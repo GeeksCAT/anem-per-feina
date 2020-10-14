@@ -1,6 +1,7 @@
-name: job-portal
+# Performs a code validation reviewing format and checking types
+name: code-check
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,6 +22,7 @@ jobs:
       - name: Run source code analysis and code format
         run: |
           pre-commit run --all
-      - name: Run checks
+      - name: Run typing tests //will not raise
+        continue-on-error: true
         run: |
           python checks.py --since origin/master --typing
