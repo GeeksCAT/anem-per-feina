@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - .env
+    ports:
+      - 15432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+    image: anem-per-feina:local
+    user: root
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/anem-per-feina/
+    entrypoint:
+      - invoke
+      - wait-for
+      - db:5432
+      - migrate
+      - runserver
+      - --debug
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: anem-per-feina:tests
+    depends_on:
+      - db
+    volumes:
+      - .:/anem-per-feina/
+
+volumes:
+  postgres_data:
