@@ -6,7 +6,6 @@ from django.utils.translation import ugettext as _
 
 from accounts.managers import UserManager
 
-
 GENDER_MALE = "male"
 GENDER_FEMALE = "female"
 GENDER_CHOICES = ((GENDER_MALE, _("Male")), (GENDER_FEMALE, _("Female")))
