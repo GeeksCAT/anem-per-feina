@@ -1,12 +1,10 @@
-# DJANGO Imports
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+from typing import List
+
+from django.contrib.auth.models import AbstractUser  # type: ignore
+from django.db import models  # type: ignore
 from django.utils.translation import ugettext as _
 
-# APP Imports
 from accounts.managers import UserManager
-
-# Global Imports
 
 
 GENDER_MALE = "male"
@@ -41,7 +39,7 @@ class User(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: List[str] = []
 
     def __str__(self):
         return self.email
