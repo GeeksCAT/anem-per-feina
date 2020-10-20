@@ -139,6 +139,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "francrodriguez",
+      "name": "Franc Rodriguez",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2232647?v=4",
+      "profile": "http://www.tecob.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
