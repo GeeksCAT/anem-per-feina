@@ -18,7 +18,7 @@ Show your support by 🌟 the project!!
 * [Setup backend development environment](#setup-backend-development-environment)
   * [Docker](#docker)
   * [Local venv](#local-venv)
-* [Screenshots](#screenshots)
+* [Contributors](#contributors)
 
 <a name="the-project"></a>
 ## The project
@@ -147,18 +147,7 @@ If you want to recreate the database:
 
     `python manage.py runserver 0.0.0.0:8000`
 
-<a name="screenshots"></a>
-## Screenshots
-
-### Home page
-<img src="screenshots/one.png" height="800">
-
-### Add new position as employer
-<img src="screenshots/two.png" height="800">
-
-### Job details
-<img src="screenshots/three.png" height="800">
-
+<a name="contributors"></a>
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
