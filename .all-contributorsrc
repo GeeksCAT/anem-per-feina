@@ -175,6 +175,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "eudago",
+      "name": "Eudald Dachs",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/809916?v=4",
+      "profile": "https://github.com/eudago",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
