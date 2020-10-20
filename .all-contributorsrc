@@ -85,6 +85,15 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "fullonic",
+      "name": "dbf",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13336073?v=4",
+      "profile": "https://github.com/fullonic",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
