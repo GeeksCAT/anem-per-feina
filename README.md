@@ -1,6 +1,6 @@
 <h1 align="center">Anem per feina</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
@@ -182,6 +182,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.linkedin.com/in/castellinmanuel/"><img src="https://avatars2.githubusercontent.com/u/2655072?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Manuel Castellin</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=mcastellin" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/oriolpiera"><img src="https://avatars2.githubusercontent.com/u/26488435?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Oriol Piera</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=oriolpiera" title="Code">💻</a></td>
     <td align="center"><a href="http://www.tecob.com/"><img src="https://avatars3.githubusercontent.com/u/2232647?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Franc Rodriguez</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=francrodriguez" title="Code">💻</a></td>
+    <td align="center"><a href="https://stackoverflow.com/users/842935/danihp?tab=profile"><img src="https://avatars2.githubusercontent.com/u/3105983?v=4?s=80" width="80px;" alt=""/><br /><sub><b>dani herrera</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=ctrl-alt-d" title="Code">💻</a></td>
   </tr>
 </table>
 

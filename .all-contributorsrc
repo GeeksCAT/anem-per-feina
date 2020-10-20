@@ -148,6 +148,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ctrl-alt-d",
+      "name": "dani herrera",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3105983?v=4",
+      "profile": "https://stackoverflow.com/users/842935/danihp?tab=profile",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
