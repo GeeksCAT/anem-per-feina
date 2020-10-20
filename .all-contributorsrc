@@ -55,6 +55,23 @@
         "projectManagement",
         "review"
       ]
+    },
+    {
+      "login": "d-asensio",
+      "name": "David Asensio Cañas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/13970905?v=4",
+      "profile": "https://github.com/d-asensio",
+      "contributions": [
+        "question",
+        "bug",
+        "code",
+        "design",
+        "doc",
+        "eventOrganizing",
+        "ideas",
+        "mentoring",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 8,
