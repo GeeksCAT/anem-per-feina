@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ytturi",
+      "name": "Ytturi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8191681?v=4",
+      "profile": "https://github.com/ytturi",
+      "contributions": [
+        "code",
+        "ideas",
+        "infra",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "anem-per-feina",
+  "projectOwner": "GeeksCAT",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
