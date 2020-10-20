@@ -38,6 +38,23 @@
         "projectManagement",
         "review"
       ]
+    },
+    {
+      "login": "francescarpi",
+      "name": "Francesc Arpí Roca",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/287872?v=4",
+      "profile": "https://github.com/francescarpi",
+      "contributions": [
+        "question",
+        "bug",
+        "code",
+        "doc",
+        "eventOrganizing",
+        "ideas",
+        "mentoring",
+        "projectManagement",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 8,
