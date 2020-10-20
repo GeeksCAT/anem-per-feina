@@ -121,6 +121,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mcastellin",
+      "name": "Manuel Castellin",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2655072?v=4",
+      "profile": "https://www.linkedin.com/in/castellinmanuel/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
