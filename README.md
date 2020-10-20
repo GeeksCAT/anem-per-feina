@@ -1,6 +1,6 @@
 <h1 align="center">Anem per feina</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
@@ -176,6 +176,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/fullonic"><img src="https://avatars3.githubusercontent.com/u/13336073?v=4?s=80" width="80px;" alt=""/><br /><sub><b>dbf</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=fullonic" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dguillen12"><img src="https://avatars0.githubusercontent.com/u/71018943?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Didac Guillen</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=dguillen12" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xdiume"><img src="https://avatars1.githubusercontent.com/u/72464185?v=4?s=80" width="80px;" alt=""/><br /><sub><b>xdiume</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=xdiume" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://avatars.githubusercontent.com/u/6842807"><img src="https://avatars2.githubusercontent.com/u/6842807?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Xavier Marquès</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=wolframtheta" title="Code">💻</a></td>
   </tr>
 </table>
 

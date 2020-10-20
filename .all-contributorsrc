@@ -112,6 +112,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wolframtheta",
+      "name": "Xavier Marquès",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6842807?v=4",
+      "profile": "https://avatars.githubusercontent.com/u/6842807",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
