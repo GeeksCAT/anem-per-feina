@@ -1,6 +1,6 @@
 <h1 align="center">Anem per feina</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
@@ -175,6 +175,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.victormartingarcia.com/"><img src="https://avatars1.githubusercontent.com/u/659832?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Victor</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=victormartingarcia" title="Code">💻</a> <a href="https://github.com/GeeksCat/anem-per-feina/commits?author=victormartingarcia" title="Documentation">📖</a> <a href="#eventOrganizing-victormartingarcia" title="Event Organizing">📋</a> <a href="#ideas-victormartingarcia" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/GeeksCat/anem-per-feina/pulls?q=is%3Apr+reviewed-by%3Avictormartingarcia" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/fullonic"><img src="https://avatars3.githubusercontent.com/u/13336073?v=4?s=80" width="80px;" alt=""/><br /><sub><b>dbf</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=fullonic" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dguillen12"><img src="https://avatars0.githubusercontent.com/u/71018943?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Didac Guillen</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=dguillen12" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/xdiume"><img src="https://avatars1.githubusercontent.com/u/72464185?v=4?s=80" width="80px;" alt=""/><br /><sub><b>xdiume</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=xdiume" title="Code">💻</a></td>
   </tr>
 </table>
 
