@@ -15,11 +15,15 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/8709244?v=4",
       "profile": "http://xaviertorello.cat/",
       "contributions": [
+        "question",
         "code",
         "doc",
         "eventOrganizing",
         "ideas",
-        "projectManagement"
+        "infra",
+        "mentoring",
+        "projectManagement",
+        "review"
       ]
     },
     {
@@ -92,16 +96,30 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/13336073?v=4",
       "profile": "https://github.com/fullonic",
       "contributions": [
-        "code"
+        "code",
+        "review"        
       ]
     },
+    {
+      "login": "ytturi",
+      "name": "Ytturi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8191681?v=4",
+      "profile": "https://github.com/ytturi",
+      "contributions": [
+        "code",
+        "ideas",
+        "infra",
+        "review"
+      ]
+    },    
     {
       "login": "dguillen12",
       "name": "Didac Guillen",
       "avatar_url": "https://avatars0.githubusercontent.com/u/71018943?v=4",
       "profile": "https://github.com/dguillen12",
       "contributions": [
-        "code"
+        "code",
+        "infra"
       ]
     },
     {
@@ -128,7 +146,9 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/2655072?v=4",
       "profile": "https://www.linkedin.com/in/castellinmanuel/",
       "contributions": [
-        "code"
+        "code",
+        "infra",
+        "review"        
       ]
     },
     {
@@ -146,7 +166,7 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/2232647?v=4",
       "profile": "http://www.tecob.com/",
       "contributions": [
-        "code"
+        "infra"
       ]
     },
     {
@@ -191,7 +211,8 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/22151914?v=4",
       "profile": "https://www.linkedin.com/in/ericmassip/",
       "contributions": [
-        "code"
+        "code",
+        "infra"        
       ]
     }
   ],
