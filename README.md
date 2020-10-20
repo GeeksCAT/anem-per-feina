@@ -1,6 +1,6 @@
 <h1 align="center">Anem per feina</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
@@ -186,6 +186,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mcmontseny"><img src="https://avatars0.githubusercontent.com/u/72517550?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Marc Casamitjana Montseny</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=mcmontseny" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/lluisd"><img src="https://avatars3.githubusercontent.com/u/7629843?v=4?s=80" width="80px;" alt=""/><br /><sub><b>lluisd</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=lluisd" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/eudago"><img src="https://avatars2.githubusercontent.com/u/809916?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Eudald Dachs</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=eudago" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/ericmassip/"><img src="https://avatars3.githubusercontent.com/u/22151914?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Eric Massip</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=ericmassip" title="Code">💻</a></td>
   </tr>
 </table>
 

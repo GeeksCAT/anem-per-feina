@@ -184,6 +184,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ericmassip",
+      "name": "Eric Massip",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22151914?v=4",
+      "profile": "https://www.linkedin.com/in/ericmassip/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
