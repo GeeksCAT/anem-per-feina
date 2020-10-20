@@ -1,4 +1,7 @@
 <h1 align="center">Anem per feina</h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
     <img alt="stars" src="https://img.shields.io/github/stars/GeeksCAT/anem-per-feina?style=social"/>
@@ -155,3 +158,23 @@ If you want to recreate the database:
 
 ### Job details
 <img src="screenshots/three.png" height="800">
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://xaviertorello.cat/"><img src="https://avatars3.githubusercontent.com/u/8709244?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Xavi Torelló</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=XaviTorello" title="Code">💻</a> <a href="https://github.com/GeeksCat/anem-per-feina/commits?author=XaviTorello" title="Documentation">📖</a> <a href="#eventOrganizing-XaviTorello" title="Event Organizing">📋</a> <a href="#ideas-XaviTorello" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-XaviTorello" title="Project Management">📆</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
