@@ -72,6 +72,19 @@
         "mentoring",
         "review"
       ]
+    },
+    {
+      "login": "victormartingarcia",
+      "name": "Victor",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/659832?v=4",
+      "profile": "https://www.victormartingarcia.com/",
+      "contributions": [
+        "code",
+        "doc",
+        "eventOrganizing",
+        "ideas",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 8,
