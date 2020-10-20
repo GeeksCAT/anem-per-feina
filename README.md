@@ -1,6 +1,6 @@
 <h1 align="center">Anem per feina</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/anem-per-feina?label=Forks&style=social"/>
@@ -169,6 +169,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://xaviertorello.cat/"><img src="https://avatars3.githubusercontent.com/u/8709244?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Xavi Torelló</b></sub></a><br /><a href="https://github.com/GeeksCat/anem-per-feina/commits?author=XaviTorello" title="Code">💻</a> <a href="https://github.com/GeeksCat/anem-per-feina/commits?author=XaviTorello" title="Documentation">📖</a> <a href="#eventOrganizing-XaviTorello" title="Event Organizing">📋</a> <a href="#ideas-XaviTorello" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-XaviTorello" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/jbagot"><img src="https://avatars1.githubusercontent.com/u/11691527?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Jordi Bagot Soler</b></sub></a><br /><a href="#question-jbagot" title="Answering Questions">💬</a> <a href="https://github.com/GeeksCat/anem-per-feina/commits?author=jbagot" title="Code">💻</a> <a href="https://github.com/GeeksCat/anem-per-feina/commits?author=jbagot" title="Documentation">📖</a> <a href="#eventOrganizing-jbagot" title="Event Organizing">📋</a> <a href="#ideas-jbagot" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-jbagot" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#mentoring-jbagot" title="Mentoring">🧑‍🏫</a> <a href="#projectManagement-jbagot" title="Project Management">📆</a> <a href="https://github.com/GeeksCat/anem-per-feina/pulls?q=is%3Apr+reviewed-by%3Ajbagot" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

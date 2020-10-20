@@ -21,6 +21,23 @@
         "ideas",
         "projectManagement"
       ]
+    },
+    {
+      "login": "jbagot",
+      "name": "Jordi Bagot Soler",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11691527?v=4",
+      "profile": "https://github.com/jbagot",
+      "contributions": [
+        "question",
+        "code",
+        "doc",
+        "eventOrganizing",
+        "ideas",
+        "infra",
+        "mentoring",
+        "projectManagement",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 8,
