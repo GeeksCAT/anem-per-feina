@@ -10,7 +10,10 @@ serve: ## Start all or c=<name> containers in BACKGROUND
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c) -d
 
 test: ## Execute tests
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) run --rm  --entrypoint "invoke test" test
+	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test
+
+test/%: ## Execute specific tests
+	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test --test tests/$*
 
 # start: ## Start all or c=<name> containers in background
 # 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d $(c)

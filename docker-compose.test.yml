@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: anem-per-feina:tests
+    environment:
+      SECRET_KEY: secret
+      POSTGRES_PASSWORD: s3cret
+    entrypoint:
+      - invoke
+      - test
+    depends_on:
+      - db
+    volumes:
+      - .:/anem-per-feina/
+
+volumes:
+  postgres_data_test:
