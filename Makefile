@@ -3,16 +3,23 @@ include $(ROOT_DIR)/.mk-lib/common.mk
 
 .PHONY: help start serve test stop restart status ps clean purge build
 
+check_env:
+ifeq ("$(wildcard .env)","")
+	cp .env.dev.example .env
+endif
+
 start: ## Start all or c=<name> containers in FOREGROUND
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c)
 
 serve: ## Start all or c=<name> containers in BACKGROUND
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c) -d
 
-test: ## Execute tests
+## Execute tests
+test: .PHONY check_env
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test
 
-test/%: ## Execute specific tests
+## Execute specific tests
+test/%: .PHONY check_env
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test --test tests/$*
 
 # start: ## Start all or c=<name> containers in background
