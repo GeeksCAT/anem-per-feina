@@ -1,4 +1,4 @@
-name: sonar-analysis
+name: code-analysis
 on:
   push:
     branches:
