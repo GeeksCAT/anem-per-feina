@@ -15,6 +15,7 @@ services:
     image: anem-per-feina:tests
     environment:
       SECRET_KEY: ${SECRET_KEY}
+      POSTGRES_HOST: db-test
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     entrypoint:
       - invoke
