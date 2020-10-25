@@ -35,9 +35,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      -
-        name: Build app image
-        uses: docker/build-push-action@v2
-      -
-        name: Execute tests
+      - name: Execute tests
         run: make test
