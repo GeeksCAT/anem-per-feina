@@ -1,4 +1,4 @@
-FROM geekscat/anem-per-feina:latest
+FROM anem-per-feina:local
 LABEL maintainer="GeeksCAT<info@geekscat.org>"
 
 WORKDIR /anem-per-feina/

@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  db-test:
     image: postgres:latest
     env_file:
       - .env
@@ -14,13 +14,13 @@ services:
       dockerfile: Dockerfile.test
     image: anem-per-feina:tests
     environment:
-      SECRET_KEY: secret
-      POSTGRES_PASSWORD: s3cret
+      SECRET_KEY: ${SECRET_KEY}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     entrypoint:
       - invoke
       - test
     depends_on:
-      - db
+      - db-test
     volumes:
       - .:/anem-per-feina/
 
