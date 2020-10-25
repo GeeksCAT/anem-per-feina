@@ -34,6 +34,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Execute tests
+      -
+        name: Build app image
+        uses: docker/build-push-action@v2
+      -
+        name: Execute tests
+        uses: actions/checkout@v2
         run: make test
