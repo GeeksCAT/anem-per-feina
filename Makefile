@@ -5,7 +5,7 @@ include $(ROOT_DIR)/.mk-lib/common.mk
 
 check_env:
 ifeq ("$(wildcard .env)","")
-	cp .env.dev.example .env
+	cp .env.dev.sample .env
 endif
 
 start: ## Start all or c=<name> containers in FOREGROUND
@@ -14,12 +14,10 @@ start: ## Start all or c=<name> containers in FOREGROUND
 serve: ## Start all or c=<name> containers in BACKGROUND
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c) -d
 
-## Execute tests
-test: .PHONY check_env
+test: check_env ## Execute tests
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test
 
-## Execute specific tests
-test/%: .PHONY check_env
+test/%: check_env ## Execute specific tests
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_TEST_FILE) run --rm test --test tests/$*
 
 # start: ## Start all or c=<name> containers in background
