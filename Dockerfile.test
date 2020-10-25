@@ -3,6 +3,7 @@ LABEL maintainer="GeeksCAT<info@geekscat.org>"
 
 WORKDIR /anem-per-feina/
 
+COPY requirements.txt ./
 COPY requirements-test.txt ./
 
 RUN pip install --no-cache-dir -r requirements-test.txt
