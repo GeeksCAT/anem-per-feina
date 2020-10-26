@@ -1,25 +1,18 @@
+# type:ignore
 import datetime
 import random
 
 import factory
 import pytest
-import requests
-from faker import Faker
 from rest_framework.test import APIClient
 
-from django.urls import reverse
-
-from accounts.api.custom_claims import MyTokenObtainPairSerializer as Token
-from accounts.models import User
+import jobs
 from tests.factories import JobFactory
 
 # type:ignore
 
 
 JOBS_ENDPOINT = "/api/jobs"
-
-
-faker = Faker("es_ES")
 
 
 @pytest.fixture
@@ -64,7 +57,7 @@ def api_client_authenticate(db, user_factory, api_client):
 
 
 @pytest.fixture
-def create_job(db, job_factory) -> dict:
+def create_job(db, job_factory):
     return job_factory
 
 
@@ -98,7 +91,9 @@ def test_list_all_jobs(api_client, create_jobs):
 
 @pytest.mark.django_db
 def test_create_job(api_client_authenticate, create_job_as_dict, create_jobs):
-    """Ensures that only registered user can create jobs."""
+    """Test HTTP POST method.
+
+    Ensures that only registered user can create jobs."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
     assert response.status_code == 201
     assert response.data["message"] == "New job created."
@@ -114,7 +109,7 @@ def test_anonymous_user_cant_create_job(api_client, create_job_as_dict):
 
 @pytest.mark.django_db
 def test_patch_job(api_client_authenticate, create_job_as_dict):
-    """Ensures that not registered user can't create jobs."""
+    """Test HTTP PATCH method."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
     job_url = response.data["url"]
     data = {"filled": True}
@@ -125,7 +120,7 @@ def test_patch_job(api_client_authenticate, create_job_as_dict):
 
 @pytest.mark.django_db
 def test_delete_job(api_client_authenticate, create_job_as_dict):
-    """Ensures that not registered user can't create jobs."""
+    """Test HTTP DELETE method."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
     job_url = response.data["url"]
     response = api_client_authenticate.delete(job_url)
