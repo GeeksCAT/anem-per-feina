@@ -1,4 +1,13 @@
+from pytest_factoryboy import register
+
 from django.conf import settings
+
+from tests.factories import JobFactory, UserFactory
+
+# Register factories to pytest global namespace.
+# They can be access as normal fixtures using user_factory or job_factory.
+register(UserFactory)
+register(JobFactory)
 
 
 def pytest_configure():

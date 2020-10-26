@@ -3,6 +3,7 @@
 black==20.8b1
 factory_boy==3.1.0
 flake8==3.8.4
+pytest-factoryboy==2.0.3
 # mypy version supported my django stubs at the moment
 mypy==0.782
 django-stubs==1.6.0

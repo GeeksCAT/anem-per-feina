@@ -8,7 +8,7 @@ from ..models import Job
 
 
 class JobSerializer(serializers.ModelSerializer):
-    # FIXME: Can this be deleted?
+    # FIXME: Do we need this?
     # user = UserSerializer(read_only=True)
 
     class Meta:
