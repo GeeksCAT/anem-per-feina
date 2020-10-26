@@ -1,8 +1,13 @@
 from typing import Any
 
 from rest_framework import status, viewsets
-from rest_framework.generics import CreateAPIView, ListAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -13,13 +18,35 @@ from django.utils.translation import gettext_lazy as _
 
 from ...models import Job
 from ...utils import contact_us_email
+from ..permissions import IsAuthorOrReadOnly
 from ..serializers import ContactSerializer, JobSerializer
 
 
-class JobViewSet(viewsets.ReadOnlyModelViewSet):
+class JobsViewList(ListCreateAPIView):
     serializer_class = JobSerializer
-    queryset = serializer_class.Meta.model.objects.filter(filled=False)
-    permission_classes = [AllowAny]
+    queryset = Job.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        validated_data = request.data.copy()
+        validated_data["user"] = request.user.id
+        serializer = self.get_serializer(data=validated_data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            headers = self.get_success_headers(serializer.data)
+            url = f"{request.build_absolute_uri()}/{serializer.data['id']}"
+            return Response(
+                {"message": "New job created.", "url": url},
+                status=status.HTTP_201_CREATED,
+                headers=headers,
+            )
+        return super().create(request, *args, **kwargs)
+
+
+class JobsViewDetails(RetrieveUpdateDestroyAPIView):
+    serializer_class = JobSerializer
+    permission_classes = [IsAuthorOrReadOnly]
+    queryset = Job.objects.all()
 
 
 class SearchApiView(ListAPIView):

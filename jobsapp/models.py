@@ -20,12 +20,7 @@ class Job(models.Model):
         (JOB_TYPE_PART_TIME, _("Part time")),
         (JOB_TYPE_INTERNSHIP, _("Internship")),
     )
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name=_("User"),
-        help_text=_("User who creates this job."),
-    )
+    user = None
     title = models.CharField(
         max_length=300, verbose_name=_("Title"), help_text=_("Short job title.")
     )
