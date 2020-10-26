@@ -130,3 +130,14 @@ def test_delete_job(api_client_authenticate, create_job_as_dict):
     job_url = response.data["url"]
     response = api_client_authenticate.delete(job_url)
     assert response.status_code == 204
+
+
+@pytest.mark.django_db
+def test_filter_query(api_client, create_jobs):
+    create_jobs(size=20)
+    url = f"{JOBS_ENDPOINT}/?category=Manager"
+    response = api_client.get(url)
+    assert response.status_code == 200
+    assert response.data[0].get("category") == "Manager"
+    for job in response.data:
+        assert job.get("category") not in ["Senior", "Junior"]

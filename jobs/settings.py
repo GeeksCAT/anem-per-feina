@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "constance",
     "notifications",
     "social_django",
+    "django_filters",
 ]
 
 MIDDLEWARE = [

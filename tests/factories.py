@@ -2,6 +2,7 @@ import datetime
 import random
 
 import factory
+from factory import fuzzy
 from faker import Faker
 
 from accounts.models import User
@@ -33,4 +34,4 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     last_date = datetime.datetime.now() + datetime.timedelta(days=10)
     website = faker.url()
     type = "1"
-    category = random.choice(["Senior", "Junior", "Manager"])
+    category = fuzzy.FuzzyChoice(["Senior", "Junior", "Manager"])
