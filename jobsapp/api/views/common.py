@@ -1,6 +1,9 @@
-from rest_framework import viewsets
+from rest_framework import status, viewsets
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
+from rest_framework.request import Request
+from rest_framework.response import Response
 
 from django.db.models.query import QuerySet
 
@@ -27,3 +30,23 @@ class SearchApiView(ListAPIView):
             )
         else:
             return self.serializer_class.Meta.model.objects.filter(filled=False)
+
+
+@api_view(["GET"])
+@permission_classes(
+    [
+        AllowAny,
+    ]
+)
+def about_us(request: Request) -> Response:
+    # TODO: Get data from database
+    content = {
+        "name": "Anem per feina",
+        "web_page": "",
+        "email": "",
+        "contact_phone": "",
+        "location": "Girona, Catalunya",
+        "lead_description": "",
+        "text_description": "",
+    }
+    return Response(data=content, status=status.HTTP_200_OK)
