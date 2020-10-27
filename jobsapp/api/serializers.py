@@ -22,7 +22,7 @@ class ApplicantSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=128, help_text="Please insert your name")
+    name = serializers.CharField(max_length=128, help_text="Please insert your name", required=True)
     email = serializers.EmailField(max_length=256, help_text="Please insert your email")
     subject = serializers.CharField(max_length=256, help_text="Reason why you are contact us")
     message = serializers.CharField(help_text="Your message")

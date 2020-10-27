@@ -7,10 +7,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from django.core.mail import send_mail
 from django.db.models.query import QuerySet
 
 from ...models import Job
+from ...utils import contact_us_email
 from ..serializers import ContactSerializer, JobSerializer
 
 
@@ -35,30 +35,14 @@ class SearchApiView(ListAPIView):
             return self.serializer_class.Meta.model.objects.filter(filled=False)
 
 
-class ContactView(CreateAPIView):
-    serializer_class = ContactSerializer
-    permission_classes = [AllowAny]
-
-    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            data = serializer.validated_data
-            email_from = data.get("email")
-            subject = data.get("subject")
-            message = data.get("message")
-            # TODO: Send email as background task with celery
-            send_mail(
-                subject,
-                message,
-                email_from,
-                ["send to email"],
-            )
-            return Response(
-                {"message": "Email sent successfully."}, status=status.HTTP_202_ACCEPTED
-            )
-        return Response(
-            {"message": "Invalid data, please try it again."}, status=status.HTTP_400_BAD_REQUEST
-        )
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def contact_us(request: Request) -> Response:
+    serializer = ContactSerializer(data=request.data)
+    if serializer.is_valid():
+        contact_us_email(serializer.validated_data)
+        return Response({"message": "Email sent successfully."}, status=status.HTTP_202_ACCEPTED)
+    return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET"])
