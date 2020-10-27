@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from jobsapp.models import Applicant, Job
+from jobsapp.models import Job
 
 
 class CreateJobForm(forms.ModelForm):
@@ -30,9 +30,3 @@ class CreateJobForm(forms.ModelForm):
         if commit:
             job.save()
         return job
-
-
-class ApplyJobForm(forms.ModelForm):
-    class Meta:
-        model = Applicant
-        fields = ("job",)

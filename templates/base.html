@@ -59,7 +59,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">Contact</a>
                     </li>
-                    {% if request.user.is_authenticated and request.user.role == 'employer' %}
+                    {% if request.user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a id="clientZone" href="#" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false"
@@ -71,40 +71,12 @@
                                              class="img-fluid">
                                     </div>
                                 </div>
-                                {% if request.user.role == 'employee' %}
-                                    {{ request.user.first_name }} {{ request.user.last_name }}
-                                {% else %}
-                                    {{ request.user.first_name }}
-                                {% endif %}
+                                {{ request.user.first_name }}
                             </a>
                             <div aria-labelledby="clientZone" class="dropdown-menu">
                                 <a href="{% url 'jobs:employer-dashboard' %}" class="dropdown-item">Dashboard</a>
-                                <a href="{% url 'jobs:employer-all-applicants' %}" class="dropdown-item">Applicants </a>
                                 <a href="{% url 'jobs:employer-jobs-create' %}" class="dropdown-item">Post a new
                                     job </a>
-                                <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
-                            </div>
-                        </li>
-                    {% elif request.user.is_authenticated and request.user.role == 'employee' %}
-                        <li class="nav-item dropdown">
-                            <a id="clientZone" href="#" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false"
-                               class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
-                                <div class="client-menu-image">
-                                    <div class="inner">
-                                        <img src="{% static 'img/company-1.png' %}"
-                                             alt="company image"
-                                             class="img-fluid">
-                                    </div>
-                                </div>
-                                {% if request.user.role == 'employee' %}
-                                    {{ request.user.first_name }} {{ request.user.last_name }}
-                                {% else %}
-                                    {{ request.user.first_name }}
-                                {% endif %}
-                            </a>
-                            <div aria-labelledby="clientZone" class="dropdown-menu">
-                                <a href="{% url 'accounts:employer-profile-update' %}" class="dropdown-item">Edit Profile</a>
                                 <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
                             </div>
                         </li>
@@ -114,7 +86,6 @@
                                class="nav-link dropdown-toggle"><i class="fa fa-signing"></i>Register
                             </a>
                             <div aria-labelledby="pages" class="dropdown-menu">
-                                <a href="{% url 'accounts:employee-register' %}" class="dropdown-item">Employee</a>
                                 <a href="{% url 'accounts:employer-register' %}" class="dropdown-item">Employers</a>
                             </div>
                         </li>

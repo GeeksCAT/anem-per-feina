@@ -36,7 +36,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             "password",
             "password2",
             "gender",
-            "role",
         ]
         extra_kwargs = {"password": {"write_only": True}}
 
@@ -45,12 +44,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         password = validated_data["password"]
         password2 = validated_data["password2"]
         gender = validated_data["gender"]
-        role = validated_data["role"]
         if email and User.objects.filter(email=email).exists():  # type: ignore
             raise serializers.ValidationError({"email": _("Email addresses must be unique.")})
         if password != password2:
             raise serializers.ValidationError({"password": _("The two passwords differ.")})
-        user = User(email=email, gender=gender, role=role)
+        user = User(email=email, gender=gender)
         user.set_password(password)
         user.save()
         return user
