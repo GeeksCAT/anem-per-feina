@@ -128,6 +128,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
 CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = ["*"]
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
 CORS_ALLOW_METHODS = (
     "DELETE",
     "GET",

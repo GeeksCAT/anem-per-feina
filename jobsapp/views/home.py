@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -74,7 +75,8 @@ class JobDetailsView(DetailView):
 class ContactView(FormView):
     template_name = "contact_us.html"
     form_class = ContactForm
-    success_url = "/"
+    success_url = "/contact-us"
+    success_message = _("Mensage sent successfully")
 
     def form_valid(self, form):
         form.send_email()
