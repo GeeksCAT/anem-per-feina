@@ -9,7 +9,6 @@ def contact_us_email(data: Dict[str, Any]) -> None:
     message = f"""{data.get("name").title()} sent the follow mensage:
     {data.get("message")}
     """
-    print(message)
     send_mail(
         data.get("subject"),
         message,
