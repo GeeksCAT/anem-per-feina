@@ -10,7 +10,7 @@ PASSWORD = "SuperPasswordSecret4"
 EMAIL = "hi@geeks.cat"
 DATA_POST = json.dumps({"email": EMAIL, "password": PASSWORD})
 LOGIN_URL = "/api/login/"
-CONTENT_TYPE_JSON = CONTENT_TYPE_JSON
+CONTENT_TYPE_JSON = "application/json"
 
 @pytest.fixture
 def create_user() -> UserFactory:
