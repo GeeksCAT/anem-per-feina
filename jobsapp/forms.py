@@ -1,7 +1,10 @@
 from django import forms
 from django.utils.translation import ugettext as _
+from django.views.generic.edit import FormView
 
 from jobsapp.models import Job
+
+from .utils import contact_us_email
 
 
 class CreateJobForm(forms.ModelForm):
@@ -30,3 +33,20 @@ class CreateJobForm(forms.ModelForm):
         if commit:
             job.save()
         return job
+
+
+class ApplyJobForm(forms.ModelForm):
+    class Meta:
+        model = Applicant
+        fields = ("job",)
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    subject = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea)
+
+    def send_email(self):
+        # send email using the self.cleaned_data dictionary
+        contact_us_email(self.cleaned_data)

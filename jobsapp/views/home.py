@@ -6,8 +6,11 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.edit import FormView
 
 # from ..documents import JobDocument
+from ..models import Job
+from ..forms import ContactForm
 from ..models import Job
 
 
@@ -67,3 +70,12 @@ class JobDetailsView(DetailView):
             raise Http404(_("Job doesn't exists"))
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+class ContactView(FormView):
+    template_name = "contact_us.html"
+    form_class = ContactForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
