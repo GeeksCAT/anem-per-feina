@@ -47,6 +47,6 @@ class ContactForm(forms.Form):
     subject = forms.CharField()
     message = forms.CharField(widget=forms.Textarea)
 
-    def send_email(self):
+    def send_email(self) -> None:
         # send email using the self.cleaned_data dictionary
         contact_us_email(self.cleaned_data)

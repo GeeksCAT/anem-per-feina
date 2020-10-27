@@ -294,6 +294,7 @@ NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
 
 # SMTP Setup
 
+EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_PORT = env("EMAIL_PORT", default="")
