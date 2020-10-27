@@ -8,6 +8,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from django.db.models.query import QuerySet
+from django.utils.translation import ugettext as _
 
 from ...models import Job
 from ...utils import contact_us_email
@@ -41,8 +42,10 @@ def contact_us(request: Request) -> Response:
     serializer = ContactSerializer(data=request.data)
     if serializer.is_valid():
         contact_us_email(serializer.validated_data)
-        return Response({"message": "Email sent successfully."}, status=status.HTTP_202_ACCEPTED)
-    return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {_("message"): _("Email sent successfully.")}, status=status.HTTP_202_ACCEPTED
+        )
+    return Response({_("message"): serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET"])
