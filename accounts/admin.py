@@ -13,13 +13,12 @@ class UserAdmin(admin.ModelAdmin):
         "is_active",
         "date_joined",
     ]
-    list_filter = ["role", "is_active", "is_staff", "is_superuser"]
+    list_filter = ["is_active", "is_staff", "is_superuser"]
     fields = [
         "email",
         "first_name",
         "last_name",
         "gender",
-        "role",
         "is_active",
         "is_staff",
         "is_superuser",

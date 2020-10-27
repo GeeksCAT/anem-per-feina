@@ -24,4 +24,5 @@ HELP_FUN = \
 PIP := pip
 DOCKER_COMPOSE := docker-compose
 DOCKER_COMPOSE_FILE := $(ROOT_DIR)/docker-compose.yml
+DOCKER_COMPOSE_TEST_FILE := $(ROOT_DIR)/docker-compose.testing.yml
 MK_REPO := krom/docker-compose-makefile

@@ -28,11 +28,11 @@ def migrate(ctx):
 
 
 @task
-def test(ctx):
+def test(ctx, test=""):
     """
     Dispatch tests task
     """
-    ctx.run("python manage.py test")
+    ctx.run(f"py.test --reuse-db {test}", pty=True)
 
 
 @task

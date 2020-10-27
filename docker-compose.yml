@@ -54,15 +54,5 @@ services:
       - db:5432
       - celery-queues
 
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.test
-    image: anem-per-feina:tests
-    depends_on:
-      - db
-    volumes:
-      - .:/anem-per-feina/
-
 volumes:
   postgres_data:

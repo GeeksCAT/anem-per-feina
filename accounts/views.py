@@ -4,35 +4,8 @@ from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, FormView, RedirectView
 
-from accounts.forms import EmployeeRegistrationForm, EmployerRegistrationForm, UserLoginForm
+from accounts.forms import EmployerRegistrationForm, UserLoginForm
 from accounts.models import User
-
-
-class RegisterEmployeeView(CreateView):
-    model = User
-    form_class = EmployeeRegistrationForm
-    template_name = "accounts/employee/register.html"
-    success_url = "/"
-
-    extra_context = {"title": "Register"}
-
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
-        return super().dispatch(self.request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-
-        form = self.form_class(data=request.POST)
-
-        if form.is_valid():
-            user = form.save(commit=False)
-            password = form.cleaned_data.get("password1")
-            user.set_password(password)
-            user.save()
-            return redirect("accounts:login")
-        else:
-            return render(request, "accounts/employee/register.html", {"form": form})
 
 
 class RegisterEmployerView(CreateView):

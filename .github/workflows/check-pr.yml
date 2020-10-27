@@ -1,10 +1,10 @@
 # Performs a code validation reviewing format and checking types
-name: code-check
+name: check-pr
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  code-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +29,11 @@ jobs:
         env:
           SECRET_KEY: mypy
           POSTGRES_PASSWORD: mypy
+  tests:
+    needs: code-check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Execute tests
+        run: make test

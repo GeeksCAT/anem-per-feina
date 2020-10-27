@@ -70,29 +70,3 @@ class Job(models.Model):
 
     def __str__(self) -> str:
         return self.title
-
-
-class Applicant(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name=_("User"), help_text=_("User applicant.")
-    )
-    job = models.ForeignKey(
-        Job,
-        on_delete=models.CASCADE,
-        related_name="applicants",
-        verbose_name=_("Job"),
-        help_text=_("Job in applicant."),
-    )
-    created_at = models.DateTimeField(
-        default=timezone.now,
-        verbose_name=_("Created"),
-        help_text=_("Applicant creation date and time."),
-    )
-
-    class Meta:
-        verbose_name = _("Applicant")
-        verbose_name_plural = _("Applicants")
-        unique_together = ("user", "job")
-
-    def __str__(self) -> str:
-        return self.user.get_full_name()
