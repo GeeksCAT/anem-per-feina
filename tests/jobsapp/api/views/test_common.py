@@ -17,7 +17,7 @@ class TestJobViewSet:
 
     @pytest.fixture(autouse=True)
     def generate_data(self):
-        for x in range(self.NUM_OF_JOBS):
+        for _ in range(self.NUM_OF_JOBS):
             JobFactory()
 
     def test_get_jobs_by_id(self, rf) -> None:
