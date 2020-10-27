@@ -1,4 +1,5 @@
 from django import forms
+from django.core import validators
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import FormView
 
@@ -42,10 +43,12 @@ class ApplyJobForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField()
-    email = forms.EmailField()
-    subject = forms.CharField()
-    message = forms.CharField(widget=forms.Textarea)
+    name = forms.CharField(help_text=_("Please insert your name"))
+    email = forms.EmailField(
+        help_text=_("Please insert your email"), validators=[validators.validate_email]
+    )
+    subject = forms.CharField(help_text=_("Reason why you are contact us"))
+    message = forms.CharField(widget=forms.Textarea, help_text=_("Your message"))
 
     def send_email(self) -> None:
         # send email using the self.cleaned_data dictionary

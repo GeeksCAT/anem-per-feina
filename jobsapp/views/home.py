@@ -1,7 +1,11 @@
+from typing import Any, Union
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404, HttpResponseRedirect
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -75,8 +79,15 @@ class JobDetailsView(DetailView):
 class ContactView(FormView):
     template_name = "contact_us.html"
     form_class = ContactForm
-    success_url = "/contact-us"
-    success_message = _("Mensage sent successfully")
+    success_url = "/"
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> Union[HttpResponse, Any]:
+        form = self.get_form()
+        if form.is_valid():
+            messages.info(self.request, _("Mensage sent successfully"))
+            return self.form_valid(form)
+        messages.warning(self.request, _("Mensage not sent"))
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.send_email()
