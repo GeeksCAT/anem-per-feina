@@ -38,9 +38,10 @@ class JobsViewList(ListCreateAPIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             headers = self.get_success_headers(serializer.data)
-            url = f"{request.build_absolute_uri()}/{serializer.data['id']}"
+            data = serializer.data.copy()
+            data["id"] = f"{request.build_absolute_uri()}/{serializer.data['id']}"
             return Response(
-                {"message": "New job created.", "url": url},
+                {"message": "New job created.", "data": data},
                 status=status.HTTP_201_CREATED,
                 headers=headers,
             )
