@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+
+{% block title %}
+  {% trans "Job details" %}
+{% endblock %}
+
+{% block content %}
+
+  <section class="bg-light-gray">
+    <div class="container">
+      <h1 class="heading">{{ job.title }}<br>
+        <small>at <a href="#"> {{ job.company_name }}</a></small>
+      </h1>
+      <div class="job-detail-description"><em class="fa fa-map-marker job__location"> </em>
+        {{ job.location }} | Posted {{ job.created_at|timesince }} |
+        {% if job.type == '1' %}
+          <span class="badge featured-badge badge-success">{% trans "Full time" %}</span>
+        {% elif job.type == '2' %}
+          <span class="badge featured-badge badge-primary">{% trans "Part time" %}</span>
+        {% else %}
+          <span style="color: #ffffff;" class="badge featured-badge badge-warning">{% trans "Internship" %}</span>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h3>{% trans "Category" %}: {{ job.category }}</h3>
+          <h5>{% trans "Last date" %}: {{ job.last_date|date }}</h5>
+          <h5 class="text-info">Salary: {% if job.salary > 0 %} {{ job.salary }}/{% trans "Yearly " %}{% else %}
+            {% trans "Negotiable " %}{% endif %} </h5>
+          <blockquote class="blockquote">
+            <p>{{ job.description }}</p>
+          </blockquote>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
+          <h4>{% trans "About" %} {{ job.company_name }}</h4>
+          <p class="job-detail__company-description">{{ job.company_description }}</p>
+          <p class="job-detail__social social social--outline">
+            <a href="{{ job.website }}" data-toggle="tooltip" data-placement="top" title="{% trans "Website" %}" class="link">
+              <em class="fa fa-link"></em>
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="twitter">
+              <em class="fa fa-twitter"></em>
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="facebook">
+              <em class="fa fa-facebook"></em>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

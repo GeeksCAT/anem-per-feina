@@ -11,7 +11,7 @@ from accounts.models import User
 class RegisterEmployerView(CreateView):
     model = User
     form_class = EmployerRegistrationForm
-    template_name = "accounts/employer/register.html"
+    template_name = "accounts/register.html"
     success_url = "/"
 
     extra_context = {"title": "Register"}
@@ -32,7 +32,7 @@ class RegisterEmployerView(CreateView):
             user.save()
             return redirect("accounts:login")
         else:
-            return render(request, "accounts/employer/register.html", {"form": form})
+            return render(request, "accounts/register.html", {"form": form})
 
 
 class LoginView(FormView):

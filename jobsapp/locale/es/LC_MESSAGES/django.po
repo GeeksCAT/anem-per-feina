@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 18:03+0100\n"
+"POT-Creation-Date: 2020-10-28 19:49+0100\n"
 "PO-Revision-Date: 2020-10-25 17:57+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
@@ -18,179 +18,503 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
 
-#: jobsapp/forms.py:15
+#: forms.py:15
 msgid "Last Date"
 msgstr "Última fecha"
 
-#: jobsapp/forms.py:16
+#: forms.py:16
 msgid "Company Name"
 msgstr "Nombre de la empresa"
 
-#: jobsapp/forms.py:17
+#: forms.py:17 templates/jobsapp/create.html:146
 msgid "Company Description"
 msgstr "Descripción de la empresa"
 
-#: jobsapp/models.py:17
+#: models.py:20 templates/home.html:68 templates/jobsapp/create.html:82
+#: templates/jobsapp/details.html:19
 msgid "Full time"
 msgstr "Tiempo completo"
 
-#: jobsapp/models.py:18
+#: models.py:21 templates/home.html:70 templates/jobsapp/create.html:83
+#: templates/jobsapp/details.html:21
 msgid "Part time"
 msgstr "Tiempo parcial"
 
-#: jobsapp/models.py:19
+#: models.py:22 templates/home.html:72 templates/jobsapp/create.html:84
+#: templates/jobsapp/details.html:23
 msgid "Internship"
 msgstr "Prácticas"
 
-#: jobsapp/models.py:24 jobsapp/models.py:74
+#: models.py:27
 msgid "User"
 msgstr "Usuario"
 
-#: jobsapp/models.py:25
+#: models.py:28
 msgid "User who creates this job."
 msgstr "Usuario que ha creado esta oferta de empleo."
 
-#: jobsapp/models.py:28
+#: models.py:31
 msgid "Title"
 msgstr "Título"
 
-#: jobsapp/models.py:28
+#: models.py:31
 msgid "Short job title."
 msgstr "Título corto de la oferta."
 
-#: jobsapp/models.py:31
+#: models.py:34
 msgid "Description"
 msgstr "Descripción"
 
-#: jobsapp/models.py:31
+#: models.py:34
 msgid "Long job description."
 msgstr "Descripción detallada."
 
-#: jobsapp/models.py:34
+#: models.py:37 templates/home.html:28 templates/jobsapp/create.html:75
+#: templates/jobsapp/jobs.html:23 templates/jobsapp/search.html:24
 msgid "Location"
 msgstr "Localización"
 
-#: jobsapp/models.py:34
+#: models.py:37
 msgid "Location for this job position."
 msgstr "Localización de esta oferta de empleo."
 
-#: jobsapp/models.py:37
+#: models.py:40 templates/jobsapp/create.html:80
 msgid "Type"
 msgstr "Tipo"
 
-#: jobsapp/models.py:37
+#: models.py:40
 msgid "Job type."
 msgstr "Tipo de oferta."
 
-#: jobsapp/models.py:40
+#: models.py:43 templates/jobsapp/create.html:90
+#: templates/jobsapp/details.html:32
 msgid "Category"
 msgstr "Categoría"
 
-#: jobsapp/models.py:40
+#: models.py:43
 msgid "Category clasification."
 msgstr "Clasificación de la categoría."
 
-#: jobsapp/models.py:42
+#: models.py:45 templates/jobsapp/details.html:33
 msgid "Last date"
 msgstr "Última fecha"
 
-#: jobsapp/models.py:42
+#: models.py:45
 msgid "Last date."
 msgstr "Última fecha."
 
-#: jobsapp/models.py:44
+#: models.py:47
 msgid "Company"
 msgstr "Empresa"
 
-#: jobsapp/models.py:44
+#: models.py:47
 msgid "Job's Company name."
 msgstr "Nombre de la empresa que publica la oferta."
 
-#: jobsapp/models.py:48
+#: models.py:51
 msgid "Company description"
 msgstr "Descripción de la empresa"
 
-#: jobsapp/models.py:49
+#: models.py:52
 msgid "Company description, activity,..."
 msgstr "Descripción de la empresa, actividades, ..."
 
-#: jobsapp/models.py:52
+#: models.py:55 templates/jobsapp/create.html:153
+#: templates/jobsapp/details.html:45
 msgid "Website"
 msgstr "Sitio web"
 
-#: jobsapp/models.py:52
+#: models.py:55
 msgid "Company Website URL."
 msgstr "URL del sitio web de la empresa."
 
-#: jobsapp/models.py:55 jobsapp/models.py:85
+#: models.py:58
 msgid "Created"
 msgstr "Creado"
 
-#: jobsapp/models.py:55
+#: models.py:58
 msgid "Job creation date and time."
 msgstr "Fecha de creación."
 
-#: jobsapp/models.py:58
+#: models.py:61 templates/jobsapp/employer/dashboard.html:49
+#: templates/jobsapp/employer/dashboard.html:65
 msgid "Filled"
 msgstr "Cubierta"
 
-#: jobsapp/models.py:58
+#: models.py:61
 msgid "Job position is filled."
 msgstr "La oferta de trabajo ha sido cubierta."
 
-#: jobsapp/models.py:61
+#: models.py:64
 msgid "Salary"
 msgstr "Salario"
 
-#: jobsapp/models.py:61
+#: models.py:64
 msgid "Maximum salary for this job."
 msgstr "Salario máximo para esta oferta de empleo."
 
-#: jobsapp/models.py:65 jobsapp/models.py:80
+#: models.py:68
 msgid "Job"
 msgstr "Empleo"
 
-#: jobsapp/models.py:66
+#: models.py:69
 msgid "Jobs"
 msgstr "Empleos"
 
-#: jobsapp/models.py:74
-msgid "User applicant."
-msgstr "Candidato."
+#: templates/base.html:44 templates/home.html:5
+msgid "Home"
+msgstr ""
 
-#: jobsapp/models.py:81
-msgid "Job in applicant."
-msgstr "Candidaturas de la oferta de empleo."
+#: templates/base.html:48
+msgid "Menu"
+msgstr ""
 
-#: jobsapp/models.py:86
-msgid "Applicant creation date and time."
-msgstr "Fecha de la candidatura."
+#: templates/base.html:53
+msgid "Home "
+msgstr ""
 
-#: jobsapp/models.py:90
-msgid "Applicant"
-msgstr "Candidatura"
+#: templates/base.html:53
+msgid "current"
+msgstr ""
 
-#: jobsapp/models.py:91
-msgid "Applicants"
-msgstr "Candidaturas"
+#: templates/base.html:56
+msgid "About Us"
+msgstr ""
 
-#: jobsapp/views/employee.py:29
+#: templates/base.html:59
+msgid "Contact"
+msgstr ""
+
+#: templates/base.html:76 templates/jobsapp/employer/dashboard.html:6
+#: templates/jobsapp/employer/dashboard.html:15
+msgid "Dashboard"
+msgstr ""
+
+#: templates/base.html:77
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Post a new job"
+msgstr "Publica una nueva oferta de empleo"
+
+#: templates/base.html:78
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:86
+msgid "Register"
+msgstr ""
+
+#: templates/base.html:91
+msgid "Login"
+msgstr ""
+
+#: templates/home.html:15
+msgid ""
+"Find a <span class=\"accent\">job</span> you will <span class=\"accent"
+"\">love</span>."
+msgstr ""
+
+#: templates/home.html:22 templates/jobsapp/search.html:19
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Descripción"
+
+#: templates/home.html:23 templates/jobsapp/search.html:20
+msgid "Position you are looking for"
+msgstr ""
+
+#: templates/home.html:29 templates/jobsapp/jobs.html:24
+#: templates/jobsapp/search.html:25
+msgid "Any particular location?"
+msgstr ""
+
+#: templates/home.html:47
+msgid "Featured jobs"
+msgstr ""
+
+#: templates/home.html:85
+msgid "Trending this month"
+msgstr ""
+
+#: templates/home.html:92
+msgid "Share Board"
+msgstr ""
+
+#: templates/home.html:108 templates/jobsapp/jobs.html:62
+#: templates/jobsapp/search.html:63
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Posted "
+msgstr "Publica una nueva oferta de empleo"
+
+#: templates/home.html:127
+msgid "Start searching for your new job now!"
+msgstr ""
+
+#: templates/home.html:128
+msgid "See our job offers"
+msgstr ""
+
+#: templates/includes/lang_selector.html:8
+msgid "Language"
+msgstr ""
+
+#: templates/jobsapp/create.html:19
+msgid "Add a new position"
+msgstr ""
+
+#: templates/jobsapp/create.html:42 templates/jobsapp/details.html:6
+#, fuzzy
+#| msgid "Job doesn't exists"
+msgid "Job details"
+msgstr "La oferta de empleo no existe"
+
+#: templates/jobsapp/create.html:44
+msgid ""
+"Some additional info for this screen about validity of\n"
+"the ads, etc. Pellentesque habitant morbi tristique senectus et netus et "
+"malesuada\n"
+"fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies "
+"eget,\n"
+"tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean\n"
+"ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est "
+"et sapien ullamcorper pharetra."
+msgstr ""
+
+#: templates/jobsapp/create.html:55
+#, fuzzy
+#| msgid "Title"
+msgid "Job Title"
+msgstr "Título"
+
+#: templates/jobsapp/create.html:61
+#, fuzzy
+#| msgid "Description"
+msgid "Job Description"
+msgstr "Descripción"
+
+#: templates/jobsapp/create.html:68
+msgid "Salary(Leave empty if it's negotiable)"
+msgstr ""
+
+#: templates/jobsapp/create.html:76
+msgid "e.g. Dhaka, Bangladesh"
+msgstr ""
+
+#: templates/jobsapp/create.html:81
+msgid "Choose job type"
+msgstr ""
+
+#: templates/jobsapp/create.html:93
+msgid "Web design"
+msgstr ""
+
+#: templates/jobsapp/create.html:96
+msgid "Graphic design"
+msgstr ""
+
+#: templates/jobsapp/create.html:99
+msgid "Web development"
+msgstr ""
+
+#: templates/jobsapp/create.html:102
+msgid "Human Resources"
+msgstr ""
+
+#: templates/jobsapp/create.html:105
+msgid "Support"
+msgstr ""
+
+#: templates/jobsapp/create.html:115
+msgid "Apply URL"
+msgstr ""
+
+#: templates/jobsapp/create.html:116
+msgid "users will apply on your website"
+msgstr ""
+
+#: templates/jobsapp/create.html:121
+msgid "Validity of the post"
+msgstr ""
+
+#: templates/jobsapp/create.html:133
+#, fuzzy
+#| msgid "Company description"
+msgid "Company details"
+msgstr "Descripción de la empresa"
+
+#: templates/jobsapp/create.html:138
+#, fuzzy
+#| msgid "Company Name"
+msgid "Company name"
+msgstr "Nombre de la empresa"
+
+#: templates/jobsapp/create.html:163
+msgid "I agree with the"
+msgstr ""
+
+#: templates/jobsapp/create.html:163
+msgid "Terms and conditions"
+msgstr ""
+
+#: templates/jobsapp/create.html:172
+msgid "Save and publish"
+msgstr ""
+
+#: templates/jobsapp/delete.html:16
+#, python-format
+msgid "Are you sure you want to delete \"%(job)s\"?"
+msgstr ""
+
+#: templates/jobsapp/delete.html:17
+msgid "Confirm"
+msgstr ""
+
+#: templates/jobsapp/details.html:34
+msgid "Yearly "
+msgstr ""
+
+#: templates/jobsapp/details.html:35
+msgid "Negotiable "
+msgstr ""
+
+#: templates/jobsapp/details.html:42
+msgid "About"
+msgstr ""
+
+#: templates/jobsapp/employee/edit-profile.html:6
+#: templates/jobsapp/employee/edit-profile.html:12
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/jobsapp/employee/edit-profile.html:41
+msgid "Male"
+msgstr ""
+
+#: templates/jobsapp/employee/edit-profile.html:47
+msgid "Female"
+msgstr ""
+
+#: templates/jobsapp/employee/edit-profile.html:67
+msgid "Update"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:16
+msgid "All created jobs"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:26
+msgid "Add new position"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:34
+#, fuzzy
+#| msgid "Job type."
+msgid "Job title"
+msgstr "Tipo de oferta."
+
+#: templates/jobsapp/employer/dashboard.html:35
+#, fuzzy
+#| msgid "Job position is filled."
+msgid "Position filled"
+msgstr "La oferta de trabajo ha sido cubierta."
+
+#: templates/jobsapp/employer/dashboard.html:36
+msgid "Date posted"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:37
+msgid "Date expiring"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:38
+#, fuzzy
+#| msgid "Location"
+msgid "Actions"
+msgstr "Localización"
+
+#: templates/jobsapp/employer/dashboard.html:51
+#, fuzzy
+#| msgid "Filled"
+msgid "Not Filled"
+msgstr "Cubierta"
+
+#: templates/jobsapp/employer/dashboard.html:58
+msgid "Edit"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:71
+msgid "Mark as"
+msgstr ""
+
+#: templates/jobsapp/employer/dashboard.html:71
+#, fuzzy
+#| msgid "Filled"
+msgid "filled"
+msgstr "Cubierta"
+
+#: templates/jobsapp/employer/dashboard.html:76
+msgid "Delete"
+msgstr ""
+
+#: templates/jobsapp/jobs.html:4 templates/jobsapp/search.html:6
+msgid "All jobs"
+msgstr ""
+
+#: templates/jobsapp/jobs.html:13 templates/jobsapp/search.html:13
+msgid ""
+"Find a <span class=\"accent\">job </span> you will <span class=\"accent"
+"\">love</span>"
+msgstr ""
+
+#: templates/jobsapp/jobs.html:19
+msgid "Profession"
+msgstr ""
+
+#: templates/jobsapp/jobs.html:20
+msgid "Profession you are looking for"
+msgstr ""
+
+#: templates/jobsapp/jobs.html:40
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs)s</span> jobs"
+msgstr ""
+
+#: templates/jobsapp/search.html:40
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs.count)s</span> jobs"
+msgstr ""
+
+#: views/employee.py:29
 msgid "User doesn't exists"
 msgstr "El usuario no existe"
 
-#: jobsapp/views/employee.py:37 jobsapp/views/home.py:60
-#: jobsapp/views/home.py:68
+#: views/employee.py:37 views/home.py:63 views/home.py:71
 msgid "Job doesn't exists"
 msgstr "La oferta de empleo no existe"
 
-#: jobsapp/views/employer.py:51
+#: views/employer.py:31
 msgid "Post New Job"
 msgstr "Publica una nueva oferta de empleo"
 
-#: jobsapp/views/home.py:86
-msgid "Successfully applied for the job!"
-msgstr "Has solicitado el empleo con éxito!"
+#~ msgid "User applicant."
+#~ msgstr "Candidato."
 
-#: jobsapp/views/home.py:106
-msgid "You already applied for this job"
-msgstr "Ya has solicitado este empleo"
+#~ msgid "Job in applicant."
+#~ msgstr "Candidaturas de la oferta de empleo."
+
+#~ msgid "Applicant creation date and time."
+#~ msgstr "Fecha de la candidatura."
+
+#~ msgid "Applicant"
+#~ msgstr "Candidatura"
+
+#~ msgid "Applicants"
+#~ msgstr "Candidaturas"
+
+#~ msgid "Successfully applied for the job!"
+#~ msgstr "Has solicitado el empleo con éxito!"
+
+#~ msgid "You already applied for this job"
+#~ msgstr "Ya has solicitado este empleo"
