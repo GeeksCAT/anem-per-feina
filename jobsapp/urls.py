@@ -1,14 +1,7 @@
 from django.urls import include, path
 
-from .views.employer import (
-    ApplicantPerJobView,
-    ApplicantsListView,
-    DashboardView,
-    JobCreateView,
-    JobDeleteView,
-    filled,
-)
-from .views.home import ApplyJobView, ContactView, HomeView, JobDetailsView, JobListView, SearchView
+from .views.employer import DashboardView, JobCreateView, JobDeleteView, filled
+from .views.home import ContactView, HomeView, JobDetailsView, JobListView, SearchView
 
 app_name = "jobs"
 

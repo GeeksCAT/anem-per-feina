@@ -15,14 +15,6 @@ class JobSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ApplicantSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = Applicant
-        fields = "__all__"
-
-
 class ContactSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=128, help_text=_("Please insert your name"))
     email = serializers.EmailField(max_length=256, help_text=_("Please insert your email"))

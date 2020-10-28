@@ -13,8 +13,6 @@ from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import FormView
 
-# from ..documents import JobDocument
-from ..models import Job
 from ..forms import ContactForm
 from ..models import Job
 
@@ -75,6 +73,7 @@ class JobDetailsView(DetailView):
             raise Http404(_("Job doesn't exists"))
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
 
 class ContactView(FormView):
     template_name = "contact_us.html"

@@ -78,6 +78,7 @@ class Job(models.Model):
         verbose_name=_("Salary"),
         help_text=_("Minimum and maximum annual salary for this job."),
     )
+
     remote = models.CharField(
         verbose_name=_("Remote"),
         null=True,

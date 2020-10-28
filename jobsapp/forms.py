@@ -1,7 +1,6 @@
 from django import forms
 from django.core import validators
 from django.utils.translation import ugettext as _
-from django.views.generic.edit import FormView
 
 from jobsapp.models import Job
 
@@ -34,12 +33,6 @@ class CreateJobForm(forms.ModelForm):
         if commit:
             job.save()
         return job
-
-
-class ApplyJobForm(forms.ModelForm):
-    class Meta:
-        model = Applicant
-        fields = ("job",)
 
 
 class ContactForm(forms.Form):
