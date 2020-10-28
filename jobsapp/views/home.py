@@ -79,7 +79,7 @@ class JobDetailsView(DetailView):
 class ContactView(FormView):
     template_name = "contact_us.html"
     form_class = ContactForm
-    success_url = "/"
+    success_url = "/contact-us"
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> Union[HttpResponse, Any]:
         form = self.get_form()
