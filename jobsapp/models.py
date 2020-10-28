@@ -1,4 +1,6 @@
 # DJANGO Imports
+from inclusive_django_range_fields import InclusiveIntegerRangeField
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -60,8 +62,10 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = models.IntegerField(
-        default=0, blank=True, verbose_name=_("Salary"), help_text=_("Maximum salary for this job.")
+    salary = InclusiveIntegerRangeField(
+        null=True,
+        verbose_name=_("Salary"),
+        help_text=_("Minimum and maximum annual salary for this job."),
     )
 
     class Meta:
