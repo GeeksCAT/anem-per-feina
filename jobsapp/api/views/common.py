@@ -6,6 +6,7 @@ from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
     ListCreateAPIView,
+    RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
@@ -17,10 +18,10 @@ from django.contrib.flatpages.models import FlatPage
 from django.db.models.query import QuerySet
 from django.utils.translation import gettext_lazy as _
 
-from ...models import Job
+from ...models import Job, User
 from ...utils import contact_us_email
 from ..permissions import IsAuthorOrReadOnly
-from ..serializers import ContactSerializer, JobSerializer
+from ..serializers import ContactSerializer, JobSerializer, UserSerializer
 
 
 class JobsViewList(ListCreateAPIView):
@@ -33,15 +34,14 @@ class JobsViewList(ListCreateAPIView):
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         validated_data = request.data.copy()
-        validated_data["user"] = request.user.id
+        base_url = reverse("users-list")
+        validated_data["user"] = f"{base_url}/{request.user.id}"
         serializer = self.get_serializer(data=validated_data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             headers = self.get_success_headers(serializer.data)
-            data = serializer.data.copy()
-            data["id"] = f"{request.build_absolute_uri()}/{serializer.data['id']}"
             return Response(
-                {"message": "New job created.", "data": data},
+                {"message": "New job created.", "data": serializer.data},
                 status=status.HTTP_201_CREATED,
                 headers=headers,
             )
@@ -92,3 +92,9 @@ class AboutUs(ListAPIView):
             "content": about_content.content,
         }
         return Response(data=content, status=status.HTTP_200_OK)
+
+
+class UsersList(ListAPIView, RetrieveAPIView):
+    serializer_class = User
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
