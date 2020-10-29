@@ -42,3 +42,5 @@ invoke==1.4.1
 werkzeug==1.0.1
 redis==3.5.3
 celery==5.0.1
+python-telegram-bot==13.0.0
+pudb
