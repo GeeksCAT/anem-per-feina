@@ -35,11 +35,7 @@ class FlatPageAdmin(FlatPageAdmin):
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "enable_comments",
-                    "registration_required",
-                    "template_name",
-                ),
+                "fields": ("template_name",),
             },
         ),
     )

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    Home
+    {% translate flatpage.title %}
 {% endblock %}
 
 {% block content %}
-    {{ flatpage.content }}
+    {% translate flatpage.content %}
 {% endblock %}

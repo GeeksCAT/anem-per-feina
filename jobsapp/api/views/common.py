@@ -9,7 +9,7 @@ from rest_framework.reverse import reverse
 
 from django.contrib.flatpages.models import FlatPage
 from django.db.models.query import QuerySet
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from ...models import Job
 from ...utils import contact_us_email
@@ -57,8 +57,8 @@ class AboutUs(ListAPIView):
         # REVIEW: Is this format okay?
         content = {
             "url": reverse("about-us"),
-            "title": about_content.title,
+            "title": _(about_content.title),
             # REVIEW: If there is any html tag we will send it, should we remove it before?
-            "content": about_content.content,
+            "content": _(about_content.content),
         }
         return Response(data=content, status=status.HTTP_200_OK)
