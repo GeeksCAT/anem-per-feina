@@ -288,6 +288,8 @@ CELERY_BEAT_SCHEDULE = {}
 NOTIFICATIONS = {
     "telegram": {
         "enabled": env.bool("NOTIF_TELEGRAM_ENABLED", default=False),
+        "token": env("TELEGRAM_TOKEN", default=None),
+        "chat_ids": env.list("TELEGRAM_CHAT_IDS", default=[]),
     },
 }
 

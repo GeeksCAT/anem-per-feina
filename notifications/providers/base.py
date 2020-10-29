@@ -1,7 +1,7 @@
 import logging
 
-from django.template.loader import render_to_string
 from django.conf import settings
+from django.template.loader import render_to_string
 
 logger = logging.getLogger(__name__)
 
