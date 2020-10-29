@@ -1,30 +1,11 @@
 import pytest
 import json
 import jwt
-from rest_framework.test import APIClient
 from rest_framework import status
+from tests.conftest import EMAIL, PASSWORD, CONTENT_TYPE_JSON
 
-from tests.factories import UserFactory
-
-PASSWORD = "SuperPasswordSecret4"
-EMAIL = "hi@geeks.cat"
 DATA_POST = json.dumps({"email": EMAIL, "password": PASSWORD})
 LOGIN_URL = "/api/login/"
-CONTENT_TYPE_JSON = "application/json"
-
-
-@pytest.fixture
-def create_user() -> UserFactory:
-    user = UserFactory(email=EMAIL, is_active=True)
-    user.set_password(PASSWORD)
-    user.save()
-    return user
-
-
-@pytest.fixture
-def client() -> APIClient:
-    api_client = APIClient()
-    return api_client
 
 
 @pytest.mark.django_db
