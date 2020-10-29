@@ -5,7 +5,9 @@ from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
+from django.contrib.flatpages.models import FlatPage
 from django.db.models.query import QuerySet
 from django.utils.translation import ugettext as _
 
@@ -47,3 +49,16 @@ class ContactUs(CreateAPIView):
                 {"message": _("Email sent successfully.")}, status=status.HTTP_202_ACCEPTED
             )
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+class AboutUs(ListAPIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        about_content = FlatPage.objects.filter(url="/about-us/").first()
+        # REVIEW: Is this format okay?
+        content = {
+            "url": reverse("about-us"),
+            "title": about_content.title,
+            # REVIEW: If there is any html tag we will send it, should we remove it before?
+            "content": about_content.content,
+        }
+        return Response(data=content, status=status.HTTP_200_OK)
