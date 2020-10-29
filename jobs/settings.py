@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = "ca"
+LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
 LANGUAGES = [("en", "English"), ("ca", "Català"), ("es", "Castellano")]
 
