@@ -2,6 +2,7 @@ import datetime
 
 import factory
 import factory.fuzzy
+
 from accounts.models import User
 from jobsapp.models import Job
 

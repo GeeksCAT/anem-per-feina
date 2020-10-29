@@ -1,8 +1,10 @@
-import pytest
 import json
+
 import jwt
+import pytest
 from rest_framework import status
-from tests.conftest import EMAIL, PASSWORD, CONTENT_TYPE_JSON
+
+from tests.conftest import CONTENT_TYPE_JSON, EMAIL, PASSWORD
 
 DATA_POST = json.dumps({"email": EMAIL, "password": PASSWORD})
 LOGIN_URL = "/api/login/"

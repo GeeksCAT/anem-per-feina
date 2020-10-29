@@ -1,13 +1,13 @@
 import json
+
 import pytest
+from rest_framework import status
 
 from django.urls import reverse
 
-from rest_framework import status
-from jobsapp.models import Job
-
-from tests.factories import JobFactory, UserFactory
 from jobsapp.api.views.common import JobViewSet
+from jobsapp.models import Job
+from tests.factories import JobFactory, UserFactory
 
 
 @pytest.mark.django_db

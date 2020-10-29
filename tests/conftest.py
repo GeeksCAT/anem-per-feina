@@ -1,7 +1,7 @@
 import pytest
+from rest_framework.test import APIClient
 
 from django.conf import settings
-from rest_framework.test import APIClient
 
 from tests.factories import UserFactory
 
