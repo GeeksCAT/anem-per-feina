@@ -51,17 +51,17 @@ class ContactUs(CreateAPIView):
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["GET"])
-@permission_classes([AllowAny])
-def about_us(request: Request) -> Response:
-    # TODO: Get data from database
-    content = {
-        "name": "Anem per feina",
-        "web_page": "",
-        "email": "",
-        "contact_phone": "",
-        "location": "Girona, Catalunya",
-        "lead_description": "",
-        "text_description": "",
-    }
-    return Response(data=content, status=status.HTTP_200_OK)
+class AboutUs(ListAPIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        content = {
+            "name": "Anem per feina",
+            "web_page": "",
+            "email": "",
+            "contact_phone": "",
+            "location": "Girona, Catalunya",
+            "lead_description": "",
+            "text_description": "",
+        }
+        return Response(data=content, status=status.HTTP_200_OK)
