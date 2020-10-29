@@ -1,6 +1,7 @@
 import logging
 
 from django.template.loader import render_to_string
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,10 @@ class ProviderBase:
         """
 
         logger.info(f"Publishing to {self.code}, event {event_name}, instance {instance.pk}")
-        context = {"object": instance}
+        context = {
+            "object": instance,
+            "base_url": settings.BASE_URL,
+        }
         tpl = render_to_string(f"notifications/{self.code}_{event_name}.html", context)
         try:
             self._publish(tpl)
