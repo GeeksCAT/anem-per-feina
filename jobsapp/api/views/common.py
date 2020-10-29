@@ -18,10 +18,12 @@ from django.contrib.flatpages.models import FlatPage
 from django.db.models.query import QuerySet
 from django.utils.translation import gettext_lazy as _
 
-from ...models import Job, User
+from ...models import JOB_INDEXES, Job, User
 from ...utils import contact_us_email
 from ..permissions import IsAuthorOrReadOnly
 from ..serializers import ContactSerializer, JobSerializer, UserSerializer
+
+INDEXED_FILTERS = {field: ["contains", "exact"] for field in JOB_INDEXES}
 
 
 class JobsViewList(ListCreateAPIView):
@@ -29,12 +31,9 @@ class JobsViewList(ListCreateAPIView):
     queryset = Job.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = (filters.DjangoFilterBackend,)
-    # REVIEW: Which fields can be used to filter queries
-    filterset_fields = {
-        "category": ["contains", "exact"],
-        "location": ["contains"],
-        "title": ["contains"],
-    }
+    # REVIEW: Which fields can be used to filter queries.
+    # Here we use the same as the model indexes and can be extended
+    filterset_fields = INDEXED_FILTERS
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         validated_data = request.data.copy()

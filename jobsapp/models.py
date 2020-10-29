@@ -9,6 +9,9 @@ from accounts.models import User
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
 
+# Global Imports
+JOB_INDEXES = ("location", "category", "type", "title")
+
 
 @event_dispatcher(EVENT_NEW_JOB)
 class Job(models.Model):
@@ -66,6 +69,7 @@ class Job(models.Model):
     class Meta:
         verbose_name = _("Job")
         verbose_name_plural = _("Jobs")
+        indexes = [models.Index(fields=(field,)) for field in JOB_INDEXES]
 
     def __str__(self) -> str:
         return self.title
