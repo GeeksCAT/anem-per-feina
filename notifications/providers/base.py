@@ -3,6 +3,8 @@ import logging
 from django.conf import settings
 from django.template.loader import render_to_string
 
+from ..settings import PROVIDERS_SETTINGS
+
 logger = logging.getLogger(__name__)
 
 
@@ -12,6 +14,13 @@ class ProviderBase:
     """
 
     code: str = None
+
+    @property
+    def settings(self):
+        """
+        Get provider settings
+        """
+        return PROVIDERS_SETTINGS.get(self.code, {})
 
     def _publish(self, tpl: str):
         """
