@@ -17,6 +17,6 @@ class JobSerializer(serializers.ModelSerializer):
 
 class ContactSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=128, help_text=_("Please insert your name"))
-    email = serializers.EmailField(max_length=256, help_text=_("Please insert your email"))
+    from_email = serializers.EmailField(max_length=256, help_text=_("Please insert your email"))
     subject = serializers.CharField(max_length=256, help_text=_("Reason why you are contact us"))
     message = serializers.CharField(help_text=_("Your message"))

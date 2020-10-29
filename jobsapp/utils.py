@@ -14,12 +14,12 @@ def contact_us_email(data: Dict[str, Any]) -> None:
     """
 
     _send_email.apply_async(
-        args=(
-            data.get("subject"),
-            message,
-            data.get("email"),
-            [
+        kwargs={
+            "subject": data.get("subject"),
+            "message": message,
+            "from_email": data.get("from_email"),
+            "recipient_list": [
                 EMAIL_HOST,
             ],
-        )
+        }
     )

@@ -1,5 +1,5 @@
 from smtplib import SMTPException
-from typing import List
+from typing import List, Union
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -15,11 +15,11 @@ ASYNC_QUEUE_NAME = getattr(settings, "NOTIFICATIONS_ASYNC_QUEUE_NAME", "default"
     autoretry=[SMTPException],
     max_retries=3,
 )  # type: ignore
-def _send_email(subject: str, message: str, email: str, recipient_list: List[str]) -> None:
+def _send_email(*, subject: str, message: str, from_email: str, recipient_list: List[str]) -> None:
     """Email us users contact form message using django send_mail."""
     send_mail(
         subject,
         message,
-        email,
+        from_email,
         recipient_list,
     )
