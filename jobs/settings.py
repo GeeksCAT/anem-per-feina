@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
-
+SITE_ID = 1
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.contrib.flatpages",
     "django_elasticsearch_dsl",
     "django_extensions",
     "drf_yasg",

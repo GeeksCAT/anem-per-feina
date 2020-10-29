@@ -37,4 +37,5 @@ urlpatterns = lang_patterns + [
         ),
     ),
     path("social-auth/", include("social_django.urls", namespace="social")),
+    path("", include("django.contrib.flatpages.urls")),
 ]
