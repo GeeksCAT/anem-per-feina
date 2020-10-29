@@ -28,9 +28,13 @@ class JobsViewList(ListCreateAPIView):
     serializer_class = JobSerializer
     queryset = Job.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
-    # TODO: Define which fields can be used to filter queries
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = {"category": ["contains", "exact"]}
+    # REVIEW: Which fields can be used to filter queries
+    filterset_fields = {
+        "category": ["contains", "exact"],
+        "location": ["contains"],
+        "title": ["contains"],
+    }
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         validated_data = request.data.copy()

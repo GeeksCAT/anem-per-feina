@@ -21,7 +21,7 @@ class JobAdmin(admin.ModelAdmin):
         "filled",
         "user",
     ]
-    # list_filter = ["salary", "last_date", "created_at", "user"]
+    list_filter = ["salary", "last_date", "created_at", "user"]
     date_hierarchy = "created_at"
 
 
