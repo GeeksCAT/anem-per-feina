@@ -1,1 +1,7 @@
-Telegram new job: {{ object.title }}
+🔊 New job: <strong>{{ object.title }}</strong> @ <i>{{ object.company_name }}</i>
+<code>
+{{ object.description }}
+</code>
+💰 {{ object.salary }}€    📃 {{ object.category }}    🕔 {{ object.get_type_display }}
+
+ℹ️ <a href="{{ base_url }}{{ object.get_absolute_url }}">More information</a>
