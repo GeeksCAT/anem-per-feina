@@ -217,8 +217,6 @@ LOGGING = {
 
 ELASTIC_HOST_NAME = env.str("ELASTIC_HOST_NAME", default="localhost")
 ELASTIC_HOST_PORT = env.str("ELASTIC_HOST_PORT", default="9200")
-
-
 ELASTICSEARCH_DSL = {
     "default": {
         "hosts": f"{ELASTIC_HOST_NAME}:{ELASTIC_HOST_PORT}",
@@ -307,9 +305,10 @@ NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
 
 
 # SMTP Setup
-
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@nemperfeina.cat")
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
