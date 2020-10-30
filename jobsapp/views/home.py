@@ -27,29 +27,33 @@ class HomeView(ListView):
 
 class SearchView(ListView):
     model = Job
-    template_name = "jobs/search.html"
+    template_name = "jobsapp/search.html"
     context_object_name = "jobs"
 
     def get_queryset(self):
-        # q = JobDocument.search().query("match", title=self.request.GET['position']).to_queryset()
-        # print(q)
-        # return q
-        return self.model.objects.filter(
-            location__contains=self.request.GET["location"],
-            title__contains=self.request.GET["position"],
-        )
+        queryset = self.model.objects.all()
+
+        location = self.request.GET.get("location")
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+
+        position = self.request.GET.get("position")
+        if position:
+            queryset = queryset.filter(title__icontains=position)
+
+        return queryset
 
 
 class JobListView(ListView):
     model = Job
-    template_name = "jobs/jobs.html"
+    template_name = "jobsapp/jobs.html"
     context_object_name = "jobs"
     paginate_by = 5
 
 
 class JobDetailsView(DetailView):
     model = Job
-    template_name = "jobs/details.html"
+    template_name = "jobsapp/details.html"
     context_object_name = "job"
     pk_url_kwarg = "id"
 

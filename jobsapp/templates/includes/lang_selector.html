@@ -1,0 +1,17 @@
+{% load i18n %}
+{% get_available_languages as languages %}
+
+<li class="nav-item dropdown">
+  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+     class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
+    <em class="fa fa-language"></em>
+    {% trans "Language" %}
+  </a>
+  <div aria-labelledby="clientZone" class="dropdown-menu">
+    {% for lang_code, lang_name in languages %}
+      {% language lang_code %}
+        <a href="{% url "jobs:home" %}" class="dropdown-item">{{ lang_name }}</a>
+      {% endlanguage %}
+    {% endfor %}
+  </div>
+</li>

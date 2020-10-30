@@ -1,1 +1,8 @@
-Telegram new job: {{ object.title }}
+{% load static i18n %}
+🔊 {% trans "New job" %}: <strong>{{ object.title }}</strong> @ <em>{{ object.company_name }}</em>
+<code>
+{{ object.description }}
+</code>
+💰 {{ object.salary }}€    📃 {{ object.category }}    🕔 {{ object.get_type_display }}
+
+ℹ️ <a href="{{ base_url }}{{ object.get_absolute_url }}">{% trans "More information" %}</a>

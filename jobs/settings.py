@@ -10,6 +10,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 env = environ.Env()
 
+BASE_URL = env("BASE_URL", default="http://localhost:8000")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = env("SECRET_KEY")
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
 LANGUAGES = [("en", "English"), ("ca", "Català"), ("es", "Castellano")]
 
@@ -287,6 +289,8 @@ CELERY_BEAT_SCHEDULE = {}
 NOTIFICATIONS = {
     "telegram": {
         "enabled": env.bool("NOTIF_TELEGRAM_ENABLED", default=False),
+        "token": env("TELEGRAM_TOKEN", default=None),
+        "chat_ids": env.list("TELEGRAM_CHAT_IDS", default=[]),
     },
 }
 

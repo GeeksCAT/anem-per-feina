@@ -14,7 +14,7 @@ class EditProfileView(UpdateView):
     model = User
     form_class = EmployeeProfileUpdateForm
     context_object_name = "employee"
-    template_name = "jobs/employee/edit-profile.html"
+    template_name = "jobsapp/employee/edit-profile.html"
     success_url = reverse_lazy("accounts:employer-profile-update")
 
     @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
