@@ -1,14 +1,8 @@
 from django.urls import path, re_path
 
-from .views.users import (
-    UsersViewDetails,
-    UsersViewsList,
-)
+from .views.jobs import JobsViewDetails, JobsViewList
+from .views.users import UsersViewDetails, UsersViewsList
 
-from .views.jobs import (
-    JobsViewDetails,
-    JobsViewList,
-)
 urlpatterns = [
     re_path("jobs/?$", JobsViewList.as_view(), name="jobs-list"),
     path("jobs/<int:pk>", JobsViewDetails.as_view(), name="job-detail"),

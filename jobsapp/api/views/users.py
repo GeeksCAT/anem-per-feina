@@ -1,4 +1,3 @@
-from ...models import JOB_INDEXES, Job, User
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
@@ -6,9 +5,9 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
+from ...models import JOB_INDEXES, Job, User
 
 
 class UsersViewsList(ListAPIView):
@@ -16,8 +15,9 @@ class UsersViewsList(ListAPIView):
     queryset = User.objects.all()
     permission_classes = [AllowAny]
 
+
 class UsersViewDetails(CreateAPIView, RetrieveUpdateDestroyAPIView):
     serializer_class = User
     queryset = User.objects.all()
-    print(queryset);
+    print(queryset)
     permission_classes = [AllowAny]

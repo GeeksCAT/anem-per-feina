@@ -1,12 +1,7 @@
-from ..serializers import ContactSerializer, JobSerializer, UserSerializer
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
-from rest_framework.reverse import reverse
+from typing import Any
+
 from django_filters import rest_framework as filters
-from ...models import JOB_INDEXES, Job, User
-from rest_framework.response import Response
-from rest_framework.request import Request
 from rest_framework import status
-from ..permissions import IsAuthorOrReadOnly
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
@@ -14,7 +9,14 @@ from rest_framework.generics import (
     RetrieveAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from typing import Any
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+from ...models import JOB_INDEXES, Job, User
+from ..permissions import IsAuthorOrReadOnly
+from ..serializers import ContactSerializer, JobSerializer, UserSerializer
 
 INDEXED_FILTERS = {field: ["contains", "exact"] for field in JOB_INDEXES}
 
@@ -37,7 +39,7 @@ class JobsViewList(ListCreateAPIView):
             serializer.save()
             headers = self.get_success_headers(serializer.data)
             return Response(
-                {"message": _("New job created."), "data": serializer.data},
+                {"message": ("New job created."), "data": serializer.data},
                 status=status.HTTP_201_CREATED,
                 headers=headers,
             )
