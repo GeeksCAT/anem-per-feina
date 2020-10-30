@@ -17,6 +17,10 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       POSTGRES_HOST: db-test
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      EMAIL_HOST: localhost
+      EMAIL_PORT: 5000
+      EMAIL_HOST_USE: testing
+      EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
     entrypoint:
       - invoke
       - wait-for
