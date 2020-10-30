@@ -54,11 +54,7 @@ class AboutUs(ListAPIView):
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         about_content = FlatPage.objects.filter(url="/about-us/").first()
-        # REVIEW: Is this response format okay?
         content = {
-            "url": reverse("about-us"),
-            "title": _(about_content.title),
-            # REVIEW: If there is any html tag we will send it, should we remove it before?
-            "content": _(about_content.content),
+            "content": about_content.content,
         }
         return Response(data=content, status=status.HTTP_200_OK)
