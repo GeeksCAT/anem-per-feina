@@ -292,6 +292,15 @@ NOTIFICATIONS = {
         "token": env("TELEGRAM_TOKEN", default=None),
         "chat_ids": env.list("TELEGRAM_CHAT_IDS", default=[]),
     },
+    "twitter": {
+        "enabled": env.bool("NOTIF_TWITTER_ENABLED", default=False),
+        "keys": {
+            "consumer_key": env("TWITTER_API_KEY", default=None),
+            "consumer_secret": env("TWITTER_API_SECRET", default=None),
+            "access_token_key": env("TWITTER_ACCESS_TOKEN", default=None),
+            "access_token_secret": env("TWITTER_ACCESS_TOKEN_SECRET", default=None),
+        },
+    },
 }
 
 NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
