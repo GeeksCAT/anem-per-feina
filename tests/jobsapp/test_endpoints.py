@@ -1,23 +1,7 @@
 # type:ignore
-import datetime
-import random
-
-import factory
 import pytest
-from rest_framework.test import APIClient
-
-import jobs
-from tests.factories import JobFactory
-
-# type:ignore
-
 
 JOBS_ENDPOINT = "/api/jobs"
-
-
-@pytest.fixture
-def api_client():
-    return APIClient()
 
 
 def test_contact_us(api_client):
@@ -48,32 +32,6 @@ def test_about_us(api_client, db):
     assert resp.status_code == 200
 
 
-@pytest.fixture
-def api_client_authenticate(db, user_factory, api_client):
-    user = user_factory()
-    api_client.force_authenticate(user=user)
-    yield api_client
-    api_client.force_authenticate(user=None)
-
-
-@pytest.fixture
-def create_job(db, job_factory):
-    return job_factory
-
-
-@pytest.fixture
-def create_job_as_dict(db, job_factory) -> dict:
-    return factory.build(dict, FACTORY_CLASS=JobFactory)
-
-
-@pytest.fixture
-def create_jobs(db, job_factory):
-    def _create_jobs(size=10):
-        return job_factory.simple_generate_batch(create=True, size=size)
-
-    return _create_jobs
-
-
 @pytest.mark.django_db
 def test_user_from_user_factory(user_factory):
     user = user_factory()
@@ -87,6 +45,7 @@ def test_list_all_jobs(api_client, create_jobs):
     response = api_client.get(JOBS_ENDPOINT)
     assert response.status_code == 200
     assert len(response.data) > 1
+    print(response.data)
 
 
 @pytest.mark.django_db
@@ -114,6 +73,7 @@ def test_patch_job(api_client_authenticate, create_job_as_dict):
     data = {"filled": True}
     response = api_client_authenticate.patch(job_url, data=data)
 
+    print(response.data)
     assert response.status_code == 200
 
 
