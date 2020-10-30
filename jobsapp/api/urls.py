@@ -5,7 +5,6 @@ from .views.common import (
     ContactUs,
     JobsViewDetails,
     JobsViewList,
-    JobViewSet,
     SearchApiView,
     UsersList,
 )
