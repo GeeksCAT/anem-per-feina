@@ -44,7 +44,7 @@ class ProviderBase:
             self._publish(tpl)
         except Exception as e:
             logger.error(
-                f"Publishing error to {self.code}, event {event_name}, instance {instance.pk}"
+                f"Publishing error to {self.code}, event {event_name}, instance {instance.pk}\n{e}"
             )
             return False
         return True
