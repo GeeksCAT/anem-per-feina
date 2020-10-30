@@ -51,3 +51,11 @@ def create_jobs(db, job_factory):
         return job_factory.simple_generate_batch(create=True, size=size)
 
     return _create_jobs
+
+
+@pytest.fixture
+def create_users(db, user_factory):
+    def _create_users(size=5):
+        return user_factory.simple_generate_batch(create=True, size=size)
+
+    return _create_users

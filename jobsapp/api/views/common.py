@@ -18,7 +18,9 @@ from django.contrib.flatpages.models import FlatPage
 from django.db.models.query import QuerySet
 from django.utils.translation import gettext_lazy as _
 
-from ...models import JOB_INDEXES, Job, User
+from accounts.models import User
+
+from ...models import JOB_INDEXES, Job
 from ...utils import contact_us_email
 from ..permissions import IsAuthorOrReadOnly
 from ..serializers import ContactSerializer, JobSerializer, UserSerializer
@@ -98,6 +100,6 @@ class AboutUs(ListAPIView):
 
 
 class UsersList(ListAPIView, RetrieveAPIView):
-    serializer_class = User
+    serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny]

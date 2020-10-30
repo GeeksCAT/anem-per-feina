@@ -2,6 +2,7 @@
 import pytest
 
 JOBS_ENDPOINT = "/api/jobs"
+USERS_ENDPOINT = "/api/users"
 
 
 def test_contact_us(api_client):
@@ -35,7 +36,7 @@ def test_about_us(api_client, db):
 @pytest.mark.django_db
 def test_user_from_user_factory(user_factory):
     user = user_factory()
-    assert user.first_name == "John"
+    assert user.last_name == "Doe"
 
 
 @pytest.mark.django_db
@@ -45,7 +46,15 @@ def test_list_all_jobs(api_client, create_jobs):
     response = api_client.get(JOBS_ENDPOINT)
     assert response.status_code == 200
     assert len(response.data) > 1
-    print(response.data)
+
+
+@pytest.mark.django_db
+def test_list_all_users(api_client, create_users):
+    """Ensures that everyone can see the jobs endpoint."""
+    create_users(size=20)
+    response = api_client.get(USERS_ENDPOINT)
+    assert response.status_code == 200
+    assert len(response.data) > 1
 
 
 @pytest.mark.django_db
@@ -84,6 +93,41 @@ def test_delete_job(api_client_authenticate, create_job_as_dict):
     job_url = response.data["data"]["url"]
     response = api_client_authenticate.delete(job_url)
     assert response.status_code == 204
+
+
+@pytest.mark.django_db
+def test_only_authors_can_edit_job(api_client, create_users, create_jobs):
+    """Test that non author users can't edit or delete job offers."""
+    jobs = create_jobs(10)
+    users = create_users(5)
+    api_client.force_authenticate(user=users[2])
+
+    # Delete
+    response = api_client.delete(f"{JOBS_ENDPOINT}/{jobs[4].id}")
+    assert response.status_code == 403
+    # Patch
+    response = api_client.patch(f"{JOBS_ENDPOINT}/{jobs[4].id}", data={"filled": True})
+    assert response.status_code == 403
+    # Put
+    data = {
+        "url": f"http://testserver/api/jobs/{jobs[4].id}",
+        "title": "Title 4",
+        "description": "Description 4",
+        "location": "Cañada de Fermín Lara 19 Apt. 98 \nCastellón, 43469",
+        "type": "1",
+        "category": "Manager",
+        "last_date": "2020-11-09T22:54:05.276115Z",
+        "company_name": "Botella PLC",
+        "company_description": "Deserunt laboriosam facere iusto eaque. Cumque at cumque.",
+        "website": "http://alvaro-castillo.es/",
+        "created_at": "2020-10-30T22:54:08.426784Z",
+        "filled": True,
+        "salary": [20000 - 5000],
+        "remote": "2",
+        "user": f"http://testserver/api/users/{jobs[4].id}",
+    }
+    response = api_client.put(f"{JOBS_ENDPOINT}/{jobs[4].id}", data=data)
+    assert response.status_code == 403
 
 
 @pytest.mark.django_db
