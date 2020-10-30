@@ -1,13 +1,18 @@
+from typing import Any, Union
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.edit import FormView
 
-# from ..documents import JobDocument
+from ..forms import ContactForm
 from ..models import Job
 
 
@@ -71,3 +76,21 @@ class JobDetailsView(DetailView):
             raise Http404(_("Job doesn't exists"))
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+
+class ContactView(FormView):
+    template_name = "contact_us.html"
+    form_class = ContactForm
+    success_url = "/"
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> Union[HttpResponse, Any]:
+        form = self.get_form()
+        if form.is_valid():
+            messages.info(self.request, _("Mensage sent successfully"))
+            return self.form_valid(form)
+        messages.warning(self.request, _("Mensage not sent"))
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
