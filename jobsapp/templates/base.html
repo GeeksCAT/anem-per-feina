@@ -56,7 +56,7 @@
             <a href="/about-us/" class="nav-link">{% trans "About Us" %}</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">{% trans "Contact" %}</a>
+            <a href="{% url 'jobs:contact-us' %}" class="nav-link">{% trans "Contact" %}</a>
           </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
