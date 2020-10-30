@@ -13,7 +13,7 @@ from jobsapp.models import Job
 
 class DashboardView(ListView):
     model = Job
-    template_name = "jobs/employer/dashboard.html"
+    template_name = "jobsapp/employer/dashboard.html"
     context_object_name = "jobs"
 
     @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
@@ -26,7 +26,7 @@ class DashboardView(ListView):
 
 
 class JobCreateView(CreateView):
-    template_name = "jobs/create.html"
+    template_name = "jobsapp/create.html"
     form_class = CreateJobForm
     extra_context = {"title": _("Post New Job")}
     success_url = reverse_lazy("jobs:employer-dashboard")
@@ -53,7 +53,7 @@ class JobCreateView(CreateView):
 class JobDeleteView(DeleteView):
     model = Job
     success_url = reverse_lazy("jobs:employer-dashboard")
-    template_name = "jobs/delete.html"
+    template_name = "jobsapp/delete.html"
 
 
 @login_required(login_url=reverse_lazy("accounts:login"))
