@@ -33,6 +33,8 @@ spec:
               name: postgres-secrets
           - secretRef:
               name: telegram-secrets
+          - secretRef:
+              name: twitter-secrets
 ---
 apiVersion: v1
 kind: Service
