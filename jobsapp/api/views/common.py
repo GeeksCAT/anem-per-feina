@@ -49,6 +49,8 @@ class ContactUs(CreateAPIView):
                 {"message": _("Email sent successfully.")}, status=status.HTTP_202_ACCEPTED
             )
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class AboutUs(ListAPIView):
     permission_classes = [AllowAny]
 

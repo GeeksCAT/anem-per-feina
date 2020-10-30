@@ -2,7 +2,7 @@ from rest_framework.routers import DefaultRouter
 
 from django.urls import path
 
-from .views.common import ContactUs, JobViewSet, SearchApiView,  AboutUs,
+from .views.common import AboutUs, ContactUs, JobViewSet, SearchApiView
 
 router = DefaultRouter()
 router.register("jobs", JobViewSet)
