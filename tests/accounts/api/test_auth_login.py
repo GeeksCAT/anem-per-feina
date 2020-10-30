@@ -15,7 +15,7 @@ def test_obtain_token(create_user, client) -> None:
     user = create_user
     request_login = client.post(LOGIN_URL, DATA_POST, content_type=CONTENT_TYPE_JSON)
     decode_access_token = jwt.decode(request_login.json()["access"], verify=False)
-    assert request_login.status_code == status.HTTP_201_CREATED
+    assert request_login.status_code == status.HTTP_200_OK
     assert decode_access_token["user_id"] == user.pk
     assert decode_access_token["user"]["email"] == EMAIL
 
