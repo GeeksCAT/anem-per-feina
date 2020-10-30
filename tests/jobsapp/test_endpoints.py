@@ -3,6 +3,7 @@ import pytest
 
 JOBS_ENDPOINT = "/api/jobs"
 USERS_ENDPOINT = "/api/users"
+from jobs.settings import REST_FRAMEWORK
 
 
 @pytest.mark.django_db
@@ -119,4 +120,4 @@ def test_pagination(api_client, create_jobs):
     url = JOBS_ENDPOINT
     response = api_client.get(url)
     assert response.status_code == 200
-    assert len(response.data["results"]) == 25
+    assert len(response.data["results"]) == REST_FRAMEWORK["PAGE_SIZE"]
