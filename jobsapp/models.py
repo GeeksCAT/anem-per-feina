@@ -14,6 +14,16 @@ from notifications.events import EVENT_NEW_JOB
 # Global Imports
 JOB_INDEXES = ("location", "category", "type", "title")
 
+# Job remote types
+NO_REMOTE = "1"
+REMOTE = "2"
+PARTIAL_REMOTE = "3"
+REMOTE_CHOICES = (
+    (NO_REMOTE, _("No remote")),
+    (REMOTE, _("Full remote")),
+    (PARTIAL_REMOTE, _("Partial remote")),
+)
+
 
 @event_dispatcher(EVENT_NEW_JOB)
 class Job(models.Model):
@@ -68,6 +78,13 @@ class Job(models.Model):
         null=True,
         verbose_name=_("Salary"),
         help_text=_("Minimum and maximum annual salary for this job."),
+    )
+    remote = models.CharField(
+        verbose_name=_("Remote"),
+        null=True,
+        choices=REMOTE_CHOICES,
+        max_length=20,
+        help_text=_("Is this job position remote?."),
     )
 
     class Meta:
