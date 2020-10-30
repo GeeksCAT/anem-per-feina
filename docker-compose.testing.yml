@@ -19,7 +19,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       EMAIL_HOST: localhost
       EMAIL_PORT: 5000
-      EMAIL_HOST_USE: testing
+      EMAIL_HOST_USER: testing
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
     entrypoint:
       - invoke
