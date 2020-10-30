@@ -54,7 +54,7 @@ class AboutUs(ListAPIView):
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         about_content = FlatPage.objects.filter(url="/about-us/").first()
-        # REVIEW: Is this format okay?
+        # REVIEW: Is this response format okay?
         content = {
             "url": reverse("about-us"),
             "title": _(about_content.title),

@@ -1,5 +1,3 @@
-from ckeditor.widgets import CKEditorWidget
-
 from django.contrib import admin
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage

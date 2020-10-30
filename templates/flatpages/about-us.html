@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+
 {% block title %}
-    {% translate flatpage.title %}
+    {% trans flatpage.title %}
 {% endblock %}
 
 {% block content %}
-    {% translate flatpage.content %}
+    {% trans flatpage.content %}
 {% endblock %}
