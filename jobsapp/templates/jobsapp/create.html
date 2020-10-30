@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+  <section class="bg-light-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h1 class="heading">{% trans "Add a new position" %}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          {% if form.errors %}
+            {% for field in form %}
+              {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{ field.label }}: {{ error|escape }}</strong>
+                </div>
+              {% endfor %}
+            {% endfor %}
+          {% endif %}
+          <form id="job-main-form" method="post" action="" class="job-add-form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>{% trans "Job details" %}</h4>
+                <p class="text-muted text-small">
+{% blocktrans %}Some additional info for this screen about validity of
+the ads, etc. Pellentesque habitant morbi tristique senectus et netus et malesuada
+fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.{% endblocktrans %}
+                </p>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="title">{% trans "Job Title" %}</label>
+                <input id="title" name="title" type="text" class="form-control" value="{{ form.title.value|default_if_none:"" }}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="text">{% trans "Job Description" %}</label>
+                <textarea id="text" name="description" rows="5"
+                          class="form-control">{{ form.description.value|default_if_none:"" }}</textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="salary">{% trans "Salary(Leave empty if it's negotiable)" %}</label>
+                <input id="salary" name="salary" type="number" min="1000" class="form-control"
+                       value="{{ form.salary.value|default_if_none:"" }}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <label for="location">{% trans "Location" %}</label>
+                <input id="location" name="location" type="text" placeholder="{% trans "e.g. Dhaka, Bangladesh" %}"
+                       class="form-control" value="{{ form.location.value|default_if_none:"" }}">
+              </div>
+              <div class="col-lg-6 form-group">
+                <label for="type">{% trans "Type" %}</label>
+                <select id="type" name="type" placeholder="{% trans "Choose job type" %}" class="form-control select2">
+                  <option value="1" {% if form.type.value == "1" %} selected {% endif %}>{% trans "Full time" %}</option>
+                  <option value="2" {% if form.type.value == "2" %} selected {% endif %}>{% trans "Part time" %}</option>
+                  <option value="3" {% if form.type.value == "3" %} selected {% endif %}>{% trans "Internship" %}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="category">{% trans "Category" %}</label>
+                <select id="category" name="category" class="form-control select2">
+                  <option value="web-design" {% if form.category.value == "web-design" %} selected {% endif %}>
+                    {% trans "Web design" %}
+                  </option>
+                  <option value="graphic-design" {% if form.category.value == "graphic-design" %} selected {% endif %}>
+                    {% trans "Graphic design" %}
+                  </option>
+                  <option value="web-development" {% if form.category.value == "web-development" %}selected {% endif %}>
+                    {% trans "Web development" %}
+                  </option>
+                  <option value="human-resource" {% if form.category.value == "human-resource" %} selected {% endif %}>
+                    {% trans "Human Resources" %}
+                  </option>
+                  <option value="support" {% if form.category.value == "support" %} selected {% endif %}>
+                    {% trans "Support" %}
+                  </option>
+                  <option value="android" {% if form.category.value == "android" %} selected {% endif %}>
+                    Android
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 form-group">
+                <label for="apply_url">{% trans "Apply URL" %} <span class="note">
+                  ({% trans "users will apply on your website" %})
+                </span></label>
+                <input id="apply_url" type="url" class="form-control">
+              </div>
+              <div class="col-xl-6 form-group">
+                <label for="validity">{% trans "Validity of the post" %}</label>
+                <input id="validity" name="last_date" type="date" class="form-control"
+                       value="{{ form.last_date.value|default_if_none:"" }}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <hr class="margin-bottom--big">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>{% trans "Company details" %}</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="company_name">{% trans "Company name" %}</label>
+                <input id="company_name" name="company_name" type="text" class="form-control"
+                       value="{{ form.company_name.value|default_if_none:"" }}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                {#                                <p class="text-danger">{{ form.company_description.errors }}</p>#}
+                <label for="company_description">{% trans "Company Description" %}</label>
+                <textarea id="company_description" name="company_description" rows="3"
+                          class="form-control">{{ form.company_description.value|default_if_none:"" }}</textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 form-group">
+                <label for="company_website">{% trans "Website" %}</label>
+                <input id="company_website" name="website" type="url" class="form-control"
+                       value="{{ form.website.value|default_if_none:"" }}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <hr>
+                <div class="checkbox text-center">
+                  <label>
+                    <input type="checkbox"> {% trans "I agree with the" %} <a href="#">{% trans "Terms and conditions" %}</a>.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <hr>
+                <button type="submit" class="btn btn-outline-white-primary"><em class="fa fa-magic"></em>
+                  {% trans "Save and publish" %}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

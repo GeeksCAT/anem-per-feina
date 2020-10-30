@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-22 17:31+0200\n"
+"POT-Creation-Date: 2020-10-29 14:03+0100\n"
 "PO-Revision-Date: 2020-10-25 17:57+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
@@ -19,179 +19,385 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
 
-#: jobsapp/models.py:17
-msgid "Full time"
-msgstr "Temps complet"
-
-#: jobsapp/models.py:18
-msgid "Part time"
-msgstr "Temps parcial"
-
-#: jobsapp/models.py:19
-msgid "Internship"
-msgstr "Pràctiques"
-
-#: jobsapp/models.py:24 jobsapp/models.py:74
-msgid "User"
-msgstr "Usuari"
-
-#: jobsapp/models.py:25
-msgid "User who creates this job."
-msgstr "Usuari que ha creat la oferta de feina."
-
-#: jobsapp/models.py:28
-msgid "Title"
-msgstr "Títol"
-
-#: jobsapp/models.py:28
-msgid "Short job title."
-msgstr "Títol curt de la oferta."
-
-#: jobsapp/models.py:31
-msgid "Description"
-msgstr "Descripció"
-
-#: jobsapp/models.py:31
-msgid "Long job description."
-msgstr "Descripció detallada."
-
-#: jobsapp/models.py:34
-msgid "Location"
-msgstr "Localització"
-
-#: jobsapp/models.py:34
-msgid "Location for this job position."
-msgstr "Localització d'aquesta oferta."
-
-#: jobsapp/models.py:37
-msgid "Type"
-msgstr "Tipus"
-
-#: jobsapp/models.py:37
-msgid "Job type."
-msgstr "Tipus d'oferta."
-
-#: jobsapp/models.py:40
-msgid "Category"
-msgstr "Categoria"
-
-#: jobsapp/models.py:40
-msgid "Category clasification."
-msgstr "Classificació de la categoria."
-
-#: jobsapp/models.py:42
-msgid "Last date"
-msgstr "Última data"
-
-#: jobsapp/models.py:42
-msgid "Last date."
-msgstr "Última data."
-
-#: jobsapp/models.py:44
-msgid "Company"
-msgstr "Empresa"
-
-#: jobsapp/models.py:44
-msgid "Job's Company name."
-msgstr "Nom de la empresa que publica la oferta."
-
-#: jobsapp/models.py:48
-msgid "Company description"
-msgstr "Descripció de l'empresa"
-
-#: jobsapp/models.py:49
-msgid "Company description, activity,..."
-msgstr "Descripció de l'empresa, activitats, ..."
-
-#: jobsapp/models.py:52
-msgid "Website"
-msgstr "Lloc web"
-
-#: jobsapp/models.py:52
-msgid "Company Website URL."
-msgstr "URL del lloc web de l'empresa."
-
-#: jobsapp/models.py:55 jobsapp/models.py:85
-msgid "Created"
-msgstr "Creat"
-
-#: jobsapp/models.py:55
-msgid "Job creation date and time."
-msgstr "Data de creació."
-
-#: jobsapp/models.py:58
-msgid "Filled"
-msgstr "Satisfeta"
-
-#: jobsapp/models.py:58
-msgid "Job position is filled."
-msgstr "La oferta de feina ha estat coberta."
-
-#: jobsapp/models.py:61
-msgid "Salary"
-msgstr "Salari"
-
-#: jobsapp/models.py:61
-msgid "Maximum salary for this job."
-msgstr "Salari màxim per aquesta feina."
-
-#: jobsapp/models.py:65 jobsapp/models.py:80
-msgid "Job"
-msgstr "Feina"
-
-#: jobsapp/models.py:66
-msgid "Jobs"
-msgstr "Feines"
-
-#: jobsapp/models.py:74
-msgid "User applicant."
-msgstr "Candidat."
-
-#: jobsapp/models.py:81
-msgid "Job in applicant."
-msgstr "Candidatures a la feina."
-
-#: jobsapp/models.py:86
-msgid "Applicant creation date and time."
-msgstr "Data de la candidatura."
-
-#: jobsapp/models.py:90
-msgid "Applicant"
-msgstr "Candidatura"
-
-#: jobsapp/models.py:91
-msgid "Applicants"
-msgstr "Candidatures"
-
-#: jobsapp/views/employee.py:29
-msgid "User doesn't exists"
-msgstr "L'usuari no existeix"
-
-#: jobsapp/views/employee.py:37 jobsapp/views/home.py:60
-#: jobsapp/views/home.py:68
-msgid "Job doesn't exists"
-msgstr "La oferta de feina no existeix"
-
-#: jobsapp/views/employer.py:51
-msgid "Post New Job"
-msgstr "Publica una nova oferta de feina"
-
-#: jobsapp/views/home.py:86
-msgid "Successfully applied for the job!"
-msgstr "Has sol·licitat la feina amb èxit!"
-
-#: jobsapp/views/home.py:106
-msgid "You already applied for this job"
-msgstr "Ja has sol·licitat aquesta feina"
-
-#: jobsapp/forms.py:15
 msgid "Last Date"
 msgstr "Última data"
 
-#: jobsapp/forms.py:16
 msgid "Company Name"
 msgstr "Nom de l'empresa"
 
-#: jobsapp/forms.py:17
 msgid "Company Description"
 msgstr "Descripció de l'empresa"
+
+msgid "Full time"
+msgstr "Temps complet"
+
+msgid "Part time"
+msgstr "Temps parcial"
+
+msgid "Internship"
+msgstr "Pràctiques"
+
+msgid "User"
+msgstr "Usuari"
+
+msgid "User who creates this job."
+msgstr "Usuari que ha creat la oferta de feina."
+
+msgid "Title"
+msgstr "Títol"
+
+msgid "Short job title."
+msgstr "Títol curt de la oferta."
+
+msgid "Description"
+msgstr "Descripció"
+
+msgid "Long job description."
+msgstr "Descripció detallada."
+
+msgid "Location"
+msgstr "Localització"
+
+msgid "Location for this job position."
+msgstr "Localització d'aquesta oferta."
+
+msgid "Type"
+msgstr "Tipus"
+
+msgid "Job type."
+msgstr "Tipus d'oferta."
+
+msgid "Category"
+msgstr "Categoria"
+
+msgid "Category clasification."
+msgstr "Classificació de la categoria."
+
+msgid "Last date"
+msgstr "Última data"
+
+msgid "Last date."
+msgstr "Última data."
+
+msgid "Company"
+msgstr "Empresa"
+
+msgid "Job's Company name."
+msgstr "Nom de la empresa que publica la oferta."
+
+msgid "Company description"
+msgstr "Descripció de l'empresa"
+
+msgid "Company description, activity,..."
+msgstr "Descripció de l'empresa, activitats, ..."
+
+msgid "Website"
+msgstr "Lloc web"
+
+msgid "Company Website URL."
+msgstr "URL del lloc web de l'empresa."
+
+msgid "Created"
+msgstr "Creat"
+
+msgid "Job creation date and time."
+msgstr "Data de creació."
+
+msgid "Filled"
+msgstr "Satisfeta"
+
+msgid "Job position is filled."
+msgstr "La oferta de feina ha estat coberta."
+
+msgid "Salary"
+msgstr "Salari"
+
+msgid "Maximum salary for this job."
+msgstr "Salari màxim per aquesta feina."
+
+msgid "Job"
+msgstr "Feina"
+
+msgid "Jobs"
+msgstr "Feines"
+
+msgid "Home"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Home "
+msgstr ""
+
+msgid "current"
+msgstr ""
+
+msgid "About Us"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Post a new job"
+msgstr "Publica una nova oferta de feina"
+
+msgid "Logout"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid ""
+"Find a <span class=\"accent\">job</span> you will <span class=\"accent"
+"\">love</span>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Descripció"
+
+msgid "Position you are looking for"
+msgstr ""
+
+msgid "Any particular location?"
+msgstr ""
+
+msgid "Featured jobs"
+msgstr ""
+
+msgid "Trending this month"
+msgstr ""
+
+msgid "Share Board"
+msgstr ""
+
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Posted "
+msgstr "Publica una nova oferta de feina"
+
+msgid "Start searching for your new job now!"
+msgstr ""
+
+msgid "See our job offers"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Add a new position"
+msgstr ""
+
+#, fuzzy
+#| msgid "Job doesn't exists"
+msgid "Job details"
+msgstr "La oferta de feina no existeix"
+
+msgid ""
+"Some additional info for this screen about validity of\n"
+"the ads, etc. Pellentesque habitant morbi tristique senectus et netus et "
+"malesuada\n"
+"fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies "
+"eget,\n"
+"tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean\n"
+"ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est "
+"et sapien ullamcorper pharetra."
+msgstr ""
+
+#, fuzzy
+#| msgid "Title"
+msgid "Job Title"
+msgstr "Títol"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Job Description"
+msgstr "Descripció"
+
+msgid "Salary(Leave empty if it's negotiable)"
+msgstr ""
+
+msgid "e.g. Dhaka, Bangladesh"
+msgstr ""
+
+msgid "Choose job type"
+msgstr ""
+
+msgid "Web design"
+msgstr ""
+
+msgid "Graphic design"
+msgstr ""
+
+msgid "Web development"
+msgstr ""
+
+msgid "Human Resources"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid "Apply URL"
+msgstr ""
+
+msgid "users will apply on your website"
+msgstr ""
+
+msgid "Validity of the post"
+msgstr ""
+
+#, fuzzy
+#| msgid "Company description"
+msgid "Company details"
+msgstr "Descripció de l'empresa"
+
+#, fuzzy
+#| msgid "Company Name"
+msgid "Company name"
+msgstr "Nom de l'empresa"
+
+msgid "I agree with the"
+msgstr ""
+
+msgid "Terms and conditions"
+msgstr ""
+
+msgid "Save and publish"
+msgstr ""
+
+#, python-format
+msgid "Are you sure you want to delete \"%(job)s\"?"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Yearly "
+msgstr ""
+
+msgid "Negotiable "
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Edit Profile"
+msgstr ""
+
+msgid "Male"
+msgstr ""
+
+msgid "Female"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "All created jobs"
+msgstr ""
+
+msgid "Add new position"
+msgstr ""
+
+#, fuzzy
+#| msgid "Job type."
+msgid "Job title"
+msgstr "Tipus d'oferta."
+
+#, fuzzy
+#| msgid "Job position is filled."
+msgid "Position filled"
+msgstr "La oferta de feina ha estat coberta."
+
+msgid "Date posted"
+msgstr ""
+
+msgid "Date expiring"
+msgstr ""
+
+#, fuzzy
+#| msgid "Location"
+msgid "Actions"
+msgstr "Localització"
+
+#, fuzzy
+#| msgid "Filled"
+msgid "Not Filled"
+msgstr "Satisfeta"
+
+msgid "Edit"
+msgstr ""
+
+msgid "Mark as"
+msgstr ""
+
+#, fuzzy
+#| msgid "Filled"
+msgid "filled"
+msgstr "Satisfeta"
+
+msgid "Delete"
+msgstr ""
+
+msgid "All jobs"
+msgstr ""
+
+msgid ""
+"Find a <span class=\"accent\">job </span> you will <span class=\"accent"
+"\">love</span>"
+msgstr ""
+
+msgid "Profession"
+msgstr ""
+
+msgid "Profession you are looking for"
+msgstr ""
+
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs)s</span> jobs"
+msgstr ""
+
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs.count)s</span> jobs"
+msgstr ""
+
+msgid "User doesn't exists"
+msgstr "L'usuari no existeix"
+
+msgid "Job doesn't exists"
+msgstr "La oferta de feina no existeix"
+
+msgid "Post New Job"
+msgstr "Publica una nova oferta de feina"
+
+#~ msgid "User applicant."
+#~ msgstr "Candidat."
+
+#~ msgid "Job in applicant."
+#~ msgstr "Candidatures a la feina."
+
+#~ msgid "Applicant creation date and time."
+#~ msgstr "Data de la candidatura."
+
+#~ msgid "Applicant"
+#~ msgstr "Candidatura"
+
+#~ msgid "Applicants"
+#~ msgstr "Candidatures"
+
+#~ msgid "Successfully applied for the job!"
+#~ msgstr "Has sol·licitat la feina amb èxit!"
+
+#~ msgid "You already applied for this job"
+#~ msgstr "Ja has sol·licitat aquesta feina"

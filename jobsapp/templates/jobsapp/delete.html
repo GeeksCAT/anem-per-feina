@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="p-5">
+    <form method="post">{% csrf_token %}
+      <p>{% blocktrans with job=job.title %}Are you sure you want to delete "{{ job }}"?{% endblocktrans %}</p>
+      <input type="submit" value="{% trans "Confirm" %}" class="btn btn-primary">
+    </form>
+  </div>
+{% endblock %}

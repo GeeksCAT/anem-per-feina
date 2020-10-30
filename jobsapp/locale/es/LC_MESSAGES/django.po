@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 18:03+0100\n"
+"POT-Creation-Date: 2020-10-29 14:03+0100\n"
 "PO-Revision-Date: 2020-10-25 17:57+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
@@ -18,179 +18,385 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
 
-#: jobsapp/forms.py:15
 msgid "Last Date"
 msgstr "Última fecha"
 
-#: jobsapp/forms.py:16
 msgid "Company Name"
 msgstr "Nombre de la empresa"
 
-#: jobsapp/forms.py:17
 msgid "Company Description"
 msgstr "Descripción de la empresa"
 
-#: jobsapp/models.py:17
 msgid "Full time"
 msgstr "Tiempo completo"
 
-#: jobsapp/models.py:18
 msgid "Part time"
 msgstr "Tiempo parcial"
 
-#: jobsapp/models.py:19
 msgid "Internship"
 msgstr "Prácticas"
 
-#: jobsapp/models.py:24 jobsapp/models.py:74
 msgid "User"
 msgstr "Usuario"
 
-#: jobsapp/models.py:25
 msgid "User who creates this job."
 msgstr "Usuario que ha creado esta oferta de empleo."
 
-#: jobsapp/models.py:28
 msgid "Title"
 msgstr "Título"
 
-#: jobsapp/models.py:28
 msgid "Short job title."
 msgstr "Título corto de la oferta."
 
-#: jobsapp/models.py:31
 msgid "Description"
 msgstr "Descripción"
 
-#: jobsapp/models.py:31
 msgid "Long job description."
 msgstr "Descripción detallada."
 
-#: jobsapp/models.py:34
 msgid "Location"
 msgstr "Localización"
 
-#: jobsapp/models.py:34
 msgid "Location for this job position."
 msgstr "Localización de esta oferta de empleo."
 
-#: jobsapp/models.py:37
 msgid "Type"
 msgstr "Tipo"
 
-#: jobsapp/models.py:37
 msgid "Job type."
 msgstr "Tipo de oferta."
 
-#: jobsapp/models.py:40
 msgid "Category"
 msgstr "Categoría"
 
-#: jobsapp/models.py:40
 msgid "Category clasification."
 msgstr "Clasificación de la categoría."
 
-#: jobsapp/models.py:42
 msgid "Last date"
 msgstr "Última fecha"
 
-#: jobsapp/models.py:42
 msgid "Last date."
 msgstr "Última fecha."
 
-#: jobsapp/models.py:44
 msgid "Company"
 msgstr "Empresa"
 
-#: jobsapp/models.py:44
 msgid "Job's Company name."
 msgstr "Nombre de la empresa que publica la oferta."
 
-#: jobsapp/models.py:48
 msgid "Company description"
 msgstr "Descripción de la empresa"
 
-#: jobsapp/models.py:49
 msgid "Company description, activity,..."
 msgstr "Descripción de la empresa, actividades, ..."
 
-#: jobsapp/models.py:52
 msgid "Website"
 msgstr "Sitio web"
 
-#: jobsapp/models.py:52
 msgid "Company Website URL."
 msgstr "URL del sitio web de la empresa."
 
-#: jobsapp/models.py:55 jobsapp/models.py:85
 msgid "Created"
 msgstr "Creado"
 
-#: jobsapp/models.py:55
 msgid "Job creation date and time."
 msgstr "Fecha de creación."
 
-#: jobsapp/models.py:58
 msgid "Filled"
 msgstr "Cubierta"
 
-#: jobsapp/models.py:58
 msgid "Job position is filled."
 msgstr "La oferta de trabajo ha sido cubierta."
 
-#: jobsapp/models.py:61
 msgid "Salary"
 msgstr "Salario"
 
-#: jobsapp/models.py:61
 msgid "Maximum salary for this job."
 msgstr "Salario máximo para esta oferta de empleo."
 
-#: jobsapp/models.py:65 jobsapp/models.py:80
 msgid "Job"
 msgstr "Empleo"
 
-#: jobsapp/models.py:66
 msgid "Jobs"
 msgstr "Empleos"
 
-#: jobsapp/models.py:74
-msgid "User applicant."
-msgstr "Candidato."
+msgid "Home"
+msgstr ""
 
-#: jobsapp/models.py:81
-msgid "Job in applicant."
-msgstr "Candidaturas de la oferta de empleo."
+msgid "Menu"
+msgstr ""
 
-#: jobsapp/models.py:86
-msgid "Applicant creation date and time."
-msgstr "Fecha de la candidatura."
+msgid "Home "
+msgstr ""
 
-#: jobsapp/models.py:90
-msgid "Applicant"
-msgstr "Candidatura"
+msgid "current"
+msgstr ""
 
-#: jobsapp/models.py:91
-msgid "Applicants"
-msgstr "Candidaturas"
+msgid "About Us"
+msgstr ""
 
-#: jobsapp/views/employee.py:29
+msgid "Contact"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Post a new job"
+msgstr "Publica una nueva oferta de empleo"
+
+msgid "Logout"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid ""
+"Find a <span class=\"accent\">job</span> you will <span class=\"accent"
+"\">love</span>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Descripción"
+
+msgid "Position you are looking for"
+msgstr ""
+
+msgid "Any particular location?"
+msgstr ""
+
+msgid "Featured jobs"
+msgstr ""
+
+msgid "Trending this month"
+msgstr ""
+
+msgid "Share Board"
+msgstr ""
+
+#, fuzzy
+#| msgid "Post New Job"
+msgid "Posted "
+msgstr "Publica una nueva oferta de empleo"
+
+msgid "Start searching for your new job now!"
+msgstr ""
+
+msgid "See our job offers"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Add a new position"
+msgstr ""
+
+#, fuzzy
+#| msgid "Job doesn't exists"
+msgid "Job details"
+msgstr "La oferta de empleo no existe"
+
+msgid ""
+"Some additional info for this screen about validity of\n"
+"the ads, etc. Pellentesque habitant morbi tristique senectus et netus et "
+"malesuada\n"
+"fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies "
+"eget,\n"
+"tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean\n"
+"ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est "
+"et sapien ullamcorper pharetra."
+msgstr ""
+
+#, fuzzy
+#| msgid "Title"
+msgid "Job Title"
+msgstr "Título"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Job Description"
+msgstr "Descripción"
+
+msgid "Salary(Leave empty if it's negotiable)"
+msgstr ""
+
+msgid "e.g. Dhaka, Bangladesh"
+msgstr ""
+
+msgid "Choose job type"
+msgstr ""
+
+msgid "Web design"
+msgstr ""
+
+msgid "Graphic design"
+msgstr ""
+
+msgid "Web development"
+msgstr ""
+
+msgid "Human Resources"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid "Apply URL"
+msgstr ""
+
+msgid "users will apply on your website"
+msgstr ""
+
+msgid "Validity of the post"
+msgstr ""
+
+#, fuzzy
+#| msgid "Company description"
+msgid "Company details"
+msgstr "Descripción de la empresa"
+
+#, fuzzy
+#| msgid "Company Name"
+msgid "Company name"
+msgstr "Nombre de la empresa"
+
+msgid "I agree with the"
+msgstr ""
+
+msgid "Terms and conditions"
+msgstr ""
+
+msgid "Save and publish"
+msgstr ""
+
+#, python-format
+msgid "Are you sure you want to delete \"%(job)s\"?"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Yearly "
+msgstr ""
+
+msgid "Negotiable "
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Edit Profile"
+msgstr ""
+
+msgid "Male"
+msgstr ""
+
+msgid "Female"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "All created jobs"
+msgstr ""
+
+msgid "Add new position"
+msgstr ""
+
+#, fuzzy
+#| msgid "Job type."
+msgid "Job title"
+msgstr "Tipo de oferta."
+
+#, fuzzy
+#| msgid "Job position is filled."
+msgid "Position filled"
+msgstr "La oferta de trabajo ha sido cubierta."
+
+msgid "Date posted"
+msgstr ""
+
+msgid "Date expiring"
+msgstr ""
+
+#, fuzzy
+#| msgid "Location"
+msgid "Actions"
+msgstr "Localización"
+
+#, fuzzy
+#| msgid "Filled"
+msgid "Not Filled"
+msgstr "Cubierta"
+
+msgid "Edit"
+msgstr ""
+
+msgid "Mark as"
+msgstr ""
+
+#, fuzzy
+#| msgid "Filled"
+msgid "filled"
+msgstr "Cubierta"
+
+msgid "Delete"
+msgstr ""
+
+msgid "All jobs"
+msgstr ""
+
+msgid ""
+"Find a <span class=\"accent\">job </span> you will <span class=\"accent"
+"\">love</span>"
+msgstr ""
+
+msgid "Profession"
+msgstr ""
+
+msgid "Profession you are looking for"
+msgstr ""
+
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs)s</span> jobs"
+msgstr ""
+
+#, python-format
+msgid "We have found <span class=\"accent\">%(jobs.count)s</span> jobs"
+msgstr ""
+
 msgid "User doesn't exists"
 msgstr "El usuario no existe"
 
-#: jobsapp/views/employee.py:37 jobsapp/views/home.py:60
-#: jobsapp/views/home.py:68
 msgid "Job doesn't exists"
 msgstr "La oferta de empleo no existe"
 
-#: jobsapp/views/employer.py:51
 msgid "Post New Job"
 msgstr "Publica una nueva oferta de empleo"
 
-#: jobsapp/views/home.py:86
-msgid "Successfully applied for the job!"
-msgstr "Has solicitado el empleo con éxito!"
+#~ msgid "User applicant."
+#~ msgstr "Candidato."
 
-#: jobsapp/views/home.py:106
-msgid "You already applied for this job"
-msgstr "Ya has solicitado este empleo"
+#~ msgid "Job in applicant."
+#~ msgstr "Candidaturas de la oferta de empleo."
+
+#~ msgid "Applicant creation date and time."
+#~ msgstr "Fecha de la candidatura."
+
+#~ msgid "Applicant"
+#~ msgstr "Candidatura"
+
+#~ msgid "Applicants"
+#~ msgstr "Candidaturas"
+
+#~ msgid "Successfully applied for the job!"
+#~ msgstr "Has solicitado el empleo con éxito!"
+
+#~ msgid "You already applied for this job"
+#~ msgstr "Ya has solicitado este empleo"
