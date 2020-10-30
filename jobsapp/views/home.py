@@ -83,14 +83,11 @@ class ContactView(FormView):
     form_class = ContactForm
     success_url = "/"
 
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> Union[HttpResponse, Any]:
-        form = self.get_form()
-        if form.is_valid():
-            messages.info(self.request, _("Mensage sent successfully"))
-            return self.form_valid(form)
-        messages.warning(self.request, _("Mensage not sent"))
-        return super().post(request, *args, **kwargs)
-
     def form_valid(self, form):
         form.send_email()
+        messages.info(self.request, _("Mensage sent successfully"))
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.warning(self.request, _("Mensage not sent"))
+        return super().form_invalid(form)
