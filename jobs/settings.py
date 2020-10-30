@@ -30,10 +30,12 @@ INSTALLED_APPS = [
     "django_extensions",
     "drf_yasg",
     "corsheaders",
+    "widget_tweaks",
     "rest_framework",
     "rest_framework.authtoken",
     "constance.backends.database",
     "cookielaw",
+    "captcha",
     "jobsapp",
     "accounts",
     "constance",
@@ -320,3 +322,8 @@ EMAIL_HOST = env("EMAIL_HOST", default=None)
 EMAIL_PORT = env("EMAIL_PORT", default=None)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
+
+# Catpcha
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
+SILENCED_SYSTEM_CHECKS = env.list("SILENCED_SYSTEM_CHECKS")
