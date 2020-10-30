@@ -5,34 +5,6 @@ JOBS_ENDPOINT = "/api/jobs"
 USERS_ENDPOINT = "/api/users"
 
 
-def test_contact_us(api_client):
-    resp = api_client.get("/api/contact-us")
-    assert resp.status_code == 405
-    from django.core import mail
-
-    data = {
-        "name": "test",
-        "from_email": "test@tester.cat",
-        "subject": "Testing",
-        "message": "tests",
-    }
-    resp = api_client.post("/api/contact-us", data=data)
-    assert len(mail.outbox) == 1
-    assert resp.status_code == 202
-
-
-@pytest.mark.skip
-@pytest.mark.django_db
-def test_about_us(api_client, db):
-    """REVIEW: Not working due:
-    AttributeError: 'NoneType' object has no attribute 'title'
-
-    However it works when tested manually. Maybe during test table is not created.
-    """
-    resp = api_client.get("/api/about-us")
-    assert resp.status_code == 200
-
-
 @pytest.mark.django_db
 def test_user_from_user_factory(user_factory):
     user = user_factory()
