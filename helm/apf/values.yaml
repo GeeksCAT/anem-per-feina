@@ -1,0 +1,80 @@
+baseurl: https://nemperfeina.cat
+
+app:
+  image: geekscat/anem-per-feina
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+  pullPolicy: Always
+  # workers is the amount of forked workers the server will have
+  workers: 4
+  # threads is the amount of threads per worker
+  threads: 2
+  debug: "True"
+  log_level: INFO
+  secretKey: null
+  container:
+    port: 8000
+  service:
+    port: 8000
+  resources: {}
+  replicaCount: 1
+
+postgresql:
+  serviceAccount:
+    enabled: true
+  postgresqlUsername: anemperfeina
+  postgresqlPassword: null
+  postgresqlDatabase: anemperfeina
+  service:
+    port: "5432"
+
+redis:
+  serviceAccount:
+    create: true
+  redisPort: "6379"
+  usePassword: false
+  db: "0"
+
+celery:
+  broker:
+    protocol: redis
+  pullPolicy: Always
+  service:
+    port: 8000
+  resources: {}
+  stdouts_level: INFO
+  replicaCount: 1
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+ingress:
+  enabled: false
+  app:
+    port: 80
+  hosts:
+    - host: nemperfeina.cat
+      paths:
+        - path: /
+          serviceName: aaa
+          servicePort: 8000
+
+certificate:
+  hostname: nemperfeina.cat
+  issuername: letsencrypt-prod
+
+notifications:
+  telegram:
+    enabled: "True"
+    chatIds: "@chatID,@chatID2"
+    token: null

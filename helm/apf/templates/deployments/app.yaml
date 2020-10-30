@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apf.fullname" . }}
+  labels:
+    {{- include "apf.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "apf.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "apf.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "apf.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}-celery
+          image: "{{ .Values.app.image }}:{{ .Values.app.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.app.pullPolicy }}
+          command:
+            - invoke
+            - uwsgi
+            - --port
+            - {{ .Values.app.container.port | quote }}
+            - -w
+            - {{ .Values.app.workers | quote }}
+            - -t
+            - {{ .Values.app.threads | quote }}
+          envFrom:
+          - secretRef:
+              name: {{ include "apf.fullname" . }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.app.container.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 4
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 4
+          resources:
+            {{- toYaml .Values.app.resources | nindent 12 }}
