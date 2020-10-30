@@ -10,6 +10,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 env = environ.Env()
 
+BASE_URL = env("BASE_URL", default="http://localhost:8000")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = env("SECRET_KEY")
@@ -287,6 +288,8 @@ CELERY_BEAT_SCHEDULE = {}
 NOTIFICATIONS = {
     "telegram": {
         "enabled": env.bool("NOTIF_TELEGRAM_ENABLED", default=False),
+        "token": env("TELEGRAM_TOKEN", default=None),
+        "chat_ids": env.list("TELEGRAM_CHAT_IDS", default=[]),
     },
 }
 

@@ -1,5 +1,6 @@
 # DJANGO Imports
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
@@ -7,8 +8,6 @@ from django.utils.translation import ugettext as _
 from accounts.models import User
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
-
-# Global Imports
 
 
 @event_dispatcher(EVENT_NEW_JOB)
@@ -70,3 +69,6 @@ class Job(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("jobs:jobs-detail", kwargs={"id": self.id})

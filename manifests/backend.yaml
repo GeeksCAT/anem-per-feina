@@ -15,6 +15,7 @@ spec:
       containers:
       - name: backend
         image: geekscat/anem-per-feina:latest
+        imagePullPolicy: Always
         command: ["invoke"]
         args: [
           "wait-for",
@@ -30,6 +31,8 @@ spec:
               name: django-secrets
           - secretRef:
               name: postgres-secrets
+          - secretRef:
+              name: telegram-secrets
 ---
 apiVersion: v1
 kind: Service
