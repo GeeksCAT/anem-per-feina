@@ -1,12 +1,11 @@
 import datetime
-import random
 
 import factory
 from factory import fuzzy
 from faker import Faker
 
 from accounts.models import User
-from jobsapp.models import NO_REMOTE, PARTIAL_REMOTE, REMOTE, Job
+from jobsapp.models import Job
 
 faker = Faker("es_ES")
 
@@ -35,4 +34,4 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     website = factory.Faker("url", locale="es_ES")
     type = "1"
     category = fuzzy.FuzzyChoice(["Senior", "Junior", "Manager"])
-    remote = fuzzy.FuzzyChoice([REMOTE, NO_REMOTE, PARTIAL_REMOTE])
+    remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])

@@ -15,14 +15,6 @@ from notifications.events import EVENT_NEW_JOB
 JOB_INDEXES = ("location", "category", "type", "title")
 
 # Job remote types
-NO_REMOTE = "1"
-REMOTE = "2"
-PARTIAL_REMOTE = "3"
-REMOTE_CHOICES = (
-    (NO_REMOTE, _("No remote")),
-    (REMOTE, _("Full remote")),
-    (PARTIAL_REMOTE, _("Partial remote")),
-)
 
 
 @event_dispatcher(EVENT_NEW_JOB)
@@ -35,6 +27,15 @@ class Job(models.Model):
         (JOB_TYPE_PART_TIME, _("Part time")),
         (JOB_TYPE_INTERNSHIP, _("Internship")),
     )
+    NO_REMOTE = "1"
+    REMOTE = "2"
+    PARTIAL_REMOTE = "3"
+    REMOTE_CHOICES = (
+        (NO_REMOTE, _("No remote")),
+        (REMOTE, _("Full remote")),
+        (PARTIAL_REMOTE, _("Partial remote")),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
