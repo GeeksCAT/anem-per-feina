@@ -12,7 +12,7 @@ from ...utils import contact_us_email
 from ..serializers import ContactSerializer, JobSerializer
 
 
-class ContactUsView(CreateAPIView):
+class ContactUs(CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = ContactSerializer
 
@@ -21,22 +21,17 @@ class ContactUsView(CreateAPIView):
         if serializer.is_valid():
             contact_us_email(serializer.validated_data)
             return Response(
-                {"message": ("Email sent successfully.")}, status=status.HTTP_202_ACCEPTED
+                {"message": _("Email sent successfully.")}, status=status.HTTP_202_ACCEPTED
             )
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class AboutUsView(ListAPIView):
+class AboutUs(ListAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        about_content = FlatPage.objects.filter(url="/about-us/").first()
         content = {
-            "name": "Anem per feina",
-            "web_page": "",
-            "email": "",
-            "contact_phone": "",
-            "location": "Girona, Catalunya",
-            "lead_description": "",
-            "text_description": "",
+            "content": about_content.content,
         }
         return Response(data=content, status=status.HTTP_200_OK)
