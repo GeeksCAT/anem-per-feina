@@ -1,9 +1,9 @@
 from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import AllowAny
 
 from ...models import User
 from ..permissions import IsSelfOrReadOnly
 from ..serializers import UserSerializer
-from rest_framework.permissions import AllowAny
 
 
 class UsersViewsList(ListCreateAPIView):

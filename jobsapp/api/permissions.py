@@ -23,6 +23,8 @@ class IsAuthorOrReadOnly(BasePermission):
         if request.method in JOB_AUTHOR_METHODS and (request.user.id == obj.user_id):
             return True
         return False
+
+
 class IsSelfOrReadOnly(BasePermission):
     # TODO: Improve message
     message = "Unauthorized"

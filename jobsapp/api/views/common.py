@@ -4,10 +4,10 @@ from rest_framework import status, viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
-from django.utils.translation import ugettext as _
 from rest_framework.response import Response
 
 from django.contrib.flatpages.models import FlatPage
+from django.utils.translation import ugettext as _
 
 from ...utils import contact_us_email
 from ..serializers import ContactSerializer, JobSerializer
