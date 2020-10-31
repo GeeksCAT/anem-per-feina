@@ -1,11 +1,11 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from ..permissions import IsSelfOrReadOnly
 
 from ...models import User
 from ..serializers import UserSerializer
 
 
-class UsersViewsList(ListAPIView):
+class UsersViewsList(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [IsSelfOrReadOnly]
