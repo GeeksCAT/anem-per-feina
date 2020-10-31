@@ -23,3 +23,12 @@ class IsAuthorOrReadOnly(BasePermission):
         if request.method in JOB_AUTHOR_METHODS and (request.user.id == obj.user_id):
             return True
         return False
+class IsSelfOrReadOnly(BasePermission):
+    # TODO: Improve message
+    message = "Unauthorized"
+
+    def has_object_permission(self, request: Request, view: View, obj: Any) -> bool:
+        """
+        Object-level permission to only allow user model manipulation
+        """
+        return bool(request.method in permissions.SAFE_METHODS or request.user.id == obj.id)
