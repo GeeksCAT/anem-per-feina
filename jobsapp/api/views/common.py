@@ -1,13 +1,15 @@
-from rest_framework.permissions import AllowAny
+from typing import Any
 
-from ..serializers import ContactSerializer, JobSerializer
-from ...utils import contact_us_email
+from rest_framework import status, viewsets
+from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework import status, viewsets
+
 from django.contrib.flatpages.models import FlatPage
-from rest_framework.generics import CreateAPIView, ListAPIView
-from typing import Any
+
+from ...utils import contact_us_email
+from ..serializers import ContactSerializer, JobSerializer
 
 
 class ContactUsView(CreateAPIView):
