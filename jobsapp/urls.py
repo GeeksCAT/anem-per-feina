@@ -1,7 +1,7 @@
 from django.urls import include, path
 
 from .views.employer import DashboardView, JobCreateView, JobDeleteView, filled
-from .views.home import HomeView, JobDetailsView, JobListView, SearchView
+from .views.home import ContactView, HomeView, JobDetailsView, JobListView, SearchView
 
 app_name = "jobs"
 
@@ -24,5 +24,6 @@ urlpatterns = [
     ),
     path("jobs", JobListView.as_view(), name="jobs"),
     path("jobs/<int:id>", JobDetailsView.as_view(), name="jobs-detail"),
+    path("contact-us", ContactView.as_view(), name="contact-us"),
     path("employer/jobs/create", JobCreateView.as_view(), name="employer-jobs-create"),
 ]

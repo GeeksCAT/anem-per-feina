@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
-
+SITE_ID = 1
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.contrib.flatpages",
     "django_elasticsearch_dsl",
     "django_extensions",
     "drf_yasg",
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     "constance",
     "notifications",
     "social_django",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -169,6 +172,9 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "EXCEPTION_HANDLER": "jobsapp.api.custom_exception.custom_exception_handler",
+    # TODO: Change later for a more efficient pagination mode
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 25,
 }
 
 SIMPLE_JWT = {
@@ -217,8 +223,6 @@ LOGGING = {
 
 ELASTIC_HOST_NAME = env.str("ELASTIC_HOST_NAME", default="localhost")
 ELASTIC_HOST_PORT = env.str("ELASTIC_HOST_PORT", default="9200")
-
-
 ELASTICSEARCH_DSL = {
     "default": {
         "hosts": f"{ELASTIC_HOST_NAME}:{ELASTIC_HOST_PORT}",
@@ -292,6 +296,25 @@ NOTIFICATIONS = {
         "token": env("TELEGRAM_TOKEN", default=None),
         "chat_ids": env.list("TELEGRAM_CHAT_IDS", default=[]),
     },
+    "twitter": {
+        "enabled": env.bool("NOTIF_TWITTER_ENABLED", default=False),
+        "keys": {
+            "consumer_key": env("TWITTER_API_KEY", default=None),
+            "consumer_secret": env("TWITTER_API_SECRET", default=None),
+            "access_token_key": env("TWITTER_ACCESS_TOKEN", default=None),
+            "access_token_secret": env("TWITTER_ACCESS_TOKEN_SECRET", default=None),
+        },
+    },
 }
 
 NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
+
+# SMTP Setup
+EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@nemperfeina.cat")
+EMAIL_HOST = env("EMAIL_HOST", default=None)
+EMAIL_PORT = env("EMAIL_PORT", default=None)
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)

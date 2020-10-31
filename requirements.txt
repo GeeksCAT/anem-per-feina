@@ -8,6 +8,7 @@ django-cors-headers==3.2.1
 django-elasticsearch-dsl==7.1.1
 django-environ==0.4.5
 django-extensions==3.0.7
+django-filter==2.4.0
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.1
@@ -43,3 +44,5 @@ werkzeug==1.0.1
 redis==3.5.3
 celery==5.0.1
 python-telegram-bot==13.0.0
+python-twitter==3.5
+inclusive-django-range-fields==0.2.3

@@ -4,16 +4,27 @@ import jwt
 import pytest
 from rest_framework import status
 
-from tests.conftest import CONTENT_TYPE_JSON, EMAIL, PASSWORD
+from tests.factories import UserFactory
 
+CONTENT_TYPE_JSON = "application/json"
+PASSWORD = "SuperPasswordSecret4"
+EMAIL = "hi@geeks.cat"
 DATA_POST = json.dumps({"email": EMAIL, "password": PASSWORD})
 LOGIN_URL = "/api/login/"
 
 
+@pytest.fixture
+def create_user() -> UserFactory:
+    user = UserFactory(email=EMAIL, is_active=True)
+    user.set_password(PASSWORD)
+    user.save()
+    return user
+
+
 @pytest.mark.django_db
-def test_obtain_token(create_user, client) -> None:
+def test_obtain_token(create_user, api_client) -> None:
     user = create_user
-    request_login = client.post(LOGIN_URL, DATA_POST, content_type=CONTENT_TYPE_JSON)
+    request_login = api_client.post(LOGIN_URL, DATA_POST, content_type=CONTENT_TYPE_JSON)
     decode_access_token = jwt.decode(request_login.json()["access"], verify=False)
     assert request_login.status_code == status.HTTP_200_OK
     assert decode_access_token["user_id"] == user.pk
@@ -21,13 +32,13 @@ def test_obtain_token(create_user, client) -> None:
 
 
 @pytest.mark.django_db
-def test_obtain_token_bad_password_or_email(client, create_user) -> None:
-    request_login_bad_password = client.post(
+def test_obtain_token_bad_password_or_email(api_client, create_user) -> None:
+    request_login_bad_password = api_client.post(
         LOGIN_URL,
         json.dumps({"email": EMAIL, "password": PASSWORD + str("bad")}),
         content_type=CONTENT_TYPE_JSON,
     )
-    request_login_bad_email = client.post(
+    request_login_bad_email = api_client.post(
         LOGIN_URL,
         json.dumps({"email": EMAIL + str("bad"), "password": PASSWORD}),
         content_type=CONTENT_TYPE_JSON,
@@ -42,10 +53,10 @@ def test_obtain_token_bad_password_or_email(client, create_user) -> None:
 
 
 @pytest.mark.django_db
-def test_obtain_token_user_is_not_active(client, create_user) -> None:
+def test_obtain_token_user_is_not_active(api_client, create_user) -> None:
     user = create_user
     user.is_active = False
     user.save()
-    request_login = client.post(LOGIN_URL, DATA_POST, content_type=CONTENT_TYPE_JSON)
+    request_login = api_client.post(LOGIN_URL, DATA_POST, content_type=CONTENT_TYPE_JSON)
     assert request_login.status_code == status.HTTP_401_UNAUTHORIZED
     assert request_login.json()["message"] == "No active account found with the given credentials"

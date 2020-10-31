@@ -1,13 +1,13 @@
 import datetime
 
 import factory
-import factory.fuzzy
+from factory import fuzzy
+from faker import Faker
 
 from accounts.models import User
 from jobsapp.models import Job
 
-JOB_CHOICE = [Job.JOB_TYPE_FULL_TIME, Job.JOB_TYPE_PART_TIME, Job.JOB_TYPE_INTERNSHIP]
-
+faker = Faker("es_ES")
 
 # List of factories
 class UserFactory(factory.django.DjangoModelFactory):  # type: ignore
@@ -15,21 +15,23 @@ class UserFactory(factory.django.DjangoModelFactory):  # type: ignore
         model = User
         django_get_or_create = ("first_name", "last_name")
 
-    email = factory.Faker("email")
-    first_name = factory.Faker("name")
+    first_name = factory.Faker("first_name", locale="es_ES")
     last_name = "Doe"
+    email = factory.Faker("email", locale="es_ES")
 
 
 class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     class Meta:
         model = Job
-        django_get_or_create = ("type", "category", "company_name", "title")
 
-    user = factory.SubFactory(UserFactory)
-    title = factory.Sequence(lambda n: "Title %d" % n)
-    description = factory.Sequence(lambda n: "Description %d" % n)
-    company_description = factory.LazyAttribute(lambda n: f"Company Description {n.company_name}")
-    company_name = factory.Faker("company")
-    category = factory.fuzzy.FuzzyChoice(["Marketing", "backend", "frontend", "Data Science"])
-    type = factory.fuzzy.FuzzyChoice(JOB_CHOICE)
-    last_date = datetime.datetime.now()
+    user = factory.SubFactory("tests.factories.UserFactory")
+    title = factory.Sequence(lambda n: f"Title {n}")
+    location = factory.Faker("address", locale="es_ES")
+    company_name = factory.Faker("company", locale="es_ES")
+    company_description = factory.Faker("text", locale="es_ES")
+    description = factory.Sequence(lambda n: f"Description {n}")
+    last_date = datetime.datetime.now() + datetime.timedelta(days=10)
+    website = factory.Faker("url", locale="es_ES")
+    type = "1"
+    category = fuzzy.FuzzyChoice(["Senior", "Junior", "Manager"])
+    remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
