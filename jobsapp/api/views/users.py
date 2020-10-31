@@ -1,7 +1,7 @@
 from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from ..permissions import IsSelfOrReadOnly
 
 from ...models import User
+from ..permissions import IsSelfOrReadOnly
 from ..serializers import UserSerializer
 
 
