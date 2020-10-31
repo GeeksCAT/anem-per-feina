@@ -1,16 +1,11 @@
-from rest_framework.routers import DefaultRouter
+from django.urls import path, re_path
 
-from django.urls import path
-
-from .views.common import AboutUs, ContactUs, JobViewSet, SearchApiView
-
-router = DefaultRouter()
-router.register("jobs", JobViewSet)
+from .views.jobs import JobsViewDetails, JobsViewList
+from .views.users import UsersViewDetails, UsersViewsList
 
 urlpatterns = [
-    path("search/", SearchApiView.as_view()),
-    path("contact-us", ContactUs.as_view()),
-    path("about-us", AboutUs.as_view(), name="about-us"),
+    re_path("jobs/?$", JobsViewList.as_view(), name="jobs-list"),
+    path("jobs/<int:pk>", JobsViewDetails.as_view(), name="job-detail"),
+    re_path("users/?$", UsersViewsList.as_view(), name="users-list"),
+    path("users/<int:pk>", UsersViewDetails.as_view(), name="user-detail"),
 ]
-
-urlpatterns += router.urls

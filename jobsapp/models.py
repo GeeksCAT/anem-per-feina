@@ -1,4 +1,6 @@
 # DJANGO Imports
+from inclusive_django_range_fields import InclusiveIntegerRangeField
+
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -8,6 +10,11 @@ from django.utils.translation import ugettext as _
 from accounts.models import User
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
+
+# Global Imports
+JOB_INDEXES = ("location", "category", "type", "title")
+
+# Job remote types
 
 
 @event_dispatcher(EVENT_NEW_JOB)
@@ -20,6 +27,15 @@ class Job(models.Model):
         (JOB_TYPE_PART_TIME, _("Part time")),
         (JOB_TYPE_INTERNSHIP, _("Internship")),
     )
+    NO_REMOTE = "1"
+    REMOTE = "2"
+    PARTIAL_REMOTE = "3"
+    REMOTE_CHOICES = (
+        (NO_REMOTE, _("No remote")),
+        (REMOTE, _("Full remote")),
+        (PARTIAL_REMOTE, _("Partial remote")),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -59,13 +75,23 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = models.IntegerField(
-        default=0, blank=True, verbose_name=_("Salary"), help_text=_("Maximum salary for this job.")
+    salary = InclusiveIntegerRangeField(
+        null=True,
+        verbose_name=_("Salary"),
+        help_text=_("Minimum and maximum annual salary for this job."),
+    )
+    remote = models.CharField(
+        verbose_name=_("Remote"),
+        null=True,
+        choices=REMOTE_CHOICES,
+        max_length=20,
+        help_text=_("Is this job position remote?."),
     )
 
     class Meta:
         verbose_name = _("Job")
         verbose_name_plural = _("Jobs")
+        indexes = [models.Index(fields=(field,)) for field in JOB_INDEXES]
 
     def __str__(self) -> str:
         return self.title

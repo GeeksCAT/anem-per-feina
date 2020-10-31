@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "constance",
     "notifications",
     "social_django",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -171,6 +172,9 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "EXCEPTION_HANDLER": "jobsapp.api.custom_exception.custom_exception_handler",
+    # TODO: Change later for a more efficient pagination mode
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 25,
 }
 
 SIMPLE_JWT = {
