@@ -13,7 +13,7 @@ from ...utils import contact_us_email
 from ..serializers import ContactSerializer, JobSerializer
 
 
-class ContactUs(CreateAPIView):
+class ContactUsView(CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = ContactSerializer
 
@@ -27,7 +27,7 @@ class ContactUs(CreateAPIView):
         return Response({"message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class AboutUs(ListAPIView):
+class AboutUsView(ListAPIView):
     permission_classes = [AllowAny]
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
