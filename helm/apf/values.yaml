@@ -59,14 +59,13 @@ serviceAccount:
   name: ""
 
 ingress:
-  enabled: false
+  enabled: true
   app:
     port: 80
   hosts:
     - host: nemperfeina.cat
       paths:
         - path: /
-          serviceName: aaa
           servicePort: 8000
 
 certificate:

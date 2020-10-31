@@ -25,6 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.app.pullPolicy }}
           command:
             - invoke
+            - migrate
             - uwsgi
             - --port
             - {{ .Values.app.container.port | quote }}

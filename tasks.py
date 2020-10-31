@@ -52,8 +52,8 @@ def uwsgi(
 
     command_args = [
         "uwsgi",
-        "--chdir=..",
-        "--module=bff.config.wsgi:application",
+        "--chdir=.",
+        "--module=jobs.wsgi:application",
         "--master",
         listen,
         f"--processes={workers}",

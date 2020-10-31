@@ -25,10 +25,6 @@ spec:
           imagePullPolicy: {{ .Values.celery.pullPolicy }}
           command:
             - invoke
-            # - wait-for
-            # - redis-master:6379
-            # - wait-for
-            # - postgresql:5432
             - celery-queues
           envFrom:
           - secretRef:
