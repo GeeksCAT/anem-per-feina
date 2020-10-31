@@ -54,7 +54,7 @@ git checkout common/master -b <your_branch_name>
   pre-commit run --all
   ```
 
-> **Tip:** Ensure you have `pre-commit` tool installed by doing `python -m pip -r requirements-test.txt` inside you virtual environment. (Optional) Doing `pre-commit install` in your local repo will ensure that `pre-commit run --all` command runs automatically on every commit.
+> **Tip:** Ensure you have `pre-commit` tool installed by doing `python -m pip install -r requirements-test.txt` inside you virtual environment. (Optional) Doing `pre-commit install` in your local repo will ensure that `pre-commit run --all` command runs automatically on every commit.
 > **Note:** If there is any error or warning, please solve it before continue.
 
 9.  Push the committed changes to your fork (the `origin` remote)
