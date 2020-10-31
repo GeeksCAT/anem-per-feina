@@ -26,18 +26,12 @@ class JobsViewList(ListCreateAPIView):
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         validated_data = request.data.copy()
-        base_url = reverse("users-list")
-        validated_data["user"] = f"{base_url}/{request.user.id}"
+        validated_data["user"] = f"{reverse('users-list')}/{request.user.id}"
         serializer = self.get_serializer(data=validated_data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            headers = self.get_success_headers(serializer.data)
-            return Response(
-                {"message": ("New job created."), "data": serializer.data},
-                status=status.HTTP_201_CREATED,
-                headers=headers,
-            )
-        return super().create(request, *args, **kwargs)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class JobsViewDetails(RetrieveUpdateDestroyAPIView):

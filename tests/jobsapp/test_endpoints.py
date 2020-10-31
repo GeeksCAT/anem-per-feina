@@ -37,7 +37,6 @@ def test_create_job(api_client_authenticate, create_job_as_dict, create_jobs):
     Ensures that only registered user can create jobs."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
     assert response.status_code == 201
-    assert response.data["message"] == "New job created."
 
 
 @pytest.mark.django_db
@@ -51,11 +50,9 @@ def test_anonymous_user_cant_create_job(api_client, create_job_as_dict):
 def test_patch_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP PATCH method."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
-    job_url = response.data["data"]["url"]
+    job_url = response.data["url"]
     data = {"filled": True}
     response = api_client_authenticate.patch(job_url, data=data)
-
-    print(response.data)
     assert response.status_code == 200
 
 
@@ -63,7 +60,7 @@ def test_patch_job(api_client_authenticate, create_job_as_dict):
 def test_delete_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP DELETE method."""
     response = api_client_authenticate.post(JOBS_ENDPOINT, data=create_job_as_dict)
-    job_url = response.data["data"]["url"]
+    job_url = response.data["url"]
     response = api_client_authenticate.delete(job_url)
     assert response.status_code == 204
 
