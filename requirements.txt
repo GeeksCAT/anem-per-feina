@@ -49,3 +49,4 @@ inclusive-django-range-fields==0.2.3
 django-cookie-law==2.0.3
 django-recaptcha==2.0.6
 django-widget-tweaks==1.4.8
+flower==0.95
