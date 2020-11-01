@@ -314,6 +314,7 @@ NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+BASE_EMAIL = env("BASE_EMAIL", default="info@geekscat.org")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@nemperfeina.cat")
 EMAIL_HOST = env("EMAIL_HOST", default=None)
 EMAIL_PORT = env("EMAIL_PORT", default=None)
