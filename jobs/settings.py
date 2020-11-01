@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "constance.backends.database",
+    "cookielaw",
     "jobsapp",
     "accounts",
     "constance",

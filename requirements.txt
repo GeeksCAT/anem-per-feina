@@ -46,3 +46,4 @@ celery==5.0.1
 python-telegram-bot==13.0.0
 python-twitter==3.5
 inclusive-django-range-fields==0.2.3
+django-cookie-law==2.0.3
