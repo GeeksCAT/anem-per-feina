@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static i18n %}
+<!DOCTYPE html>{% load static i18n cookielaw_tags %}
 <html lang="en">
 
 <head>
@@ -35,6 +35,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
+{% cookielaw_banner %}
 <!-- navbar-->
 <header class="header">
   <nav class="navbar navbar-expand-lg">
@@ -141,6 +142,7 @@
 <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
 <script src="{% static 'js/front.js' %}"></script>
+<script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
 
 {% block javascripts %}{% endblock %}
 

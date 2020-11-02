@@ -21,6 +21,9 @@ services:
       EMAIL_PORT: 5000
       EMAIL_HOST_USER: testing
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+      RECAPTCHA_PUBLIC_KEY:
+      RECAPTCHA_PRIVATE_KEY:
+      SILENCED_SYSTEM_CHECKS:
     entrypoint:
       - invoke
       - wait-for

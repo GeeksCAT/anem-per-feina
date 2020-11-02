@@ -218,7 +218,7 @@ fabric.properties
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 
 # Installer logs
-logs
+logs/*.log.*
 
 # Unit test / coverage reports
 

@@ -15,5 +15,4 @@ class UsersViewsList(ListCreateAPIView):
 class UsersViewDetails(CreateAPIView, RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    print(queryset)
     permission_classes = [IsSelfOrReadOnly]

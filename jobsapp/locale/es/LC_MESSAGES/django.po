@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-29 14:03+0100\n"
+"POT-Creation-Date: 2020-10-31 10:15+0100\n"
 "PO-Revision-Date: 2020-10-25 17:57+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
@@ -17,6 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Advanced options"
+msgstr "Localización"
+
+msgid "Please insert your name"
+msgstr ""
+
+msgid "Please insert your email"
+msgstr ""
+
+msgid "Reason why you are contact us"
+msgstr ""
+
+msgid "Your message"
+msgstr ""
+
+msgid "Email sent successfully."
+msgstr ""
 
 msgid "Last Date"
 msgstr "Última fecha"
@@ -153,6 +173,12 @@ msgid "Register"
 msgstr ""
 
 msgid "Login"
+msgstr ""
+
+msgid "Contact us"
+msgstr ""
+
+msgid "Send message"
 msgstr ""
 
 msgid ""
@@ -379,6 +405,12 @@ msgstr "La oferta de empleo no existe"
 
 msgid "Post New Job"
 msgstr "Publica una nueva oferta de empleo"
+
+msgid "Mensage sent successfully"
+msgstr ""
+
+msgid "Mensage not sent"
+msgstr ""
 
 #~ msgid "User applicant."
 #~ msgstr "Candidato."

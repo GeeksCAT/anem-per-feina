@@ -1,30 +1,32 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load i18n %}
+{% load static i18n widget_tweaks %}
+
 {% block title %}
-Contact us
+  {% trans "Contact us" %}
 {%endblock %}
 
 {% block content %}
 <div class="container mt-5 mb-5">
-<form action="" method="post">
-  {% csrf_token %} {% for field in form %}
-  <div class="form-group">
-    <label for="id_{{ field.name }}">{% trans field.label %}</label>
-    <input
-      type="{{ field.field.widget.input_type }}"
-      class="form-control"
-      name="{{ field.name }}"
-      id="id_{{ field.name }}"
-      placeholder="{{ field.field.widget.attrs.placeholder }}"
-    />
-  </div>
-  {% endfor %}
-  <div class="text-center">
+  <form action="https://formspree.io/f/xqkgbqek" method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        <label for="id_{{ field.name }}">{{ field.label }}</label>
+        {{ field|add_class:"form-control" }}
+        {% if field.errors %}
+          <div class="alert alert-danger alert-dismissable mt-1">
+            <strong>{{ field.errors.0 }}</strong>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <div class="text-center">
       <button type="submit" class="btn btn-outline-white-primary">
-      <i class="fa fa-send"></i> {% trans "Send message" %}
-    </button>
-  </div>
-</form>
+        <i class="fa fa-send"></i> {% trans "Send message" %}
+      </button>
+    </div>
+  </form>
 </div>
 {% endblock %}

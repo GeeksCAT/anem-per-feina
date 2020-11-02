@@ -1,3 +1,6 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -9,6 +12,8 @@ GENDER_CHOICES = (("male", "Male"), ("female", "Female"))
 
 
 class EmployerRegistrationForm(UserCreationForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
     def __init__(self, *args, **kwargs):
         super(EmployerRegistrationForm, self).__init__(*args, **kwargs)
         self.fields["first_name"].label = _("Company Name")
