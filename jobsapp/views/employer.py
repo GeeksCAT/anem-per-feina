@@ -1,3 +1,7 @@
+from datetime import timedelta
+
+from constance import config
+
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
@@ -5,6 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic.dates import timezone_today
 
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm
@@ -48,6 +53,9 @@ class JobCreateView(CreateView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+    def get_initial(self):
+        return {"last_date": timezone_today() + timedelta(days=config.DEFAULT_JOB_EXPIRATION)}
 
 
 class JobDeleteView(DeleteView):
