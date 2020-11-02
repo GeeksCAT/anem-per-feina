@@ -34,24 +34,16 @@
           <h5 class="text-info">Salary: {% if job.salary > 0 %} {{ job.salary }}/{% trans "Yearly " %}{% else %}
             {% trans "Negotiable " %}{% endif %} </h5>
           <blockquote class="blockquote">
-            <p>{{ job.description }}</p>
+            <p>{{ job.description|linebreaksbr }}</p>
           </blockquote>
+          <a href="{{ job.apply_url }}" target="_blank" class="btn btn-success">
+            {% trans "Apply URL" %}
+          </a>
         </div>
         <div class="col-lg-1"></div>
         <div class="col-lg-3">
           <h4>{% trans "About" %} {{ job.company_name }}</h4>
           <p class="job-detail__company-description">{{ job.company_description }}</p>
-          <p class="job-detail__social social social--outline">
-            <a href="{{ job.website }}" data-toggle="tooltip" data-placement="top" title="{% trans "Website" %}" class="link">
-              <em class="fa fa-link"></em>
-            </a>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="twitter">
-              <em class="fa fa-twitter"></em>
-            </a>
-            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="facebook">
-              <em class="fa fa-facebook"></em>
-            </a>
-          </p>
         </div>
       </div>
     </div>
