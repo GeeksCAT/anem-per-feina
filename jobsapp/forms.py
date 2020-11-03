@@ -7,6 +7,12 @@ from jobsapp.models import Job
 from .utils import contact_us_email
 
 
+class EditJobForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        exclude = ("user", "created_at")
+
+
 class CreateJobForm(forms.ModelForm):
     class Meta:
         model = Job
