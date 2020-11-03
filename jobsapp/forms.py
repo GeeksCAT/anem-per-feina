@@ -7,13 +7,9 @@ from jobsapp.models import Job
 from .utils import contact_us_email
 
 
-class EditJobForm(forms.ModelForm):
-    class Meta:
-        model = Job
-        exclude = ("user", "created_at")
-
-
 class CreateJobForm(forms.ModelForm):
+    policies = forms.BooleanField()
+
     class Meta:
         model = Job
         exclude = (
@@ -26,19 +22,9 @@ class CreateJobForm(forms.ModelForm):
             "company_description": _("Company Description"),
         }
 
-    def is_valid(self):
-        valid = super(CreateJobForm, self).is_valid()
 
-        # if already valid, then return True
-        if valid:
-            return valid
-        return valid
-
-    def save(self, commit=True):
-        job = super(CreateJobForm, self).save(commit=False)
-        if commit:
-            job.save()
-        return job
+class EditJobForm(CreateJobForm):
+    pass
 
 
 class ContactForm(forms.Form):

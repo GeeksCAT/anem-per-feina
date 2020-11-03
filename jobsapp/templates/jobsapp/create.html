@@ -134,7 +134,8 @@ ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sa
                 <hr>
                 <div class="checkbox text-center">
                   <label>
-                    <input type="checkbox"> {% trans "I agree with the" %} <a href="#">{% trans "Terms and conditions" %}</a>.
+                    {% render_field form.policies %}
+                    {% trans "I agree with the" %} <a href="#">{% trans "Terms and conditions" %}</a>.
                   </label>
                 </div>
               </div>
