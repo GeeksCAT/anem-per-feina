@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-29 14:03+0100\n"
-"PO-Revision-Date: 2020-10-25 17:57+0000\n"
+"PO-Revision-Date: 2020-11-03 17:18+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
 "apf-backend-accounts/es/>\n"
@@ -91,43 +91,43 @@ msgid "User email, also used as username."
 msgstr "Email del usuario, utilizado como nombre de usuario."
 
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 msgid "Already our have account?"
-msgstr ""
+msgstr "Ya tienes una cuenta?"
 
 msgid "Log in"
-msgstr ""
+msgstr "Iniciar sesión"
 
 msgid "Login with Github"
-msgstr ""
+msgstr "Acceder usando Github"
 
 msgid "Employer Register"
-msgstr ""
+msgstr "Registro de Empresario"
 
 msgid "New account"
-msgstr ""
+msgstr "Nueva cuenta"
 
 msgid "Not our registered yet?"
-msgstr ""
+msgstr "Aún no te has registrado?"
 
 msgid "If you have any questions, please feel free to"
-msgstr ""
+msgstr "Si tienes cualquier duda, por favor, no dudes en"
 
 msgid "contact us"
-msgstr ""
+msgstr "contactar con nosotros"
 
 msgid "our customer service center is working for you 24/7."
-msgstr ""
+msgstr "nuestro servicio de soporto trabaja para ti 24/7."
 
 msgid "Male"
-msgstr ""
+msgstr "Hombre"
 
 msgid "Female"
-msgstr ""
+msgstr "Mujer"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrarse"
 
 msgid "You are now logged out"
 msgstr "Acabas de cerrar sesión"
