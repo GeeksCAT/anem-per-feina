@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-29 14:03+0100\n"
-"PO-Revision-Date: 2020-11-02 06:56+0000\n"
-"Last-Translator: Diogo <somnium@riseup.net>\n"
+"PO-Revision-Date: 2020-11-03 16:48+0000\n"
+"Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
 "apf-backend-accounts/ca/>\n"
 "Language: ca\n"
@@ -96,31 +96,31 @@ msgid "Login"
 msgstr "Iniciar Sessió"
 
 msgid "Already our have account?"
-msgstr ""
+msgstr "Ja tens un compte?"
 
 msgid "Log in"
 msgstr "Iniciar Sessió"
 
 msgid "Login with Github"
-msgstr ""
+msgstr "Accedir emprant Github"
 
 msgid "Employer Register"
-msgstr ""
+msgstr "Registre d'Empresari"
 
 msgid "New account"
-msgstr ""
+msgstr "Nou compte"
 
 msgid "Not our registered yet?"
-msgstr ""
+msgstr "Encara no estàs registrat?"
 
 msgid "If you have any questions, please feel free to"
-msgstr ""
+msgstr "Si tens qualsevol dubte, si us plau, sigues lliure de"
 
 msgid "contact us"
-msgstr ""
+msgstr "contactar amb nosaltres"
 
 msgid "our customer service center is working for you 24/7."
-msgstr ""
+msgstr "el nostre servei de suport treballa per a tu 24/7."
 
 msgid "Male"
 msgstr "Home"
@@ -129,7 +129,7 @@ msgid "Female"
 msgstr "Dona"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrar-se"
 
 msgid "You are now logged out"
 msgstr "Acabes de tancar sessió"
