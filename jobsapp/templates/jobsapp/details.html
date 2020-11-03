@@ -31,7 +31,7 @@
         <div class="col-lg-8">
           <h3>{% trans "Category" %}: {{ job.category }}</h3>
           <h5>{% trans "Last date" %}: {{ job.last_date|date }}</h5>
-          <h5 class="text-info">Salary: {% if job.salary > 0 %} {{ job.salary }}/{% trans "Yearly " %}{% else %}
+          <h5 class="text-info">{% trans "Salary" %}: {% if job.salary > 0 %} {{ job.salary }}/{% trans "Yearly " %}{% else %}
             {% trans "Negotiable " %}{% endif %} </h5>
           <blockquote class="blockquote">
             <p>{{ job.description|linebreaksbr }}</p>
