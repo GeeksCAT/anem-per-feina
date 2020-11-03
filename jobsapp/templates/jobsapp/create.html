@@ -98,7 +98,9 @@ ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sa
               </div>
               <div class="col-xl-6 form-group">
                 <label for="validity">{% trans "Validity of the post" %}</label>
-                {% render_field form.last_date class+="form-control" placeholder=form.last_date.help_text type="date" %}
+                {% with last_date=form.last_date.value|date:"Y-m-d" %}
+                  {% render_field form.last_date class+="form-control" placeholder=form.last_date.help_text type="date" value=last_date %}
+                {% endwith %}
               </div>
             </div>
             <div class="row">

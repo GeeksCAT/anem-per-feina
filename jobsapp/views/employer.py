@@ -70,7 +70,7 @@ class JobCreateView(CreateView):
 
     def get_initial(self):
         last_date = timezone_today() + timedelta(days=config.DEFAULT_JOB_EXPIRATION)
-        return {"last_date": last_date.strftime("%Y-%m-%d")}
+        return {"last_date": last_date}
 
 
 class JobDeleteView(DeleteView):
