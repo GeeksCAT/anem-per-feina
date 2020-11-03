@@ -1,13 +1,18 @@
+from datetime import timedelta
+
+from constance import config
+
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic.dates import timezone_today
 
 from jobsapp.decorators import user_is_employer
-from jobsapp.forms import CreateJobForm
+from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
 
 
@@ -23,6 +28,20 @@ class DashboardView(ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(user_id=self.request.user.id)
+
+
+class JobUpdateView(UpdateView):
+    template_name = "jobsapp/update.html"
+    form_class = EditJobForm
+    extra_context = {"title": _("Edit Job")}
+    success_url = reverse_lazy("jobs:employer-dashboard")
+
+    def get_object(self, queryset=None):
+        try:
+            job = self.request.user.job_set.get(pk=self.kwargs["pk"])
+        except Job.DoesNotExist:
+            raise Http404
+        return job
 
 
 class JobCreateView(CreateView):
@@ -49,6 +68,10 @@ class JobCreateView(CreateView):
         else:
             return self.form_invalid(form)
 
+    def get_initial(self):
+        last_date = timezone_today() + timedelta(days=config.DEFAULT_JOB_EXPIRATION)
+        return {"last_date": last_date}
+
 
 class JobDeleteView(DeleteView):
     model = Job
@@ -60,9 +83,8 @@ class JobDeleteView(DeleteView):
 def filled(request, job_id=None):
     try:
         job = Job.objects.get(user_id=request.user.id, id=job_id)
-        job.filled = True
+        job.filled = not job.filled
         job.save()
     except IntegrityError as e:
-        print(e.message)
         return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))
     return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))

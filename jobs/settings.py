@@ -244,6 +244,7 @@ CONSTANCE_CONFIG = {
     "SITE_NAME": ("My Title", "Website title"),
     "SITE_DESCRIPTION": ("", "Website description"),
     "JOBS_URL": ("", "URL Jobs"),
+    "DEFAULT_JOB_EXPIRATION": (90, "Default job expiration days"),
 }
 CONSTANCE_CONFIG_FIELDSETS = {
     "General Configuration Service": ("SITE_NAME", "SITE_DESCRIPTION"),

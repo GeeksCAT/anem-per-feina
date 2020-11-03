@@ -37,9 +37,6 @@ msgstr ""
 msgid "Your message"
 msgstr ""
 
-msgid "Email sent successfully."
-msgstr ""
-
 msgid "Last Date"
 msgstr "Última data"
 
@@ -57,6 +54,28 @@ msgstr "Temps parcial"
 
 msgid "Internship"
 msgstr "Pràctiques"
+
+msgid "No remote"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full time"
+msgid "Full remote"
+msgstr "Temps complet"
+
+#, fuzzy
+#| msgid "Part time"
+msgid "Partial remote"
+msgstr "Temps parcial"
+
+msgid "Web design"
+msgstr ""
+
+msgid "Graphic design"
+msgstr ""
+
+msgid "Web development"
+msgstr ""
 
 msgid "User"
 msgstr "Usuari"
@@ -133,8 +152,24 @@ msgstr "La oferta de feina ha estat coberta."
 msgid "Salary"
 msgstr "Salari"
 
-msgid "Maximum salary for this job."
+#, fuzzy
+#| msgid "Maximum salary for this job."
+msgid "Minimum and maximum annual salary for this job."
 msgstr "Salari màxim per aquesta feina."
+
+msgid "Remote"
+msgstr ""
+
+#, fuzzy
+#| msgid "Location for this job position."
+msgid "Is this job position remote?."
+msgstr "Localització d'aquesta oferta."
+
+msgid "Apply URL"
+msgstr ""
+
+msgid "Users will apply on your website."
+msgstr ""
 
 msgid "Job"
 msgstr "Feina"
@@ -247,35 +282,16 @@ msgid "Job Title"
 msgstr "Títol"
 
 #, fuzzy
+#| msgid "Company Name"
+msgid "Enter Company Name"
+msgstr "Nom de l'empresa"
+
+#, fuzzy
 #| msgid "Description"
 msgid "Job Description"
 msgstr "Descripció"
 
 msgid "Salary(Leave empty if it's negotiable)"
-msgstr ""
-
-msgid "e.g. Dhaka, Bangladesh"
-msgstr ""
-
-msgid "Choose job type"
-msgstr ""
-
-msgid "Web design"
-msgstr ""
-
-msgid "Graphic design"
-msgstr ""
-
-msgid "Web development"
-msgstr ""
-
-msgid "Human Resources"
-msgstr ""
-
-msgid "Support"
-msgstr ""
-
-msgid "Apply URL"
 msgstr ""
 
 msgid "users will apply on your website"
@@ -404,6 +420,9 @@ msgstr "L'usuari no existeix"
 
 msgid "Job doesn't exists"
 msgstr "La oferta de feina no existeix"
+
+msgid "Edit Job"
+msgstr ""
 
 msgid "Post New Job"
 msgstr "Publica una nova oferta de feina"

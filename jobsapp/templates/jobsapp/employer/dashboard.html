@@ -53,7 +53,7 @@
                   <td>{{ job.created_at }}</td>
                   <td>{{ job.last_date }}</td>
                   <td>
-                    <a href="#" class="btn btn-outline-white-secondary">
+                    <a href="{% url "jobs:employer-jobs-update" job.pk %}" class="btn btn-outline-white-secondary">
                       <em class="fa fa-edit"></em>{% trans "Edit" %}
                     </a>
                     <br>
