@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # admin <it@geekscat.org>, 2020.
 # Xavi Torelló <info@xaviertorello.cat>, 2020.
+# Diogo <somnium@riseup.net>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 08:30+0100\n"
-"PO-Revision-Date: 2020-10-25 17:57+0000\n"
-"Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
+"POT-Creation-Date: 2020-10-29 14:03+0100\n"
+"PO-Revision-Date: 2020-11-02 06:56+0000\n"
+"Last-Translator: Diogo <somnium@riseup.net>\n"
 "Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
 "apf-backend-jobsapp/ca/>\n"
 "Language: ca\n"
@@ -177,22 +178,22 @@ msgid "Jobs"
 msgstr "Feines"
 
 msgid "Home"
-msgstr ""
+msgstr "Inici"
 
 msgid "Menu"
 msgstr ""
 
 msgid "Home "
-msgstr ""
+msgstr "Inici "
 
 msgid "current"
 msgstr ""
 
 msgid "About Us"
-msgstr ""
+msgstr "Sobre"
 
 msgid "Contact"
-msgstr ""
+msgstr "Contacte"
 
 msgid "Dashboard"
 msgstr ""
@@ -209,7 +210,7 @@ msgid "Register"
 msgstr ""
 
 msgid "Login"
-msgstr ""
+msgstr "Iniciar Sessió"
 
 msgid "Contact us"
 msgstr ""
@@ -231,10 +232,10 @@ msgid "Position you are looking for"
 msgstr ""
 
 msgid "Any particular location?"
-msgstr ""
+msgstr "Alguna ubicació concreta?"
 
 msgid "Featured jobs"
-msgstr ""
+msgstr "Ofertes destacades"
 
 msgid "Trending this month"
 msgstr ""
@@ -338,10 +339,10 @@ msgid "Edit Profile"
 msgstr ""
 
 msgid "Male"
-msgstr ""
+msgstr "Home"
 
 msgid "Female"
-msgstr ""
+msgstr "Dona"
 
 msgid "Update"
 msgstr ""
