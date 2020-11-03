@@ -36,6 +36,16 @@ class Job(models.Model):
         (PARTIAL_REMOTE, _("Partial remote")),
     )
 
+    CATEGORY_WEB_DESIGN = "web-design"
+    CATEGORY_GRAPHIC_DESIGN = "graphic-design"
+    CATEGORY_WEB_DEVELOPMENT = "web-development"
+
+    CATEGORIES = (
+        (CATEGORY_WEB_DESIGN, _("Web design")),
+        (CATEGORY_GRAPHIC_DESIGN, _("Graphic design")),
+        (CATEGORY_WEB_DEVELOPMENT, _("Web development")),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -55,9 +65,12 @@ class Job(models.Model):
         choices=JOB_TYPES, max_length=10, verbose_name=_("Type"), help_text=_("Job type.")
     )
     category = models.CharField(
-        max_length=100, verbose_name=_("Category"), help_text=_("Category clasification.")
+        max_length=100,
+        verbose_name=_("Category"),
+        help_text=_("Category clasification."),
+        choices=CATEGORIES,
     )
-    last_date = models.DateTimeField(verbose_name=_("Last date"), help_text=_("Last date."))
+    last_date = models.DateField(verbose_name=_("Last date"), help_text=_("Last date."))
     company_name = models.CharField(
         max_length=100, verbose_name=_("Company"), help_text=_("Job's Company name.")
     )
@@ -75,10 +88,12 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = InclusiveIntegerRangeField(
-        null=True,
+    salary = models.PositiveIntegerField(
         verbose_name=_("Salary"),
         help_text=_("Minimum and maximum annual salary for this job."),
+        default=None,
+        blank=True,
+        null=True,
     )
     remote = models.CharField(
         verbose_name=_("Remote"),
@@ -86,6 +101,12 @@ class Job(models.Model):
         choices=REMOTE_CHOICES,
         max_length=20,
         help_text=_("Is this job position remote?."),
+    )
+    apply_url = models.URLField(
+        max_length=200,
+        verbose_name=_("Apply URL"),
+        help_text=_("Users will apply on your website."),
+        default="",
     )
 
     class Meta:

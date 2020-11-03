@@ -103,12 +103,12 @@ def test_only_authors_can_edit_job(api_client, create_users, create_jobs):
 @pytest.mark.django_db
 def test_filter_query(api_client, create_jobs):
     create_jobs(size=20)
-    url = f"{JOBS_ENDPOINT}/?category=Manager"
+    url = f"{JOBS_ENDPOINT}/?category=web-design"
     response = api_client.get(url)
     assert response.status_code == 200
-    assert response.data["results"][0].get("category") == "Manager"
+    assert response.data["results"][0].get("category") == "web-design"
     for job in response.data["results"]:
-        assert job.get("category") not in ["Senior", "Junior"]
+        assert job.get("category") not in ["Manager", "Junior"]
 
 
 @pytest.mark.django_db

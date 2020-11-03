@@ -72,7 +72,7 @@
                     <span style="color: #ffffff;" class="badge featured-badge badge-warning">{% trans "Internship" %}</span>
                   {% endif %}
                 </p>
-                <p>{{ job.description }}</p>
+                <p>{{ job.description|truncatewords:40 }}</p>
               </div>
             </div>
           </div>
