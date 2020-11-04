@@ -4,13 +4,14 @@
 # admin <it@geekscat.org>, 2020.
 # Xavi Torelló <info@xaviertorello.cat>, 2020.
 # Diogo <somnium@riseup.net>, 2020.
+# Francesc Arpí <francesc.arpi@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-04 17:01+0100\n"
-"PO-Revision-Date: 2020-11-03 17:18+0000\n"
-"Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
+"PO-Revision-Date: 2020-11-04 18:05+0000\n"
+"Last-Translator: Francesc Arpí <francesc.arpi@gmail.com>\n"
 "Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
 "apf-backend-jobsapp/ca/>\n"
 "Language: ca\n"
@@ -77,53 +78,47 @@ msgstr "Disseny web"
 msgid "Graphic design"
 msgstr "Disseny gràfic"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Sofware developer"
-msgstr "Desenvolupament web"
+msgstr "Desenvolupador de programari"
 
 msgid "Data analyst"
-msgstr ""
+msgstr "Analista de dades"
 
 msgid "Android mobile developer"
-msgstr ""
+msgstr "Desenvolupador mòbil Android"
 
 msgid "iOS mobile developer"
-msgstr ""
+msgstr "Desenvolupador mòbil iOS"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Frontend developer"
-msgstr "Desenvolupament web"
+msgstr "Desenvolupador de frontend"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Backend developer"
-msgstr "Desenvolupament web"
+msgstr "Desenvolupador de backend"
 
 msgid "Fullstack developer"
-msgstr ""
+msgstr "Desenvolupador Fullstack"
 
 msgid "Product Owner"
-msgstr ""
+msgstr "Product Owner"
 
 msgid "Project Manager"
-msgstr ""
+msgstr "Cap de projecte"
 
 msgid "Lead software engineer"
-msgstr ""
+msgstr "Enginyer Lead de programari"
 
 msgid "Security specialist"
-msgstr ""
+msgstr "Especialista en seguretat"
 
 msgid "Sysadmin"
-msgstr ""
+msgstr "Sysadmin"
 
 msgid "Devops"
-msgstr ""
+msgstr "Devops"
 
 msgid "Database administrator"
-msgstr ""
+msgstr "Administrador de la base de dades"
 
 msgid "User"
 msgstr "Usuari"
@@ -200,12 +195,12 @@ msgstr "La oferta de feina ha estat coberta."
 msgid "Salary"
 msgstr "Salari"
 
-#, fuzzy
-#| msgid "Minimum and maximum annual salary for this job."
 msgid ""
 "Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € "
 "- 40.000 €, etc"
-msgstr "Salari mínim i màxim per aquesta feina."
+msgstr ""
+"Salari mínim i màxim per aquesta feina. Exemples: 30.000 €, 30.000 € - "
+"40.000 €, etc"
 
 msgid "Remote"
 msgstr "Remot"
