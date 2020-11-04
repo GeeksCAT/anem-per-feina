@@ -24,7 +24,7 @@ urlpatterns = [
     ),
     path("jobs", JobListView.as_view(), name="jobs"),
     path("jobs/<int:id>", JobDetailsView.as_view(), name="jobs-detail"),
-    path("contact-us", ContactView.as_view(), name="contact-us"),
+    path("contact-us/", ContactView.as_view(), name="contact-us"),
     path("employer/jobs/create", JobCreateView.as_view(), name="employer-jobs-create"),
     path("employer/jobs/update/<int:pk>", JobUpdateView.as_view(), name="employer-jobs-update"),
 ]
