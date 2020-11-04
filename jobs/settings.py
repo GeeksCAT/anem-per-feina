@@ -262,12 +262,14 @@ if SENTRY_URL:
 
 # More third-party logins available
 AUTHENTICATION_BACKENDS = (
-    "social_core.backends.github.GithubOAuth2",
     "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
 )
 
-SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=False)
-SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=False)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/employer/dashboard/"
+SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=None)
+SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=None)
+SOCIAL_AUTH_GITHUB_SCOPE = ["user:email"]
 
 # Celery settings
 CELERY_HIGH_QUEUE_NAME = "high_priority"
