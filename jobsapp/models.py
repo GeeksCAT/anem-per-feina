@@ -8,6 +8,7 @@ from django.utils.translation import ugettext as _
 
 # APP Imports
 from accounts.models import User
+from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
 
@@ -71,6 +72,8 @@ class Job(models.Model):
         (CATEGORY_DEVOPS, _("Devops")),
         (CATEGORY_DATABASE_ADMINISTRATOR, _("Database administrator")),
     )
+
+    objects = JobManager()
 
     user = models.ForeignKey(
         User,
