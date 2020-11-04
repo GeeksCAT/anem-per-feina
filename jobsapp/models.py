@@ -40,21 +40,11 @@ class Job(models.Model):
     CATEGORY_GRAPHIC_DESIGN = "graphic-design"
     CATEGORY_SOFTWARE_DEVELOPER = "software-developer"
     CATEGORY_DATA_ANALYST = "data-analyst"
-    CATEGORY_MOBILE_DEVELOPER_JUNIOR_ANDROID = "mobile-android-junior-developer"
-    CATEGORY_MOBILE_DEVELOPER_MEDIOR_ANDROID = "mobile-android-medior-developer"
-    CATEGORY_MOBILE_DEVELOPER_SENIOR_ANDROID = "mobile-android-senior-developer"
-    CATEGORY_MOBILE_DEVELOPER_JUNIOR_IOS = "mobile-ios-junior-developer"
-    CATEGORY_MOBILE_DEVELOPER_MEDIOR_IOS = "mobile-ios-medior-developer"
-    CATEGORY_MOBILE_DEVELOPER_SENIOR_IOS = "mobile-ios-senior-developer"
-    CATEGORY_FRONTEND_WEB_DEVELOPER_JUNIOR = "frontend-junior-developer"
-    CATEGORY_FRONTEND_WEB_DEVELOPER_MEDIOR = "frontend-medior-developer"
-    CATEGORY_FRONTEND_WEB_DEVELOPER_SENIOR = "frontend-senior-developer"
-    CATEGORY_BACKEND_WEB_DEVELOPER_JUNIOR = "backend-junior-developer"
-    CATEGORY_BACKEND_WEB_DEVELOPER_MEDIOR = "backend-medior-developer"
-    CATEGORY_BACKEND_WEB_DEVELOPER_SENIOR = "backend-senior-developer"
-    CATEGORY_FULLSTACK_WEB_DEVELOPER_JUNIOR = "fullstack-junior-developer"
-    CATEGORY_FULLSTACK_WEB_DEVELOPER_MEDIOR = "fullstack-medior-developer"
-    CATEGORY_FULLSTACK_WEB_DEVELOPER_SENIOR = "fullstack-senior-developer"
+    CATEGORY_MOBILE_DEVELOPER_ANDROID = "mobile-android-developer"
+    CATEGORY_MOBILE_DEVELOPER_IOS = "mobile-ios-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER = "frontend-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER = "backend-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER = "fullstack-developer"
     CATEGORY_PRODUCT_OWNER = "product-owner"
     CATEGORY_PROJECT_MANAGER = "project-manager"
     CATEGORY_LEAD_SOFTWARE_ENGINEER = "lead-software-engineer"
@@ -68,21 +58,11 @@ class Job(models.Model):
         (CATEGORY_GRAPHIC_DESIGN, _("Graphic design")),
         (CATEGORY_SOFTWARE_DEVELOPER, _("Sofware developer")),
         (CATEGORY_DATA_ANALYST, _("Data analyst")),
-        (CATEGORY_MOBILE_DEVELOPER_JUNIOR_ANDROID, _("Junior Mobile developer Android")),
-        (CATEGORY_MOBILE_DEVELOPER_MEDIOR_ANDROID, _("Medior Mobile developer Android")),
-        (CATEGORY_MOBILE_DEVELOPER_SENIOR_ANDROID, _("Senior Mobile developer Android")),
-        (CATEGORY_MOBILE_DEVELOPER_JUNIOR_IOS, _("Junior Mobile developer iOS")),
-        (CATEGORY_MOBILE_DEVELOPER_MEDIOR_IOS, _("Medior Mobile developer iOS")),
-        (CATEGORY_MOBILE_DEVELOPER_SENIOR_IOS, _("Senior Mobile developer iOS")),
-        (CATEGORY_FRONTEND_WEB_DEVELOPER_JUNIOR, _("Junior Frontend developer")),
-        (CATEGORY_FRONTEND_WEB_DEVELOPER_MEDIOR, _("Medior Frontend developer")),
-        (CATEGORY_FRONTEND_WEB_DEVELOPER_SENIOR, _("Senior Frontend developer")),
-        (CATEGORY_BACKEND_WEB_DEVELOPER_JUNIOR, _("Junior Backend developer")),
-        (CATEGORY_BACKEND_WEB_DEVELOPER_MEDIOR, _("Medior Backend developer")),
-        (CATEGORY_BACKEND_WEB_DEVELOPER_SENIOR, _("Senior Backend developer")),
-        (CATEGORY_FULLSTACK_WEB_DEVELOPER_JUNIOR, _("Junior Fullstack developer")),
-        (CATEGORY_FULLSTACK_WEB_DEVELOPER_MEDIOR, _("Medior Fullstack developer")),
-        (CATEGORY_FULLSTACK_WEB_DEVELOPER_SENIOR, _("Senior Fullstack developer")),
+        (CATEGORY_MOBILE_DEVELOPER_ANDROID, _("Android mobile developer")),
+        (CATEGORY_MOBILE_DEVELOPER_IOS, _("iOS mobile developer")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER, _("Frontend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER, _("Backend developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER, _("Fullstack developer")),
         (CATEGORY_PRODUCT_OWNER, _("Product Owner")),
         (CATEGORY_PROJECT_MANAGER, _("Project Manager")),
         (CATEGORY_LEAD_SOFTWARE_ENGINEER, _("Lead software engineer")),
