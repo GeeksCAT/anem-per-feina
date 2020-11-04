@@ -1,6 +1,5 @@
-<!DOCTYPE html>{% load static i18n cookielaw_tags %}
-<html lang="en">
-
+<!DOCTYPE html>{% load static i18n cookielaw_tags %}{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +53,7 @@
             <a href="/" class="nav-link">{% trans "Home " %} <span class="sr-only">({% trans "current" %})</span></a>
           </li>
           <li class="nav-item">
-            <a href="/about-us/" class="nav-link">{% trans "About Us" %}</a>
+            <a href="/{{ LANGUAGE_CODE }}/about-us" class="nav-link">{% trans "About Us" %}</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'jobs:contact-us' %}" class="nav-link">{% trans "Contact" %}</a>
