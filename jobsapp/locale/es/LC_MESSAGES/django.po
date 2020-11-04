@@ -42,6 +42,18 @@ msgstr "Nombre de la empresa"
 msgid "Company Description"
 msgstr "Descripción de la empresa"
 
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Subject"
+msgstr "Asunto"
+
+msgid "Message"
+msgstr "Mensaje"
+
 msgid "Full time"
 msgstr "Tiempo completo"
 

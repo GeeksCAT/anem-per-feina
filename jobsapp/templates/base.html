@@ -1,6 +1,5 @@
-<!DOCTYPE html>{% load static i18n cookielaw_tags %}
-<html lang="en">
-
+<!DOCTYPE html>{% load static i18n cookielaw_tags %}{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +53,7 @@
             <a href="/" class="nav-link">{% trans "Home " %} <span class="sr-only">({% trans "current" %})</span></a>
           </li>
           <li class="nav-item">
-            <a href="/about-us/" class="nav-link">{% trans "About Us" %}</a>
+            <a href="/{{ LANGUAGE_CODE }}/about-us" class="nav-link">{% trans "About Us" %}</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'jobs:contact-us' %}" class="nav-link">{% trans "Contact" %}</a>
@@ -127,8 +126,22 @@
   <div class="footer__copyright">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 text-md-left text-center">
+        <div class="col-md-4 text-md-left text-center">
           <p>&copy;{% now "Y" %} Anem per feina!</p>
+        </div>
+        <div class="col-md-8 text-center text-md-right github-buttons">
+          <a href="https://github.com/GeeksCAT/anem-per-feina" target="_blank">
+            <img alt="stars" src="https://img.shields.io/github/stars/GeeksCAT/anem-per-feina?style=social" />
+          </a>
+          <a href="https://github.com/GeeksCAT/anem-per-feina/issues" target="_blank">
+            <img alt="issues" src="https://img.shields.io/github/issues/GeeksCAT/anem-per-feina?style=social" />
+          </a>
+          <a href="https://weblate.geekscat.org/projects/anem-per-feina/" target="_blank">
+            <img alt="translation" src="https://weblate.geekscat.org/widgets/anem-per-feina/-/svg-badge.svg"/>
+          </a>
+          <a href="https://github.com/GeeksCAT/anem-per-feina/#contributors-" target="_blank">
+            <img alt="translation" src="https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square"/>
+          </a>
         </div>
       </div>
     </div>
