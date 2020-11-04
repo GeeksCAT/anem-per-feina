@@ -38,12 +38,58 @@ class Job(models.Model):
 
     CATEGORY_WEB_DESIGN = "web-design"
     CATEGORY_GRAPHIC_DESIGN = "graphic-design"
-    CATEGORY_WEB_DEVELOPMENT = "web-development"
+    CATEGORY_SOFTWARE_DEVELOPER = "software-developer"
+    CATEGORY_DATA_ANALYST = "data-analyst"
+    CATEGORY_MOBILE_DEVELOPER_JUNIOR_ANDROID = "mobile-android-junior-developer"
+    CATEGORY_MOBILE_DEVELOPER_MEDIOR_ANDROID = "mobile-android-medior-developer"
+    CATEGORY_MOBILE_DEVELOPER_SENIOR_ANDROID = "mobile-android-senior-developer"
+    CATEGORY_MOBILE_DEVELOPER_JUNIOR_IOS = "mobile-ios-junior-developer"
+    CATEGORY_MOBILE_DEVELOPER_MEDIOR_IOS = "mobile-ios-medior-developer"
+    CATEGORY_MOBILE_DEVELOPER_SENIOR_IOS = "mobile-ios-senior-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER_JUNIOR = "frontend-junior-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER_MEDIOR = "frontend-medior-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER_SENIOR = "frontend-senior-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER_JUNIOR = "backend-junior-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER_MEDIOR = "backend-medior-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER_SENIOR = "backend-senior-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER_JUNIOR = "fullstack-junior-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER_MEDIOR = "fullstack-medior-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER_SENIOR = "fullstack-senior-developer"
+    CATEGORY_PRODUCT_OWNER = "product-owner"
+    CATEGORY_PROJECT_MANAGER = "project-manager"
+    CATEGORY_LEAD_SOFTWARE_ENGINEER = "lead-software-engineer"
+    CATEGORY_SECURITY_SPECIALIST = "security-specialist"
+    CATEGORY_SYSADMIN = "sysadmin"
+    CATEGORY_DEVOPS = "devops"
+    CATEGORY_DATABASE_ADMINISTRATOR = "database-administrator"
 
     CATEGORIES = (
         (CATEGORY_WEB_DESIGN, _("Web design")),
         (CATEGORY_GRAPHIC_DESIGN, _("Graphic design")),
-        (CATEGORY_WEB_DEVELOPMENT, _("Web development")),
+        (CATEGORY_SOFTWARE_DEVELOPER, _("Sofware developer")),
+        (CATEGORY_DATA_ANALYST, _("Data analyst")),
+        (CATEGORY_MOBILE_DEVELOPER_JUNIOR_ANDROID, _("Junior Mobile developer Android")),
+        (CATEGORY_MOBILE_DEVELOPER_MEDIOR_ANDROID, _("Medior Mobile developer Android")),
+        (CATEGORY_MOBILE_DEVELOPER_SENIOR_ANDROID, _("Senior Mobile developer Android")),
+        (CATEGORY_MOBILE_DEVELOPER_JUNIOR_IOS, _("Junior Mobile developer iOS")),
+        (CATEGORY_MOBILE_DEVELOPER_MEDIOR_IOS, _("Medior Mobile developer iOS")),
+        (CATEGORY_MOBILE_DEVELOPER_SENIOR_IOS, _("Senior Mobile developer iOS")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER_JUNIOR, _("Junior Frontend developer")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER_MEDIOR, _("Medior Frontend developer")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER_SENIOR, _("Senior Frontend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER_JUNIOR, _("Junior Backend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER_MEDIOR, _("Medior Backend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER_SENIOR, _("Senior Backend developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER_JUNIOR, _("Junior Fullstack developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER_MEDIOR, _("Medior Fullstack developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER_SENIOR, _("Senior Fullstack developer")),
+        (CATEGORY_PRODUCT_OWNER, _("Product Owner")),
+        (CATEGORY_PROJECT_MANAGER, _("Project Manager")),
+        (CATEGORY_LEAD_SOFTWARE_ENGINEER, _("Lead software engineer")),
+        (CATEGORY_SECURITY_SPECIALIST, _("Security specialist")),
+        (CATEGORY_SYSADMIN, _("Sysadmin")),
+        (CATEGORY_DEVOPS, _("Devops")),
+        (CATEGORY_DATABASE_ADMINISTRATOR, _("Database administrator")),
     )
 
     user = models.ForeignKey(
