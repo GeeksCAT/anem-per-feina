@@ -92,7 +92,7 @@ def test_only_authors_can_edit_job(api_client, create_users, create_jobs):
         "website": "http://alvaro-castillo.es/",
         "created_at": "2020-10-30T22:54:08.426784Z",
         "filled": True,
-        "salary": [20000 - 5000],
+        "salary": "20000 - 5000",
         "remote": "2",
         "user": f"http://testserver/api/users/{jobs[4].id}",
     }
