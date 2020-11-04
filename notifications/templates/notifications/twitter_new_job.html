@@ -1,4 +1,4 @@
 {% load static i18n %}
 🔊 {% trans "New job" %}: {{ object.title }} @ {{ object.company_name }}
-💰 {{ object.salary }}€ | 📃 {{ object.category }} | 🕔 {{ object.get_type_display }}
+💰 {{ object.salary }} | 📃 {{ object.category }} | 🕔 {{ object.get_type_display }}
 ℹ️ {{ base_url }}{{ object.get_absolute_url }}
