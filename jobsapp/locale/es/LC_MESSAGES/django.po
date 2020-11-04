@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-04 17:01+0100\n"
-"PO-Revision-Date: 2020-11-04 15:28+0000\n"
+"PO-Revision-Date: 2020-11-04 18:51+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
 "apf-backend-jobsapp/es/>\n"
@@ -75,53 +75,47 @@ msgstr "Diseño web"
 msgid "Graphic design"
 msgstr "Diseño gráfico"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Sofware developer"
-msgstr "Desarrollo web"
+msgstr "Desarrollador de software"
 
 msgid "Data analyst"
-msgstr ""
+msgstr "Analista de datos"
 
 msgid "Android mobile developer"
-msgstr ""
+msgstr "Desarrollador móvil Android"
 
 msgid "iOS mobile developer"
-msgstr ""
+msgstr "Desarrollador móvil iOS"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Frontend developer"
-msgstr "Desarrollo web"
+msgstr "Desarrollador de frontend"
 
-#, fuzzy
-#| msgid "Web development"
 msgid "Backend developer"
-msgstr "Desarrollo web"
+msgstr "Desarrollador de backend"
 
 msgid "Fullstack developer"
-msgstr ""
+msgstr "Desarrollador Fullstack"
 
 msgid "Product Owner"
-msgstr ""
+msgstr "Product Owner"
 
 msgid "Project Manager"
-msgstr ""
+msgstr "Jefe de proyecto"
 
 msgid "Lead software engineer"
-msgstr ""
+msgstr "Ingeniero de software líder"
 
 msgid "Security specialist"
-msgstr ""
+msgstr "Especialista en seguridad"
 
 msgid "Sysadmin"
-msgstr ""
+msgstr "Administrador de sistemas"
 
 msgid "Devops"
-msgstr ""
+msgstr "Devops"
 
 msgid "Database administrator"
-msgstr ""
+msgstr "Administrador de base de datos"
 
 msgid "User"
 msgstr "Usuario"
@@ -198,12 +192,12 @@ msgstr "La oferta de trabajo ha sido cubierta."
 msgid "Salary"
 msgstr "Salario"
 
-#, fuzzy
-#| msgid "Minimum and maximum annual salary for this job."
 msgid ""
 "Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € "
 "- 40.000 €, etc"
-msgstr "Salario mínimo y máximo para esta oferta de empleo."
+msgstr ""
+"Salario mínimo y máximo para esta oferta de empleo. Ejemplos: 30.000 €, "
+"30.000 € - 40.000 €, etc"
 
 msgid "Remote"
 msgstr "Remoto"
