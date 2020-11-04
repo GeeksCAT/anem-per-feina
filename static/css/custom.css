@@ -125,3 +125,7 @@ section.section-divider .overlay {
 .text-small {
     font-size: 1.2em;
 }
+
+.github-buttons * {
+    margin: 0.2em;
+}
