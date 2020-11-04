@@ -4,6 +4,7 @@ from rest_framework import permissions
 from rest_framework.permissions import BasePermission
 from rest_framework.request import Request
 
+from django.utils.translation import ugettext as _
 from django.views import View
 
 JOB_AUTHOR_METHODS: Sequence[str] = ("PUT", "PATCH", "DELETE")
@@ -11,7 +12,7 @@ JOB_AUTHOR_METHODS: Sequence[str] = ("PUT", "PATCH", "DELETE")
 
 class IsAuthorOrReadOnly(BasePermission):
     # TODO: Improve message
-    message = "Unauthorized"
+    message = _("Unauthorized")
 
     def has_object_permission(self, request: Request, view: View, obj: Any) -> bool:
         """
@@ -27,7 +28,7 @@ class IsAuthorOrReadOnly(BasePermission):
 
 class IsSelfOrReadOnly(BasePermission):
     # TODO: Improve message
-    message = "Unauthorized"
+    message = _("Unauthorized")
 
     def has_object_permission(self, request: Request, view: View, obj: Any) -> bool:
         """
