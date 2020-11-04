@@ -28,14 +28,28 @@ class EditJobForm(CreateJobForm):
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=128, help_text=_("Please insert your name"))
+    name = forms.CharField(
+        label=_("Name"),
+        max_length=128,
+        help_text=_("Please insert your name"),
+    )
     email = forms.EmailField(
+        label=_("Email"),
         max_length=256,
         help_text=_("Please insert your email"),
         validators=[validators.validate_email],
     )
-    subject = forms.CharField(max_length=256, help_text=_("Reason why you are contact us"))
-    message = forms.CharField(max_length=2048, widget=forms.Textarea, help_text=_("Your message"))
+    subject = forms.CharField(
+        label=_("Subject"),
+        max_length=256,
+        help_text=_("Reason why you are contact us"),
+    )
+    message = forms.CharField(
+        label=_("Message"),
+        max_length=2048,
+        widget=forms.Textarea,
+        help_text=_("Your message"),
+    )
 
     def send_email(self) -> None:
         # send email using the self.cleaned_data dictionary
