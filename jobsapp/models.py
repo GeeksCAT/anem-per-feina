@@ -38,12 +38,38 @@ class Job(models.Model):
 
     CATEGORY_WEB_DESIGN = "web-design"
     CATEGORY_GRAPHIC_DESIGN = "graphic-design"
-    CATEGORY_WEB_DEVELOPMENT = "web-development"
+    CATEGORY_SOFTWARE_DEVELOPER = "software-developer"
+    CATEGORY_DATA_ANALYST = "data-analyst"
+    CATEGORY_MOBILE_DEVELOPER_ANDROID = "mobile-android-developer"
+    CATEGORY_MOBILE_DEVELOPER_IOS = "mobile-ios-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER = "frontend-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER = "backend-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER = "fullstack-developer"
+    CATEGORY_PRODUCT_OWNER = "product-owner"
+    CATEGORY_PROJECT_MANAGER = "project-manager"
+    CATEGORY_LEAD_SOFTWARE_ENGINEER = "lead-software-engineer"
+    CATEGORY_SECURITY_SPECIALIST = "security-specialist"
+    CATEGORY_SYSADMIN = "sysadmin"
+    CATEGORY_DEVOPS = "devops"
+    CATEGORY_DATABASE_ADMINISTRATOR = "database-administrator"
 
     CATEGORIES = (
         (CATEGORY_WEB_DESIGN, _("Web design")),
         (CATEGORY_GRAPHIC_DESIGN, _("Graphic design")),
-        (CATEGORY_WEB_DEVELOPMENT, _("Web development")),
+        (CATEGORY_SOFTWARE_DEVELOPER, _("Sofware developer")),
+        (CATEGORY_DATA_ANALYST, _("Data analyst")),
+        (CATEGORY_MOBILE_DEVELOPER_ANDROID, _("Android mobile developer")),
+        (CATEGORY_MOBILE_DEVELOPER_IOS, _("iOS mobile developer")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER, _("Frontend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER, _("Backend developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER, _("Fullstack developer")),
+        (CATEGORY_PRODUCT_OWNER, _("Product Owner")),
+        (CATEGORY_PROJECT_MANAGER, _("Project Manager")),
+        (CATEGORY_LEAD_SOFTWARE_ENGINEER, _("Lead software engineer")),
+        (CATEGORY_SECURITY_SPECIALIST, _("Security specialist")),
+        (CATEGORY_SYSADMIN, _("Sysadmin")),
+        (CATEGORY_DEVOPS, _("Devops")),
+        (CATEGORY_DATABASE_ADMINISTRATOR, _("Database administrator")),
     )
 
     user = models.ForeignKey(
@@ -88,12 +114,15 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = models.PositiveIntegerField(
+    salary = models.CharField(
         verbose_name=_("Salary"),
-        help_text=_("Minimum and maximum annual salary for this job."),
+        help_text=_(
+            "Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € - 40.000 €, etc"
+        ),
         default=None,
         blank=True,
         null=True,
+        max_length=50,
     )
     remote = models.CharField(
         verbose_name=_("Remote"),
