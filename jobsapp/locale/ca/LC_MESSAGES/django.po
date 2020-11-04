@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-04 08:40+0000\n"
+"POT-Creation-Date: 2020-11-04 17:01+0100\n"
 "PO-Revision-Date: 2020-11-03 17:18+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
 "Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
@@ -19,9 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
-
-msgid "Advanced options"
-msgstr "Opcions avançades"
 
 msgid "Please insert your name"
 msgstr "S.u.p. inserta el teu nom"
@@ -80,8 +77,53 @@ msgstr "Disseny web"
 msgid "Graphic design"
 msgstr "Disseny gràfic"
 
-msgid "Web development"
+#, fuzzy
+#| msgid "Web development"
+msgid "Sofware developer"
 msgstr "Desenvolupament web"
+
+msgid "Data analyst"
+msgstr ""
+
+msgid "Android mobile developer"
+msgstr ""
+
+msgid "iOS mobile developer"
+msgstr ""
+
+#, fuzzy
+#| msgid "Web development"
+msgid "Frontend developer"
+msgstr "Desenvolupament web"
+
+#, fuzzy
+#| msgid "Web development"
+msgid "Backend developer"
+msgstr "Desenvolupament web"
+
+msgid "Fullstack developer"
+msgstr ""
+
+msgid "Product Owner"
+msgstr ""
+
+msgid "Project Manager"
+msgstr ""
+
+msgid "Lead software engineer"
+msgstr ""
+
+msgid "Security specialist"
+msgstr ""
+
+msgid "Sysadmin"
+msgstr ""
+
+msgid "Devops"
+msgstr ""
+
+msgid "Database administrator"
+msgstr ""
 
 msgid "User"
 msgstr "Usuari"
@@ -158,7 +200,11 @@ msgstr "La oferta de feina ha estat coberta."
 msgid "Salary"
 msgstr "Salari"
 
-msgid "Minimum and maximum annual salary for this job."
+#, fuzzy
+#| msgid "Minimum and maximum annual salary for this job."
+msgid ""
+"Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € "
+"- 40.000 €, etc"
 msgstr "Salari mínim i màxim per aquesta feina."
 
 msgid "Remote"
@@ -222,8 +268,8 @@ msgid ""
 "Find a <span class=\"accent\">job</span> you will <span class=\"accent"
 "\">love</span>."
 msgstr ""
-"Troba una <span class=\"accent\">feina</span> que <span class=\"accent\""
-">t'encantarà</span>."
+"Troba una <span class=\"accent\">feina</span> que <span class=\"accent"
+"\">t'encantarà</span>."
 
 msgid "Position"
 msgstr "Posició"
@@ -376,8 +422,8 @@ msgid ""
 "Find a <span class=\"accent\">job </span> you will <span class=\"accent"
 "\">love</span>"
 msgstr ""
-"Troba una <span class=\"accent\">feina </span> que <span class=\"accent\""
-">t'encantarà</span>"
+"Troba una <span class=\"accent\">feina </span> que <span class=\"accent"
+"\">t'encantarà</span>"
 
 msgid "Profession"
 msgstr "Professió"
@@ -410,6 +456,9 @@ msgstr "El missatge s'ha enviat correctament"
 
 msgid "Mensage not sent"
 msgstr "El missatge no s'ha pogut enviar"
+
+#~ msgid "Advanced options"
+#~ msgstr "Opcions avançades"
 
 #~ msgid "User applicant."
 #~ msgstr "Candidat."

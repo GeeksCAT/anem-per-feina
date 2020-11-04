@@ -9,6 +9,8 @@
 <div class="container mt-5 mb-5">
   <form action="https://formspree.io/f/xqkgbqek" method="POST">
     {% csrf_token %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <input name="_language" type="hidden" value="{{ LANGUAGE_CODE }}"/>
 
     {% for field in form %}
       <div class="form-group">
