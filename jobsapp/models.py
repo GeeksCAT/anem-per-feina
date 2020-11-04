@@ -114,12 +114,15 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = models.PositiveIntegerField(
+    salary = models.CharField(
         verbose_name=_("Salary"),
-        help_text=_("Minimum and maximum annual salary for this job."),
+        help_text=_(
+            "Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € - 40.000 €, etc"
+        ),
         default=None,
         blank=True,
         null=True,
+        max_length=50,
     )
     remote = models.CharField(
         verbose_name=_("Remote"),
