@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
 
 LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
-LANGUAGES = [("en", "English"), ("ca", "Català"), ("es", "Castellano")]
+LANGUAGES = [("ca", "Català"), ("es", "Castellano"), ("en", "English")]
 
 USE_I18N = True
 
