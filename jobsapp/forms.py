@@ -24,7 +24,9 @@ class CreateJobForm(forms.ModelForm):
 
 
 class EditJobForm(CreateJobForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        del self.fields["policies"]
 
 
 class ContactForm(forms.Form):

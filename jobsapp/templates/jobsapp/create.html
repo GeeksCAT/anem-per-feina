@@ -131,17 +131,19 @@ ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sa
                 {% render_field form.website class+="form-control" placeholder=form.website.help_text %}
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <hr>
-                <div class="checkbox text-center">
-                  <label>
-                    {% render_field form.policies %}
-                    {% trans "I agree with the" %} <a href="#">{% trans "Terms and conditions" %}</a>.
-                  </label>
+            {% if form.policies %}
+              <div class="row">
+                <div class="col-lg-12">
+                  <hr>
+                  <div class="checkbox text-center">
+                    <label>
+                      {% render_field form.policies %}
+                      {% trans "I agree with the" %} <a href="#">{% trans "Terms and conditions" %}</a>.
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endif %}
             <div class="row">
               <div class="col-lg-12 text-center">
                 <hr>
