@@ -7,12 +7,13 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.flatpages import views
 from django.urls import include, path
+from django.utils.translation import gettext as _
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Jobs Portal API",
+        title="Nem per Feina API",
         default_version="v1",
-        description="Jobs Portal Api Description",
+        description=f"Nem per Feina API {_('Description')}",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
@@ -32,7 +33,7 @@ urlpatterns = lang_patterns + [
         "api/",
         include(
             [
-                path("swagger", schema_view.with_ui("swagger", cache_timeout=0)),
+                path("docs", schema_view.with_ui("swagger", cache_timeout=0)),
                 path("", include("accounts.api.urls")),
                 path("", include("jobsapp.api.urls")),
             ]
