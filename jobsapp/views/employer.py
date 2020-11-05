@@ -3,8 +3,8 @@ from datetime import timedelta
 from constance import config
 
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
@@ -27,7 +27,7 @@ class DashboardView(ListView):
         return super().dispatch(self.request, *args, **kwargs)
 
     def get_queryset(self):
-        return self.model.objects.filter(user_id=self.request.user.id)
+        return self.request.user.job_set.all().order_by("-created_at")
 
 
 class JobUpdateView(UpdateView):
@@ -36,11 +36,13 @@ class JobUpdateView(UpdateView):
     extra_context = {"title": _("Edit Job")}
     success_url = reverse_lazy("jobs:employer-dashboard")
 
+    @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
+    @method_decorator(user_is_employer)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
     def get_object(self, queryset=None):
-        try:
-            job = self.request.user.job_set.get(pk=self.kwargs["pk"])
-        except Job.DoesNotExist:
-            raise Http404
+        job = get_object_or_404(Job, user=self.request.user, pk=self.kwargs["pk"])
         return job
 
 
@@ -78,13 +80,19 @@ class JobDeleteView(DeleteView):
     success_url = reverse_lazy("jobs:employer-dashboard")
     template_name = "jobsapp/delete.html"
 
+    @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
+    @method_decorator(user_is_employer)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        job = get_object_or_404(Job, user=self.request.user, pk=self.kwargs["pk"])
+        return job
+
 
 @login_required(login_url=reverse_lazy("accounts:login"))
-def filled(request, job_id=None):
-    try:
-        job = Job.objects.get(user_id=request.user.id, id=job_id)
-        job.filled = not job.filled
-        job.save()
-    except IntegrityError as e:
-        return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))
+def filled(request, job_id):
+    job = get_object_or_404(Job, user=request.user, pk=job_id)
+    job.filled = not job.filled
+    job.save()
     return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))
