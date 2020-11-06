@@ -14,13 +14,14 @@
 
 Show your support by 🌟 the project!!
 
-* [The project](#the-project)
-* [Contributing](#contributing)
-* [Tech stack](#tech-stack)
-* [Setup backend development environment](#setup-backend-development-environment)
-  * [Docker](#docker)
-  * [Local venv](#local-venv)
-* [Contributors](#contributors)
+- [The project](#the-project)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [Tech stack](#tech-stack)
+- [Setup backend development environment](#setup-backend-development-environment)
+  - [Docker](#docker)
+  - [Local venv](#local-venv)
+- [Contributors](#contributors)
 
 <a name="the-project"></a>
 ## The project
@@ -34,7 +35,13 @@ We forked the open source project [django-job-portal](https://github.com/manjuru
 
 ### Kubernetes deployment
 
-To deploy to a k8s cluster see the [k8s manifests](/manifests/README.md)
+#### Using k8s manifests
+
+To deploy to a k8s cluster using core manifests see the [NPF k8s manifests](/manifests/README.md)
+
+#### Using Helm Chart
+
+To deploy to a k8s cluster see the [NPF Helm Chart](/helm/npf/README.md)
 
 <a name="contributing"></a>
 ## Contributing
