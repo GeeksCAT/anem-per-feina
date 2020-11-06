@@ -1,4 +1,5 @@
 baseUrl: https://nemperfeina.cat
+baseEmail: it@geekscat.org
 
 app:
   image: geekscat/anem-per-feina
@@ -10,6 +11,7 @@ app:
   # threads is the amount of threads per worker
   threads: 2
   debug: "True"
+  silencedSystemChecks: "[]"
   log_level: INFO
   secretKey: null
   container:
@@ -74,6 +76,23 @@ certificate:
 
 notifications:
   telegram:
-    enabled: "True"
+    enabled: "False"
     chatIds: "@chatID,@chatID2"
     token: null
+  twitter:
+    enabled: "False"
+    apiKey: null
+    apiSecret: null
+    accessToken: null
+    accessTokenSecret: null
+
+socialAuth:
+  githubKey: null
+  githubSecret: null
+
+recaptcha:
+  publicKey: null
+  privateKey: null
+
+sentry:
+  dsn: null
