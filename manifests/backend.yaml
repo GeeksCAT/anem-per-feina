@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: geekscat/anem-per-feina:latest
+        image: geekscat/nem-per-feina:latest
         imagePullPolicy: Always
         command: ["invoke"]
         args: [

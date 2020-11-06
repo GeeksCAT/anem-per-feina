@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-29 14:03+0100\n"
+"POT-Creation-Date: 2020-11-05 16:14+0000\n"
 "PO-Revision-Date: 2020-11-03 17:18+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
-"Language-Team: Spanish <http://weblate.geekscat.org/projects/anem-per-feina/"
+"Language-Team: Spanish <http://weblate.geekscat.org/projects/nem-per-feina/"
 "apf-backend-accounts/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -120,17 +120,17 @@ msgstr "contactar con nosotros"
 msgid "our customer service center is working for you 24/7."
 msgstr "nuestro servicio de soporto trabaja para ti 24/7."
 
-msgid "Male"
-msgstr "Hombre"
-
-msgid "Female"
-msgstr "Mujer"
-
 msgid "Register"
 msgstr "Registrarse"
 
 msgid "You are now logged out"
 msgstr "Acabas de cerrar sesión"
+
+#~ msgid "Male"
+#~ msgstr "Hombre"
+
+#~ msgid "Female"
+#~ msgstr "Mujer"
 
 #~ msgid "First Name"
 #~ msgstr "Nombre"

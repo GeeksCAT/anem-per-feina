@@ -16,7 +16,7 @@ services:
   app:
     build:
       context: .
-    image: anem-per-feina:local
+    image: nem-per-feina:local
     user: root
     depends_on:
       - db
@@ -25,7 +25,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/anem-per-feina/
+      - .:/nem-per-feina/
     entrypoint:
       - invoke
       - wait-for
@@ -45,7 +45,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/anem-per-feina/
+      - .:/nem-per-feina/
     entrypoint:
       - invoke
       - wait-for
