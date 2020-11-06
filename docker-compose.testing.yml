@@ -12,7 +12,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test
-    image: anem-per-feina:tests
+    image: nem-per-feina:tests
     environment:
       SECRET_KEY: ${SECRET_KEY}
       POSTGRES_HOST: db-test
@@ -32,7 +32,7 @@ services:
     depends_on:
       - db-test
     volumes:
-      - .:/anem-per-feina/
+      - .:/nem-per-feina/
 
 volumes:
   postgres_data_test:
