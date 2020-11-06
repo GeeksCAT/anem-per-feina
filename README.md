@@ -1,4 +1,6 @@
-<h1 align="center">Nem per feina</h1>
+<p align="center">
+    <img alt="banner" src="https://github.com/GeeksCAT/nem-per-feina-logos/raw/main/nemperfeina_large_v2_60px.png"/>
+</p>
 <p align="center">
     <img alt="stars" src="https://img.shields.io/github/stars/GeeksCAT/nem-per-feina?style=social"/>
     <img alt="forks" src="https://img.shields.io/github/forks/GeeksCAT/nem-per-feina?label=Forks&style=social"/>
@@ -9,6 +11,8 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </p>
+
+<h1>Nem per feina</h1>
 
 **Nem per feina** is an open source project promoted by [GeeksCat](https://geekscat.org/) association for [Hactoberfest 2020](https://hacktoberfest.geekscat.org/) event.
 
