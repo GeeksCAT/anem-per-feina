@@ -268,3 +268,8 @@ __pycache__/
 
 # all-contributors-cli
 node_modules
+
+### Helm
+helm/*/myvalues.yaml
+# Dependencies
+helm/*/charts

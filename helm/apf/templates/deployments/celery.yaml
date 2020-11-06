@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apf.fullname" . }}-celery
+  labels:
+    {{- include "apf.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.celery.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "apf.selectorLabels" . | nindent 6 }}-celery
+  template:
+    metadata:
+      labels:
+        {{- include "apf.selectorLabels" . | nindent 8 }}-celery
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "apf.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.app.image }}:{{ .Values.app.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.celery.pullPolicy }}
+          command:
+            - invoke
+            - celery-queues
+          envFrom:
+          - secretRef:
+              name: {{ include "apf.fullname" . }}
+          resources:
+            {{- toYaml .Values.celery.resources | nindent 12 }}

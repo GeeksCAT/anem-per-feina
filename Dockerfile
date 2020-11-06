@@ -5,6 +5,7 @@ WORKDIR /nem-per-feina/
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -qy wait-for-it \
+     build-essential \
     && rm -rf /var/lib/apt/list/*
 
 COPY requirements.txt ./

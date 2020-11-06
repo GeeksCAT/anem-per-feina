@@ -1,0 +1,30 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "apf.fullname" . -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "apf.labels" . | nindent 4 }}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: {{ .Values.certificate.issuername | quote }}
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+    - secretName: {{ $fullName }}-cert
+  {{- end }}
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+        {{- range .paths }}
+        - path: {{ .path }}
+          pathType: Prefix
+          backend:
+            serviceName: {{ $fullName }}
+            servicePort: {{ .servicePort }}
+        {{- end }}
+    {{- end }}
+  {{- end }}
