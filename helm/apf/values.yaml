@@ -2,7 +2,7 @@ baseUrl: https://nemperfeina.cat
 baseEmail: it@geekscat.org
 
 app:
-  image: geekscat/anem-per-feina
+  image: geekscat/nem-per-feina
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
   pullPolicy: Always
@@ -24,9 +24,9 @@ app:
 postgresql:
   serviceAccount:
     enabled: true
-  postgresqlUsername: anemperfeina
+  postgresqlUsername: nemperfeina
   postgresqlPassword: null
-  postgresqlDatabase: anemperfeina
+  postgresqlDatabase: nemperfeina
   service:
     port: "5432"
 

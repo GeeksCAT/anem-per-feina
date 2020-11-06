@@ -1,6 +1,6 @@
 apiVersion: v2
-name: apf
-description: A Helm chart for Kubernetes
+name: npf
+description: Nem per feina Chart
 type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
