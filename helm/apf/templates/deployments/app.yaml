@@ -26,13 +26,17 @@ spec:
           command:
             - invoke
             - migrate
-            - uwsgi
-            - --port
-            - {{ .Values.app.container.port | quote }}
-            - -w
-            - {{ .Values.app.workers | quote }}
-            - -t
-            - {{ .Values.app.threads | quote }}
+            - runserver
+          # command:
+          #   - invoke
+          #   - migrate
+          #   - uwsgi
+          #   - --port
+          #   - {{ .Values.app.container.port | quote }}
+          #   - -w
+          #   - {{ .Values.app.workers | quote }}
+          #   - -t
+          #   - {{ .Values.app.threads | quote }}
           envFrom:
           - secretRef:
               name: {{ include "apf.fullname" . }}
