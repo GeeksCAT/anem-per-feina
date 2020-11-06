@@ -6,7 +6,7 @@ from django.conf import settings
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jobs.settings")
 
-app = Celery("anem-per-feina")
+app = Celery("nem-per-feina")
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 

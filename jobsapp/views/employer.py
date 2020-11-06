@@ -1,13 +1,18 @@
+from datetime import timedelta
+
+from constance import config
+
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic.dates import timezone_today
 
 from jobsapp.decorators import user_is_employer
-from jobsapp.forms import CreateJobForm
+from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
 
 
@@ -22,7 +27,23 @@ class DashboardView(ListView):
         return super().dispatch(self.request, *args, **kwargs)
 
     def get_queryset(self):
-        return self.model.objects.filter(user_id=self.request.user.id)
+        return self.request.user.job_set.all().order_by("-created_at")
+
+
+class JobUpdateView(UpdateView):
+    template_name = "jobsapp/update.html"
+    form_class = EditJobForm
+    extra_context = {"title": _("Edit Job")}
+    success_url = reverse_lazy("jobs:employer-dashboard")
+
+    @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
+    @method_decorator(user_is_employer)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        job = get_object_or_404(Job, user=self.request.user, pk=self.kwargs["pk"])
+        return job
 
 
 class JobCreateView(CreateView):
@@ -49,20 +70,29 @@ class JobCreateView(CreateView):
         else:
             return self.form_invalid(form)
 
+    def get_initial(self):
+        last_date = timezone_today() + timedelta(days=config.DEFAULT_JOB_EXPIRATION)
+        return {"last_date": last_date}
+
 
 class JobDeleteView(DeleteView):
     model = Job
     success_url = reverse_lazy("jobs:employer-dashboard")
     template_name = "jobsapp/delete.html"
 
+    @method_decorator(login_required(login_url=reverse_lazy("accounts:login")))
+    @method_decorator(user_is_employer)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        job = get_object_or_404(Job, user=self.request.user, pk=self.kwargs["pk"])
+        return job
+
 
 @login_required(login_url=reverse_lazy("accounts:login"))
-def filled(request, job_id=None):
-    try:
-        job = Job.objects.get(user_id=request.user.id, id=job_id)
-        job.filled = True
-        job.save()
-    except IntegrityError as e:
-        print(e.message)
-        return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))
+def filled(request, job_id):
+    job = get_object_or_404(Job, user=request.user, pk=job_id)
+    job.filled = not job.filled
+    job.save()
     return HttpResponseRedirect(reverse_lazy("jobs:employer-dashboard"))

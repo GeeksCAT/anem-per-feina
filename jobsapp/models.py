@@ -8,6 +8,7 @@ from django.utils.translation import ugettext as _
 
 # APP Imports
 from accounts.models import User
+from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
 
@@ -36,6 +37,44 @@ class Job(models.Model):
         (PARTIAL_REMOTE, _("Partial remote")),
     )
 
+    CATEGORY_WEB_DESIGN = "web-design"
+    CATEGORY_GRAPHIC_DESIGN = "graphic-design"
+    CATEGORY_SOFTWARE_DEVELOPER = "software-developer"
+    CATEGORY_DATA_ANALYST = "data-analyst"
+    CATEGORY_MOBILE_DEVELOPER_ANDROID = "mobile-android-developer"
+    CATEGORY_MOBILE_DEVELOPER_IOS = "mobile-ios-developer"
+    CATEGORY_FRONTEND_WEB_DEVELOPER = "frontend-developer"
+    CATEGORY_BACKEND_WEB_DEVELOPER = "backend-developer"
+    CATEGORY_FULLSTACK_WEB_DEVELOPER = "fullstack-developer"
+    CATEGORY_PRODUCT_OWNER = "product-owner"
+    CATEGORY_PROJECT_MANAGER = "project-manager"
+    CATEGORY_LEAD_SOFTWARE_ENGINEER = "lead-software-engineer"
+    CATEGORY_SECURITY_SPECIALIST = "security-specialist"
+    CATEGORY_SYSADMIN = "sysadmin"
+    CATEGORY_DEVOPS = "devops"
+    CATEGORY_DATABASE_ADMINISTRATOR = "database-administrator"
+
+    CATEGORIES = (
+        (CATEGORY_WEB_DESIGN, _("Web design")),
+        (CATEGORY_GRAPHIC_DESIGN, _("Graphic design")),
+        (CATEGORY_SOFTWARE_DEVELOPER, _("Sofware developer")),
+        (CATEGORY_DATA_ANALYST, _("Data analyst")),
+        (CATEGORY_MOBILE_DEVELOPER_ANDROID, _("Android mobile developer")),
+        (CATEGORY_MOBILE_DEVELOPER_IOS, _("iOS mobile developer")),
+        (CATEGORY_FRONTEND_WEB_DEVELOPER, _("Frontend developer")),
+        (CATEGORY_BACKEND_WEB_DEVELOPER, _("Backend developer")),
+        (CATEGORY_FULLSTACK_WEB_DEVELOPER, _("Fullstack developer")),
+        (CATEGORY_PRODUCT_OWNER, _("Product Owner")),
+        (CATEGORY_PROJECT_MANAGER, _("Project Manager")),
+        (CATEGORY_LEAD_SOFTWARE_ENGINEER, _("Lead software engineer")),
+        (CATEGORY_SECURITY_SPECIALIST, _("Security specialist")),
+        (CATEGORY_SYSADMIN, _("Sysadmin")),
+        (CATEGORY_DEVOPS, _("Devops")),
+        (CATEGORY_DATABASE_ADMINISTRATOR, _("Database administrator")),
+    )
+
+    objects = JobManager()
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -55,9 +94,12 @@ class Job(models.Model):
         choices=JOB_TYPES, max_length=10, verbose_name=_("Type"), help_text=_("Job type.")
     )
     category = models.CharField(
-        max_length=100, verbose_name=_("Category"), help_text=_("Category clasification.")
+        max_length=100,
+        verbose_name=_("Category"),
+        help_text=_("Category clasification."),
+        choices=CATEGORIES,
     )
-    last_date = models.DateTimeField(verbose_name=_("Last date"), help_text=_("Last date."))
+    last_date = models.DateField(verbose_name=_("Last date"), help_text=_("Last date."))
     company_name = models.CharField(
         max_length=100, verbose_name=_("Company"), help_text=_("Job's Company name.")
     )
@@ -75,10 +117,15 @@ class Job(models.Model):
     filled = models.BooleanField(
         default=False, verbose_name=_("Filled"), help_text=_("Job position is filled.")
     )
-    salary = InclusiveIntegerRangeField(
-        null=True,
+    salary = models.CharField(
         verbose_name=_("Salary"),
-        help_text=_("Minimum and maximum annual salary for this job."),
+        help_text=_(
+            "Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € - 40.000 €, etc"
+        ),
+        default=None,
+        blank=True,
+        null=True,
+        max_length=50,
     )
     remote = models.CharField(
         verbose_name=_("Remote"),
@@ -86,6 +133,12 @@ class Job(models.Model):
         choices=REMOTE_CHOICES,
         max_length=20,
         help_text=_("Is this job position remote?."),
+    )
+    apply_url = models.URLField(
+        max_length=200,
+        verbose_name=_("Apply URL"),
+        help_text=_("Users will apply on your website."),
+        default="",
     )
 
     class Meta:

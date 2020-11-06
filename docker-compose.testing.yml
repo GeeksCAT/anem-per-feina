@@ -12,7 +12,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test
-    image: anem-per-feina:tests
+    image: nem-per-feina:tests
     environment:
       SECRET_KEY: ${SECRET_KEY}
       POSTGRES_HOST: db-test
@@ -21,6 +21,9 @@ services:
       EMAIL_PORT: 5000
       EMAIL_HOST_USER: testing
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+      RECAPTCHA_PUBLIC_KEY:
+      RECAPTCHA_PRIVATE_KEY:
+      SILENCED_SYSTEM_CHECKS:
     entrypoint:
       - invoke
       - wait-for
@@ -29,7 +32,7 @@ services:
     depends_on:
       - db-test
     volumes:
-      - .:/anem-per-feina/
+      - .:/nem-per-feina/
 
 volumes:
   postgres_data_test:

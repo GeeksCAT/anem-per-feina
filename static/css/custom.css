@@ -1,1 +1,131 @@
-/* your styles go here */
+:root {
+  --white: #EDF0F0;
+
+  --primary-light-color: #2C7DAD;
+  --secondary-light-color: #85B5BB;
+
+  --primary-dark-color: #1C2335;
+  --secondary-dark-color: #4D638F;
+}
+
+.navbar {
+    background: var(--primary-dark-color);
+}
+
+.navbar a{
+    font-family: "Roboto", Helvetica, Arial, sans serif;
+    font-size: 1.0rem;
+}
+
+.navbar ul.navbar-nav>li>a:not(.navbar-btn) {
+    color: var(--white);
+    font-family: "Roboto", Helvetica, Arial, sans serif;
+    font-size: 1.0rem;
+}
+
+.navbar ul.navbar-nav>li>a:not(.navbar-btn):hover {
+    color: var(--secondary-light-color);
+    border-top-color: var(--secondary-light-color);
+}
+
+.navbar ul.navbar-nav>li.active>a,
+.navbar ul.navbar-nav>li.show>a{
+    color: var(--secondary-light-color);
+    border-top-color: var(--secondary-light-color);
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    background: var(--primary-dark-color);
+}
+
+.dropdown-item {
+    background: var(--primary-dark-color);
+    color: var(--secondary-light-color);
+}
+
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .box-simple h3, .box-image .name h3, .box-image-text .top .name h3, .box-image-text .top .name h4, .h5, .h6 {
+    margin-bottom: 1rem;
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--primary-dark-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.accent {
+    color: var(--secondary-dark-color);
+}
+
+a {
+    color: var(--primary-light-color);
+}
+
+a:hover {
+    color: var(--secondary-light-color);
+}
+
+.featured__details {
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+}
+
+.heading:after {
+    background: var(--primary-dark-color);
+}
+
+section.section-divider .overlay {
+    background: var(--secondary-dark-color);
+}
+
+.footer__copyright {
+    background: var(--primary-dark-color);
+    color: var(--white);
+}
+
+.btn {
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+    letter-spacing: 0em;
+}
+
+.btn-outline-light:{
+    color: var(--white);
+}
+
+.btn-outline-light:hover {
+    color: var(--secondary-light-color) !important;
+    background-color: var(--white);
+}
+
+.btn-outline-white-primary {
+    color: var(--primary-light-color);
+    background-color: var(--white);
+    background-image: none;
+    border-color: var(--primary-light-color);
+}
+
+.btn-outline-white-primary:hover {
+    color: var(--white);
+    background-color: var(--primary-light-color);
+    border-color: var(--primary-light-color);
+}
+
+.btn-outline-white-primary:not([disabled]):not(.disabled):active, .btn-outline-white-primary:not([disabled]):not(.disabled).active, .show>.btn-outline-white-primary.dropdown-toggle {
+    color: var(--white);
+    background-color: var(--primary-light-color);
+    border-color: var(--primary-light-color);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.box-image-text .content p {
+    font-size: 1.4em;
+}
+
+.text-small {
+    font-size: 1.2em;
+}
+
+.github-buttons * {
+    margin: 0.2em;
+}

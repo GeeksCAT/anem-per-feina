@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 LABEL maintainer="GeeksCAT<info@geekscat.org>"
 
-WORKDIR /anem-per-feina/
+WORKDIR /nem-per-feina/
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -qy wait-for-it \

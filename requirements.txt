@@ -47,3 +47,6 @@ python-telegram-bot==13.0.0
 python-twitter==3.5
 inclusive-django-range-fields==0.2.3
 uwsgi==2.0.19.1
+django-cookie-law==2.0.3
+django-recaptcha==2.0.6
+django-widget-tweaks==1.4.8

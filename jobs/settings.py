@@ -30,9 +30,12 @@ INSTALLED_APPS = [
     "django_extensions",
     "drf_yasg",
     "corsheaders",
+    "widget_tweaks",
     "rest_framework",
     "rest_framework.authtoken",
     "constance.backends.database",
+    "cookielaw",
+    "captcha",
     "jobsapp",
     "accounts",
     "constance",
@@ -112,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
 
 LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
-LANGUAGES = [("en", "English"), ("ca", "Català"), ("es", "Castellano")]
+LANGUAGES = [("ca", "Català"), ("es", "Castellano"), ("en", "English")]
 
 USE_I18N = True
 
@@ -241,6 +244,7 @@ CONSTANCE_CONFIG = {
     "SITE_NAME": ("My Title", "Website title"),
     "SITE_DESCRIPTION": ("", "Website description"),
     "JOBS_URL": ("", "URL Jobs"),
+    "DEFAULT_JOB_EXPIRATION": (90, "Default job expiration days"),
 }
 CONSTANCE_CONFIG_FIELDSETS = {
     "General Configuration Service": ("SITE_NAME", "SITE_DESCRIPTION"),
@@ -258,12 +262,15 @@ if SENTRY_URL:
 
 # More third-party logins available
 AUTHENTICATION_BACKENDS = (
-    "social_core.backends.github.GithubOAuth2",
     "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
 )
 
-SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=False)
-SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=False)
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/employer/dashboard/"
+SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=None)
+SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=None)
+SOCIAL_AUTH_GITHUB_SCOPE = ["user:email"]
 
 # Celery settings
 CELERY_HIGH_QUEUE_NAME = "high_priority"
@@ -313,8 +320,14 @@ NOTIFICATIONS_ASYNC_QUEUE_NAME = CELERY_LOW_QUEUE_NAME
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+BASE_EMAIL = env("BASE_EMAIL", default="info@geekscat.org")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@nemperfeina.cat")
 EMAIL_HOST = env("EMAIL_HOST", default=None)
 EMAIL_PORT = env("EMAIL_PORT", default=None)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default=None)
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
+
+# Catpcha
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
+SILENCED_SYSTEM_CHECKS = env.list("SILENCED_SYSTEM_CHECKS")

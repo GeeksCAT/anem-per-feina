@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from jobs.settings import EMAIL_HOST
+from jobs.settings import BASE_EMAIL
 from jobsapp.tasks import _send_email
 
 
@@ -19,7 +19,7 @@ def contact_us_email(data: Dict[str, Any]) -> None:
             "message": message,
             "from_email": data.get("from_email"),
             "recipient_list": [
-                EMAIL_HOST,
+                BASE_EMAIL,
             ],
         }
     )
