@@ -143,3 +143,13 @@ section.section-divider .overlay {
   text-align: justify;
 }
 
+/* Avoid uppercase in blockquoute titles to diff "normal" titles than content titles */
+.offer-details h1,
+.offer-details h2,
+.offer-details h3,
+.offer-details h4,
+.offer-details h5,
+.offer-details h6 {
+  text-transform: none;
+}
+
