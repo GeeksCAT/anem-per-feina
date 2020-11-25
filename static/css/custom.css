@@ -139,3 +139,7 @@ section.section-divider .overlay {
   color: var(--primary-light-color) !important;
 }
 
+#job-offer p {
+  text-align: justify;
+}
+
