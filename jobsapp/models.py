@@ -12,12 +12,12 @@ from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
 
+from .fields import JobsURLField
+
 # Global Imports
 JOB_INDEXES = ("location", "category", "type", "title")
 
 # Job remote types
-
-
 @event_dispatcher(EVENT_NEW_JOB)
 class Job(models.Model):
     JOB_TYPE_FULL_TIME = "1"
@@ -134,8 +134,8 @@ class Job(models.Model):
         max_length=20,
         help_text=_("Is this job position remote?."),
     )
-    apply_url = models.URLField(
-        max_length=200,
+    apply_url = JobsURLField(
+        max_length=500,
         verbose_name=_("Apply URL"),
         help_text=_("Users will apply on your website."),
         default="",
