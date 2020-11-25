@@ -129,3 +129,13 @@ section.section-divider .overlay {
 .github-buttons * {
     margin: 0.2em;
 }
+
+/* Override color to match our palette */
+.blockquote {
+  border-color: var(--primary-light-color);
+}
+
+.text-info {
+  color: var(--primary-light-color) !important;
+}
+
