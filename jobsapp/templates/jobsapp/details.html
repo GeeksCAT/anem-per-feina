@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n %}
+{% load static i18n bleach_tags %}
 
 {% block title %}
   {% trans "Job details" %}
@@ -25,7 +25,7 @@
       </div>
     </div>
   </section>
-  <section>
+  <section id="job-offer">
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
@@ -33,17 +33,17 @@
           <h5>{% trans "Last date" %}: {{ job.last_date|date }}</h5>
           <h5 class="text-info">{% trans "Salary" %}: {% if job.salary %} {{ job.salary }}/{% trans "Yearly " %}{% else %}
             {% trans "Negotiable " %}{% endif %} </h5>
-          <blockquote class="blockquote">
-            <p>{{ job.description|linebreaksbr }}</p>
+          <blockquote class="blockquote offer-details">
+            <p>{{ job.description|bleach }}</p>
           </blockquote>
           <a href="{{ job.apply_url }}" target="_blank" class="btn btn-success">
             {% trans "Apply URL" %}
           </a>
         </div>
         <div class="col-lg-1"></div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 ">
           <h4>{% trans "About" %} {{ job.company_name }}</h4>
-          <p class="job-detail__company-description">{{ job.company_description }}</p>
+          <p class="job-detail__company-description offer-details">{{ job.company_description|bleach }}</p>
         </div>
       </div>
     </div>
