@@ -36,7 +36,7 @@
           <blockquote class="blockquote offer-details">
             <p>{{ job.description|bleach }}</p>
           </blockquote>
-          <a href="{{ job.apply_url }}" target="_blank" class="btn btn-success">
+          <a href="{{ job.apply_url }}" target="_blank" rel="noopener" class="btn btn-success">
             {% trans "Apply URL" %}
           </a>
         </div>
