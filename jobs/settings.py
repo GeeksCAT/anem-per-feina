@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "notifications",
     "social_django",
     "django_filters",
+    "django_bleach",
+    "tinymce",
 ]
 
 MIDDLEWARE = [
@@ -334,3 +336,43 @@ SILENCED_SYSTEM_CHECKS = env.list("SILENCED_SYSTEM_CHECKS")
 
 # URL Schemes
 URL_SCHEMES = env.list("URL_SCHEMES", default=["http", "https", "mailto"])
+
+# TinyMCE
+# TINYMCE_DEFAULT_CONFIG = {'theme': "simple", 'relative_urls': False}
+
+# Bleach
+# Which HTML tags are allowed
+BLEACH_ALLOWED_TAGS = [
+    "p",
+    "b",
+    "i",
+    "u",
+    "em",
+    "strong",
+    "a",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "code",
+    "ul",
+    "ol",
+    "li",
+]
+
+# Which HTML attributes are allowed
+BLEACH_ALLOWED_ATTRIBUTES = ["title", "style"]
+
+# Which CSS properties are allowed in 'style' attributes
+BLEACH_ALLOWED_STYLES = ["font-family", "font-weight", "text-decoration", "font-variant"]
+
+# Strip unknown tags if True, replace with HTML escaped characters if False
+BLEACH_STRIP_TAGS = True
+
+# Strip comments, or leave them in.
+BLEACH_STRIP_COMMENTS = True
+
+# Default widget
+BLEACH_DEFAULT_WIDGET = "tinymce.widgets.TinyMCE"

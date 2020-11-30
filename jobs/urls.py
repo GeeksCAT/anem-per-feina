@@ -39,5 +39,6 @@ urlpatterns = lang_patterns + [
         ),
     ),
     path("social-auth/", include("social_django.urls", namespace="social")),
+    path("tinymce/", include("tinymce.urls")),
     url(r"^(?P<url>.*)$", views.flatpage),
 ]

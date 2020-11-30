@@ -12,7 +12,7 @@ from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
 
-from .fields import JobsURLField
+from .fields import JobsURLField, SanitizedHTMLField
 
 # Global Imports
 JOB_INDEXES = ("location", "category", "type", "title")
@@ -84,7 +84,7 @@ class Job(models.Model):
     title = models.CharField(
         max_length=300, verbose_name=_("Title"), help_text=_("Short job title.")
     )
-    description = models.TextField(
+    description = SanitizedHTMLField(
         verbose_name=_("Description"), help_text=_("Long job description.")
     )
     location = models.CharField(
@@ -103,7 +103,7 @@ class Job(models.Model):
     company_name = models.CharField(
         max_length=100, verbose_name=_("Company"), help_text=_("Job's Company name.")
     )
-    company_description = models.CharField(
+    company_description = SanitizedHTMLField(
         max_length=300,
         verbose_name=_("Company description"),
         help_text=_("Company description, activity,..."),
