@@ -24,14 +24,8 @@ class JobsViewList(ListCreateAPIView):
     # Here we use the same as the model indexes and can be extended
     filterset_fields = INDEXED_FILTERS
 
-    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        validated_data = request.data.copy()
-        validated_data["user"] = f"{reverse('users-list')}/{request.user.id}"
-        serializer = self.get_serializer(data=validated_data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class JobsViewDetails(RetrieveUpdateDestroyAPIView):

@@ -8,9 +8,7 @@ from ..models import Job
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
-    # class JobSerializer(serializers.ModelSerializer):
-    # FIXME: Do we need this?
-    # user = UserSerializer(read_only=True)
+    user = serializers.ReadOnlyField(source="user.email")
 
     class Meta:
         model = Job
