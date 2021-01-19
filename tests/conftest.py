@@ -29,9 +29,14 @@ def api_client():
 
 @pytest.fixture
 def api_client_authenticate(db, user_factory, api_client):
-    user = user_factory()
-    api_client.force_authenticate(user=user)
-    yield api_client
+    def _api_client(user=None):
+        """Allows pass custom user object."""
+        if user is None:
+            user = user_factory()
+        api_client.force_authenticate(user=user)
+        return api_client
+
+    yield _api_client
     api_client.force_authenticate(user=None)
 
 
