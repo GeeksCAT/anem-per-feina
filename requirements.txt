@@ -10,7 +10,7 @@ django-environ==0.4.5
 django-extensions==3.0.7
 django-filter==2.4.0
 djangorestframework==3.11.0
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==4.5.0
 drf-yasg==1.17.1
 elasticsearch==7.5.1
 elasticsearch-dsl==7.1.0
@@ -51,3 +51,4 @@ django-recaptcha==2.0.6
 django-widget-tweaks==1.4.8
 django-tinymce==3.1.0
 django-bleach==0.6.1
+geopy==2.1.0

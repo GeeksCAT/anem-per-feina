@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_bleach",
     "tinymce",
+    "geolocation",
 ]
 
 MIDDLEWARE = [
