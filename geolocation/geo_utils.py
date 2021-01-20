@@ -14,16 +14,7 @@ class GeoCoder:
         self.geolocator: "Nominatim" = Nominatim(user_agent=user_agent, **kwargs)
         self.address: str
 
-    def get_coordinates(
-        self,
-        *,
-        city: str,
-        country: str,
-        street: str = "",
-        county: str = "",
-        state: str = "",
-        postalcode: str = "",
-    ) -> None:
+    def get_coordinates(self, address, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
 
@@ -31,11 +22,11 @@ class GeoCoder:
         """
 
         # build address with as much information as possible using OSM address structure
-        address = f"{street}, {city}, {county}, {state}, {postalcode}, {country}".strip()
-        location = self.geolocator.geocode(address)
+        # address = f"{street}, {city}, {county}, {state}, {postalcode}, {country}".strip()
+        location = self.geolocator.geocode(address, **kwargs)
         try:
             self.lat = location.latitude
             self.lon = location.longitude
             self.geo_point = Point(location.latitude, location.longitude)
         except CoordinatesNotFound:
-            raise CoordinatesNotFound(f"Was not possible find coordinates for address {address}")
+            raise CoordinatesNotFound(f"Was not possible find coordinates for address:{address}")
