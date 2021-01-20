@@ -2,6 +2,8 @@ from geopy.geocoders import Nominatim
 
 from django.contrib.gis.geos import Point
 
+from geolocation.models import Address
+
 CoordinatesNotFound = AttributeError
 
 
@@ -30,3 +32,15 @@ class GeoCoder:
             self.geo_point = Point(location.latitude, location.longitude)
         except CoordinatesNotFound:
             raise CoordinatesNotFound(f"Was not possible find coordinates for address:{address}")
+
+
+def add_coordinates_to_address(pk: int):
+    """Helper function do generate coordinates to an new address entry.
+
+    TODO Use it as a celery task
+    """
+    address = Address.objects.get(pk=pk)
+    location = GeoCoder()
+    location.get_coordinates(address=address.full_address)
+    address.set_coordinates(location.lat, location.lon)
+    return address
