@@ -45,5 +45,5 @@ class AddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Address
 
-    city = "Girona"
+    city = factory.Faker("city", locale="es_ES")
     country = "Spain"

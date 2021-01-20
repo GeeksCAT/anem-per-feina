@@ -4,6 +4,8 @@ from django.contrib.gis.geos import Point
 from django.db import models
 from django.utils.translation import gettext as _
 
+from geolocation.managers import AddressQuerySet
+
 User = get_user_model()
 
 
@@ -24,6 +26,7 @@ class Address(geo_models.Model):
     lat = geo_models.FloatField(verbose_name=_("Latitude"), null=True)
     lon = geo_models.FloatField(verbose_name=_("Longitude"), null=True)
     geo_point = geo_models.PointField(null=True)
+    objects = AddressQuerySet.as_manager()
 
     @property
     def full_address(self) -> str:

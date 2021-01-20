@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 
 from django.conf import settings
 
+from geolocation.geo_utils import GeoCoder
 from tests.factories import AddressFactory, JobFactory, UserFactory
 
 # Register factories to pytest global namespace.
@@ -65,3 +66,13 @@ def create_users(db, user_factory):
         return user_factory.simple_generate_batch(create=True, size=size)
 
     return _create_users
+
+
+@pytest.fixture
+def complete_address_records(address_factory):
+    records = address_factory.simple_generate_batch(create=True, size=2)
+    location = GeoCoder()
+    for rec in records:
+        location.get_coordinates(address=rec.full_address)
+        rec.set_coordinates(location.lat, location.lon)
+    return records

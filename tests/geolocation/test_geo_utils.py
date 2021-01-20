@@ -4,6 +4,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.geos.point import Point
 
 from geolocation.geo_utils import CoordinatesNotFound, GeoCoder
+from geolocation.models import Address
 
 
 def test_convert_full_address_to_coordinates():
@@ -70,3 +71,14 @@ def test_get_coordinates_from_address_record_full_address(address_factory):
     location = GeoCoder()
     location.get_coordinates(address=new_address.full_address)
     assert all((location.lat == lat, location.lon == lon))
+
+
+@pytest.mark.django_db
+@pytest.mark.now
+def test_convert_addres_records_to_geojson(complete_address_records):
+    geojson = Address.objects.geojson()
+    assert isinstance(geojson, dict)
+    assert len(geojson["features"]) == 2
+    # test chaining query
+    single_geometry = Address.objects.filter(pk=1).geojson()
+    assert len(single_geometry["features"]) == 1
