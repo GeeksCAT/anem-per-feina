@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres:latest
+    image: kartoza/postgis:13.0
     env_file:
       - .env
     ports:
