@@ -1,7 +1,9 @@
 import ujson
 
 from django.core.serializers import serialize
-from django.db import models
+from django.db import models, transaction
+
+from .tasks import add_coordinates_to_address
 
 
 class AddressQuerySet(models.QuerySet):
@@ -21,3 +23,13 @@ class AddressQuerySet(models.QuerySet):
                 ),
             )
         )
+
+    @transaction.atomic
+    def create(self, *args, **kwargs):
+        """Create a new address entry on the the database using a transaction.
+
+        Ensures that background tasks will be called only after the new entry is saved.
+        """
+        new_entry = super().create(*args, **kwargs)
+        transaction.on_commit(lambda: add_coordinates_to_address.apply_async(new_entry.pk))
+        return new_entry

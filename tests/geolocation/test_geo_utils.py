@@ -1,11 +1,10 @@
 import pytest
 
 from django.contrib.gis.geos import Point
-from django.contrib.gis.geos.point import Point
 
-from geolocation.geo_utils import CoordinatesNotFound, GeoCoder, add_coordinates_to_address
+from geolocation.geo_utils import CoordinatesNotFound, GeoCoder
 from geolocation.models import Address
-from geolocation.tasks import _add_coordinates_to_address
+from geolocation.tasks import add_coordinates_to_address
 
 
 def test_convert_full_address_to_coordinates():
@@ -27,8 +26,9 @@ def test_raise_exception_when_fail_get_coordinates_from_address():
 
 
 @pytest.mark.django_db
+@pytest.mark.now
 def test_add_new_address(address_factory):
-    address = address_factory(county="Girona")
+    address = address_factory(county="Girona", city="Girona")
     assert address.county == "Girona"
     assert address.city == "Girona"
 
@@ -81,15 +81,14 @@ def test_convert_address_records_to_geojson(complete_address_records):
     assert len(geojson["features"]) == 2
     # test chaining query
     single_geometry = Address.objects.filter(pk=1).geojson()
-    assert len(single_geometry["features"]) == 1
+    assert isinstance(single_geometry, dict)
 
 
 @pytest.mark.django_db
-@pytest.mark.now
-def test_add_coordinates_to_address_task(address_factory):
+def test_celery_task_add_coordinates_to_address(address_factory):
     # Integration
     address = address_factory()
     assert all((address.lat is None, address.lat is None))
     # get the result object from celery task
-    address = _add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
+    address = add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
     assert all((address.lat is not None, address.lat is not None))
