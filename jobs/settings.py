@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     "django.contrib.sites",
     "django.contrib.flatpages",
     "django_elasticsearch_dsl",
@@ -86,7 +87,7 @@ WSGI_APPLICATION = "jobs.wsgi.application"
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": env("POSTGRES_DB", default="anemperfeina"),
         "USER": env("POSTGRES_USER", default="anemperfeina"),
         "PASSWORD": env("POSTGRES_PASSWORD"),
