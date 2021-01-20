@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.db import models
 from django.utils.translation import gettext as _
+
+User = get_user_model()
 
 
 class Address(geo_models.Model):
@@ -23,7 +26,13 @@ class Address(geo_models.Model):
 
     @property
     def full_address(self) -> str:
+        """Return a valid complete address that can be used to get coordinates points."""
         return f"{self.street} {self.number}, {self.city}, {self.county}, {self.state}, {self.postalcode}, {self.country}"
 
     def __str__(self) -> str:
         return f"{self.street} {self.number}, {self.city}, {self.country}"
+
+    def set_coordinates(self, lat, lon):
+        self.lat = lat
+        self.lon = lon
+        self.save()

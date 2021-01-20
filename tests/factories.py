@@ -7,6 +7,7 @@ from faker import Faker
 from django.views.generic.dates import timezone_today
 
 from accounts.models import User
+from geolocation.models import Address
 from jobsapp.models import Job
 
 faker = Faker("es_ES")
@@ -38,3 +39,11 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     type = "1"
     category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
+
+
+class AddressFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    city = "Girona"
+    country = "Spain"
