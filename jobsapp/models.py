@@ -140,6 +140,15 @@ class Job(models.Model):
         help_text=_("Users will apply on your website."),
         default="",
     )
+    geo_location = models.ForeignKey(
+        "geolocation.Address",
+        verbose_name=_("Location"),
+        help_text=_("Location for this job position."),
+        blank=True,
+        null=True,
+        related_name="jobs",
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         verbose_name = _("Job")
