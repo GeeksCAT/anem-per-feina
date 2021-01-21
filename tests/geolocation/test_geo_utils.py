@@ -26,7 +26,6 @@ def test_raise_exception_when_fail_get_coordinates_from_address():
 
 
 @pytest.mark.django_db
-@pytest.mark.now
 def test_add_new_address(address_factory):
     address = address_factory(county="Girona", city="Girona")
     assert address.county == "Girona"
@@ -40,8 +39,8 @@ def test_set_coordinates_to_address(address_factory):
     new_address_entry = address_factory(
         street=street,
         number=number,
-        city=city,
         county=county,
+        city=city,
         state=state,
         postalcode=postalcode,
         country=country,
@@ -74,14 +73,27 @@ def test_get_coordinates_from_address_record_full_address(address_factory):
     assert all((location.lat == lat, location.lon == lon))
 
 
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
+
+
 @pytest.mark.django_db
+@pytest.mark.now
 def test_convert_address_records_to_geojson(complete_address_records):
-    geojson = Address.objects.geojson()
-    assert isinstance(geojson, dict)
-    assert len(geojson["features"]) == 2
-    # test chaining query
-    single_geometry = Address.objects.filter(pk=1).geojson()
-    assert isinstance(single_geometry, dict)
+
+    with CaptureQueriesContext(connection):
+        geojson = Address.objects.geojson()
+        print(len(connection.queries))
+    #     breakpoint()
+
+    # assert geojson["features"][0]["geometry"] is not None
+    # assert isinstance(geojson, dict)
+    # assert len(geojson["features"]) == 2
+    # # test chaining query
+    # single_geometry = Address.objects.filter(pk=1).geojson()
+    # assert ["city", "country", "company_name", "opening_positions"] == list(
+    #     single_geometry["features"][0]["properties"].keys()
+    # )
 
 
 @pytest.mark.django_db
@@ -92,3 +104,15 @@ def test_celery_task_add_coordinates_to_address(address_factory):
     # get the result object from celery task
     address = add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
     assert all((address.lat is not None, address.lat is not None))
+
+
+# @pytest.mark.django_db
+def print_total_queries(fn, *args, **kwargs):
+    from django.db import connection
+
+    def wrap(cims_list, routes_list, *args, **kwargs):
+        with CaptureQueriesContext(connection):
+            fn(cims_list, routes_list, *args, **kwargs)
+            print(len(connection.queries))
+
+    return wrap

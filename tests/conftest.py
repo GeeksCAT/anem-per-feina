@@ -68,11 +68,17 @@ def create_users(db, user_factory):
     return _create_users
 
 
+import random
+
+
 @pytest.fixture
-def complete_address_records(address_factory):
-    records = address_factory.simple_generate_batch(create=True, size=2)
+def complete_address_records(address_factory, job_factory):
+    address_list = [address_factory(city="Girona"), address_factory(city="Barcelona")]
     location = GeoCoder()
-    for rec in records:
-        location.get_coordinates(address=rec.full_address)
-        rec.set_coordinates(location.lat, location.lon)
-    return records
+    for _ in range(5):
+        address = random.choice(address_list)
+        location.get_coordinates(address=address.full_address)
+        address.set_coordinates(location.lat, location.lon)
+        job_factory(geo_location=address)
+
+    return address_list

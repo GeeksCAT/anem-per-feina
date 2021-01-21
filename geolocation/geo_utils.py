@@ -3,6 +3,9 @@ from geopy.geocoders import Nominatim
 from django.contrib.gis.geos import Point
 
 CoordinatesNotFound = AttributeError
+from functools import lru_cache
+
+from django.contrib.gis.serializers.geojson import Serializer
 
 
 class GeoCoder:
@@ -14,6 +17,7 @@ class GeoCoder:
         self.geolocator: "Nominatim" = Nominatim(user_agent=user_agent, **kwargs)
         self.address: str
 
+    @lru_cache()
     def get_coordinates(self, address, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
@@ -44,3 +48,23 @@ def _add_coordinates_to_address(pk: int):
     location.get_coordinates(address=address.full_address)
     address.set_coordinates(location.lat, location.lon)
     return address
+
+
+class GeoJSONSerializer(Serializer):
+    def end_object(self, obj):
+        for field in self.selected_fields:
+            if field == "pk" or field in self._current.keys():
+                continue
+            # elif field in self._current.keys():
+            #     continue
+            if field == "jobs_info":
+                try:
+                    company_data = obj.jobs.first()
+                    self._current["company_name"] = company_data.company_name
+                    self._current["opening_positions"] = obj.jobs.count()
+                except AttributeError:
+                    continue
+        super().end_object(obj)
+
+
+serializer = GeoJSONSerializer()

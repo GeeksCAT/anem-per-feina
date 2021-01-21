@@ -1,8 +1,10 @@
+# from jobsapp.models import Job
+
 import ujson
 
-from django.core.serializers import serialize
 from django.db import models, transaction
 
+from .geo_utils import serializer
 from .tasks import add_coordinates_to_address
 
 
@@ -12,15 +14,15 @@ class AddressQuerySet(models.QuerySet):
 
         It allows to be pass as an api response to populate a map.
         """
+        queryset = self.prefetch_related("jobs").all()
+
         return ujson.loads(
-            serialize(
-                "geojson",
-                self.all(),
+            serializer.serialize(
+                queryset,
                 geometry_field="geo_point",
-                fields=(
-                    "city",
-                    "country",
-                ),
+                fields=("jobs_info", "city", "country"),
+                use_natural_foreign_keys=True,
+                use_natural_primary_keys=True,
             )
         )
 
