@@ -4,8 +4,9 @@ import ujson
 
 from django.db import models, transaction
 
+from geolocation.tasks import add_coordinates_to_address
+
 from .geo_utils import serializer
-from .tasks import add_coordinates_to_address
 
 
 class AddressQuerySet(models.QuerySet):
@@ -33,5 +34,7 @@ class AddressQuerySet(models.QuerySet):
         Ensures that background tasks will be called only after the new entry is saved.
         """
         new_entry = super().create(*args, **kwargs)
-        transaction.on_commit(lambda: add_coordinates_to_address.apply_async(new_entry.pk))
+        transaction.on_commit(
+            lambda: add_coordinates_to_address.apply_async(kwargs={"pk": new_entry.pk})
+        )
         return new_entry
