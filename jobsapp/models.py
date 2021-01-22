@@ -1,13 +1,14 @@
 # DJANGO Imports
 from inclusive_django_range_fields import InclusiveIntegerRangeField
 
-from django.db import models
+from django.db import models, transaction
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
 # APP Imports
 from accounts.models import User
+from geolocation.models import Address
 from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
@@ -160,3 +161,13 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})
+
+    @classmethod
+    def save_job_with_address(cls, new_job: dict, *args, **kwargs):
+        """Ensures that a new address is created at the same time we add a new Job offer"""
+        geo_location = new_job.pop("geo_location")
+        address = Address.objects.create(**geo_location)
+        job = cls(**new_job)
+        job.geo_location = address
+        job.save(*args, **kwargs)
+        return job
