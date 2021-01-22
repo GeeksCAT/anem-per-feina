@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
+from geolocation.tasks import add_coordinates_to_address
 
 User = get_user_model()
 
@@ -28,6 +29,9 @@ class Address(geo_models.Model):
     geo_point = geo_models.PointField(null=True)
     objects = AddressQuerySet.as_manager()
 
+    def __str__(self) -> str:
+        return f"{self.street} {self.number}, {self.city}, {self.country}"
+
     @property
     def full_address(self) -> str:
         """Return a valid complete address that can be used to get coordinates points."""
@@ -35,11 +39,23 @@ class Address(geo_models.Model):
             "None", ""
         )
 
-    def __str__(self) -> str:
-        return f"{self.street} {self.number}, {self.city}, {self.country}"
-
     def set_coordinates(self, lat, lon):
         self.lat = lat
         self.lon = lon
         self.geo_point = Point(lat, lon)
         self.save()
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        """Save a new address record to the database..
+
+        At the end of the transaction, we run a background task to add coordinates information the address record.
+        """
+        if self._state.adding:
+            super().save(*args, **kwargs)
+            transaction.on_commit(
+                lambda: add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
+            )
+            return self
+
+        super().save(*args, **kwargs)

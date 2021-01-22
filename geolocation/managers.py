@@ -27,14 +27,13 @@ class AddressQuerySet(models.QuerySet):
             )
         )
 
-    @transaction.atomic
-    def create(self, *args, **kwargs):
-        """Create a new address entry on the the database using a transaction.
+    # def create(self, *args, **kwargs):
+    #     """Create a new address entry on the the database using a transaction.
 
-        Ensures that background tasks will be called only after the new entry is saved.
-        """
-        new_entry = super().create(*args, **kwargs)
-        transaction.on_commit(
-            lambda: add_coordinates_to_address.apply_async(kwargs={"pk": new_entry.pk})
-        )
-        return new_entry
+    #     Ensures that background tasks will be called only after the new entry is saved.
+    #     """
+    #     new_entry = super().create(*args, **kwargs)
+    #     transaction.on_commit(
+    #         lambda: add_coordinates_to_address.apply_async(kwargs={"pk": new_entry.pk})
+    #     )
+    #     return new_entry
