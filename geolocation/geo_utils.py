@@ -59,8 +59,9 @@ class GeoJSONSerializer(Serializer):
             #     continue
             if field == "jobs_info":
                 try:
-                    company_data = obj.jobs.first()
-                    self._current["company_name"] = company_data.company_name
+                    # select only the first job entry to company information
+                    job_info = obj.jobs.all()[0]
+                    self._current["company_name"] = job_info.company_name
                     self._current["opening_positions"] = obj.jobs.count()
                 except AttributeError:
                     continue

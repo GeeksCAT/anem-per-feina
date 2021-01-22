@@ -83,17 +83,16 @@ def test_convert_address_records_to_geojson(complete_address_records):
 
     with CaptureQueriesContext(connection):
         geojson = Address.objects.geojson()
-        print(len(connection.queries))
-    #     breakpoint()
+        assert len(connection.queries) == 2
 
-    # assert geojson["features"][0]["geometry"] is not None
-    # assert isinstance(geojson, dict)
-    # assert len(geojson["features"]) == 2
-    # # test chaining query
-    # single_geometry = Address.objects.filter(pk=1).geojson()
-    # assert ["city", "country", "company_name", "opening_positions"] == list(
-    #     single_geometry["features"][0]["properties"].keys()
-    # )
+    assert geojson["features"][0]["geometry"] is not None
+    assert isinstance(geojson, dict)
+    assert len(geojson["features"]) == 2
+    # test chaining query
+    single_geometry = Address.objects.filter(pk=1).geojson()
+    assert ["city", "country", "company_name", "opening_positions"] == list(
+        single_geometry["features"][0]["properties"].keys()
+    )
 
 
 @pytest.mark.django_db
