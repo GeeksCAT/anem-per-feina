@@ -11,8 +11,8 @@ function createPopup(data) {
   // TODO: And url to see company offers in detail
   return `
   <div><b>${data.company_name}</b><br>
-  Open Positions: ${data.opening_positions} </span><br>
-  Location: ${data.city}<br>
+  Open positions: ${data.opening_positions} </span><br>
+  Location: ${data.city}, ${data.country}<br>
   <a href="#">See offers</a>
   </div>
   `;
@@ -57,7 +57,6 @@ var map = L.map("mapid", {
   center: [42.0, 1.3],
   zoom: 8,
   maxZoom: 16,
-  minZoom: 8,
   layers: jobsClusterLayer, //default selected layers
 });
 

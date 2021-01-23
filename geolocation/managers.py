@@ -17,23 +17,31 @@ class AddressQuerySet(models.QuerySet):
         """
         queryset = self.prefetch_related("jobs").all()
 
-        return ujson.loads(
-            serializer.serialize(
-                queryset,
-                geometry_field="geo_point",
-                fields=("jobs_info", "city", "country"),
-                use_natural_foreign_keys=True,
-                use_natural_primary_keys=True,
+        jobs_list = []
+        for pt in queryset:
+            job_info = pt.jobs.all()[0]
+            jobs_list.append(
+                {
+                    "type": "Feature",
+                    "geometry": {"type": "Point", "coordinates": [pt.lon, pt.lat]},
+                    "properties": {
+                        "company_name": job_info.company_name,
+                        "opening_positions": pt.jobs.count(),
+                        "city": pt.city,
+                        "country": pt.country,
+                    },
+                }
             )
-        )
 
-    # def create(self, *args, **kwargs):
-    #     """Create a new address entry on the the database using a transaction.
+        return {"type": "FeatureCollection", "features": jobs_list}
 
-    #     Ensures that background tasks will be called only after the new entry is saved.
-    #     """
-    #     new_entry = super().create(*args, **kwargs)
-    #     transaction.on_commit(
-    #         lambda: add_coordinates_to_address.apply_async(kwargs={"pk": new_entry.pk})
-    #     )
-    #     return new_entry
+        # return ujson.loads(
+        #     serializer.serialize(
+        #         queryset,
+        #         geometry_field="geo_point",
+        #         # srid=3857,
+        #         fields=("jobs_info", "city", "country"),
+        #         use_natural_foreign_keys=True,
+        #         use_natural_primary_keys=True,
+        #     )
+        # )
