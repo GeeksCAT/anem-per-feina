@@ -24,6 +24,14 @@ class UserFactory(factory.django.DjangoModelFactory):  # type: ignore
     email = factory.Faker("email", locale="es_ES")
 
 
+class AddressFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    city = factory.Faker("city", locale="es_ES")
+    country = "Spain"
+
+
 class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     class Meta:
         model = Job
@@ -39,11 +47,4 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     type = "1"
     category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
-
-
-class AddressFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Address
-
-    city = factory.Faker("city", locale="es_ES")
-    country = "Spain"
+    # geo_location = factory.SubFactory("tests.factories.AddressFactory")

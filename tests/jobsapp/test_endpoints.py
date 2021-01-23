@@ -36,7 +36,7 @@ def test_create_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP POST method.
 
     Ensures that only registered user can create jobs."""
-    response = api_client_authenticate().post(reverse("jobs-list"), data=create_job_as_dict)
+    response = api_client_authenticate().post(reverse("jobs-list"), data=create_job_as_dict, format="json")
     assert response.status_code == 201
 
 

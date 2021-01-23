@@ -63,7 +63,9 @@ class GeoJSONSerializer(Serializer):
                     job_info = obj.jobs.all()[0]
                     self._current["company_name"] = job_info.company_name
                     self._current["opening_positions"] = obj.jobs.count()
-                except AttributeError:
+                # FIXME: Remove IndexError. It happens when there is a address without
+                # job. It should not happen, as we are forcing create address and job at the same time inside a transaction
+                except (IndexError, AttributeError):
                     continue
         super().end_object(obj)
 
