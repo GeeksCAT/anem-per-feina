@@ -24,6 +24,7 @@ schema_view = get_schema_view(
 lang_patterns = i18n_patterns(
     path("", include("jobsapp.urls")),
     path("", include("accounts.urls")),
+    path("", include("geolocation.urls")),
 )
 
 urlpatterns = lang_patterns + [

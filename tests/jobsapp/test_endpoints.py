@@ -2,8 +2,6 @@
 import pytest
 from rest_framework.reverse import reverse
 
-JOBS_ENDPOINT = "/api/jobs"
-USERS_ENDPOINT = "/api/users"
 from jobs.settings import REST_FRAMEWORK
 
 
@@ -36,7 +34,11 @@ def test_create_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP POST method.
 
     Ensures that only registered user can create jobs."""
-    response = api_client_authenticate().post(reverse("jobs-list"), data=create_job_as_dict, format="json")
+    create_job_as_dict.pop("user")
+    create_job_as_dict["geo_location"] = {"city": "Girona", "country": "Catalunya"}
+    response = api_client_authenticate().post(
+        reverse("jobs-list"), data=create_job_as_dict, format="json"
+    )
     assert response.status_code == 201
 
 
