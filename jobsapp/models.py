@@ -89,7 +89,10 @@ class Job(models.Model):
         verbose_name=_("Description"), help_text=_("Long job description.")
     )
     location = models.CharField(
-        max_length=150, verbose_name=_("Location"), help_text=_("Location for this job position.")
+        max_length=150,
+        verbose_name=_("Location"),
+        default="",
+        help_text=_("Location for this job position."),
     )
     type = models.CharField(
         choices=JOB_TYPES, max_length=10, verbose_name=_("Type"), help_text=_("Job type.")
