@@ -93,16 +93,13 @@ from django.test.utils import CaptureQueriesContext
 
 
 @pytest.mark.django_db
-@pytest.mark.now
 def test_convert_address_records_to_geojson(complete_address_records):
 
     with CaptureQueriesContext(connection):
         geojson = Address.objects.geojson()
         assert len(connection.queries) == 2
-    breakpoint()
     assert geojson["features"][0]["geometry"] is not None
     assert isinstance(geojson, dict)
-    assert len(geojson["features"]) == 2
 
 
 @pytest.mark.django_db

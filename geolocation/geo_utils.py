@@ -27,8 +27,8 @@ class GeoCoder:
 
         # build address with as much information as possible using OSM address structure
         # address = f"{street}, {city}, {county}, {state}, {postalcode}, {country}".strip()
-        location = self.geolocator.geocode(address, **kwargs)
         try:
+            location = self.geolocator.geocode(address, **kwargs)
             self.lat = location.latitude
             self.lon = location.longitude
             self.geo_point = Point(location.latitude, location.longitude)
@@ -45,7 +45,11 @@ def _add_coordinates_to_address(pk: int):
 
     address = Address.objects.get(pk=pk)
     location = GeoCoder()
-    location.get_coordinates(address=address.full_address)
+    try:
+        location.get_coordinates(address=address.full_address)
+    except CoordinatesNotFound:
+        # If it fails to get the coordinates, we try again but using only the city and country and postlcode.
+        location.get_coordinates(address=f"{address.city}, {address.country},{address.postalcode} ")
     address.set_coordinates(location.lat, location.lon)
     return address
 

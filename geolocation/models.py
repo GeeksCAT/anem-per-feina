@@ -34,7 +34,10 @@ class Address(geo_models.Model):
 
     @property
     def full_address(self) -> str:
-        """Return a valid complete address that can be used to get coordinates points."""
+        """Return a valid address that can be used to get coordinates points.
+
+        We keep the empty places which may help on the coordinates lookup.
+        """
         return f"{self.street} {self.number}, {self.city}, {self.county}, {self.state}, {self.postalcode}, {self.country}".replace(
             "None", ""
         )
@@ -47,12 +50,10 @@ class Address(geo_models.Model):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
-        """Save a new address record to the database..
-
-        At the end of the transaction, we run a background task to add coordinates information the address record.
-        """
+        """Save a new address record to the database."""
         if self._state.adding:
             super().save(*args, **kwargs)
+            # We run a background task to add coordinates information the address record.
             transaction.on_commit(
                 lambda: add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
             )

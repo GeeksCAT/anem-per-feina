@@ -19,19 +19,26 @@ class AddressQuerySet(models.QuerySet):
 
         jobs_list = []
         for pt in queryset:
-            job_info = pt.jobs.all()[0]
-            jobs_list.append(
-                {
-                    "type": "Feature",
-                    "geometry": {"type": "Point", "coordinates": [pt.lon, pt.lat]},
-                    "properties": {
-                        "company_name": job_info.company_name,
-                        "opening_positions": pt.jobs.count(),
-                        "city": pt.city,
-                        "country": pt.country,
-                    },
-                }
-            )
+            try:
+                # Address without jobs will raise an IndexError. This could be remove at some point as we should enforce all jobs to have some address with
+                # coordinates
+                job_info = pt.jobs.all()[0]
+            except IndexError:
+                # Add to logging if some address don't have a job
+                continue
+            else:
+                jobs_list.append(
+                    {
+                        "type": "Feature",
+                        "geometry": {"type": "Point", "coordinates": [pt.lon, pt.lat]},
+                        "properties": {
+                            "company_name": job_info.company_name,
+                            "opening_positions": pt.jobs.count(),
+                            "city": pt.city,
+                            "country": pt.country,
+                        },
+                    }
+                )
 
         return {"type": "FeatureCollection", "features": jobs_list}
 
