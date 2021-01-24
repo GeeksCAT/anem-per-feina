@@ -14,8 +14,7 @@ class GeoCoder:
         self.coordinates: list
         self.lat: float
         self.geo_point: Point
-        self.geolocator: "Nominatim" = Nominatim(user_agent=user_agent, **kwargs)
-        self.address: str
+        self.geolocator = Nominatim(user_agent=user_agent, **kwargs)
 
     @lru_cache()
     def get_coordinates(self, address, **kwargs) -> None:
@@ -24,9 +23,6 @@ class GeoCoder:
 
         Search API fields: https://nominatim.org/release-docs/develop/api/Search/
         """
-
-        # build address with as much information as possible using OSM address structure
-        # address = f"{street}, {city}, {county}, {state}, {postalcode}, {country}".strip()
         try:
             location = self.geolocator.geocode(address, **kwargs)
             self.lat = location.latitude
@@ -48,8 +44,10 @@ def _add_coordinates_to_address(pk: int):
     try:
         location.get_coordinates(address=address.full_address)
     except CoordinatesNotFound:
-        # If it fails to get the coordinates, we try again but using only the city and country and postlcode.
-        location.get_coordinates(address=f"{address.city}, {address.country},{address.postalcode} ")
+        # If it fails to get the coordinates, we try again but using only the city and country and postalcode.
+        location.get_coordinates(
+            address=f"{address.city}, {address.country}, {address.postalcode} "
+        )
     address.set_coordinates(location.lat, location.lon)
     return address
 
@@ -68,7 +66,7 @@ class GeoJSONSerializer(Serializer):
                     self._current["company_name"] = job_info.company_name
                     self._current["opening_positions"] = obj.jobs.count()
                 # FIXME: Remove IndexError. It happens when there is a address without
-                # job. It should not happen, as we are forcing create address and job at the same time inside a transaction
+                # a job. It shouldn't happen, as we are adding the address and job at the same time inside a transaction
                 except (IndexError, AttributeError):
                     continue
         super().end_object(obj)

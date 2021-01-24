@@ -164,13 +164,3 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})
-
-    @classmethod
-    def save_job_with_address(cls, new_job: dict, *args, **kwargs):
-        """Ensures that a new address is created at the same time we add a new Job offer"""
-        geo_location = new_job.pop("geo_location")
-        address = Address.objects.create(**geo_location)
-        job = cls(**new_job)
-        job.geo_location = address
-        job.save(*args, **kwargs)
-        return job

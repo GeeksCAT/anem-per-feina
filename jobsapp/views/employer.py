@@ -3,6 +3,7 @@ from datetime import timedelta
 from constance import config
 
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -77,13 +78,14 @@ class JobCreateView(CreateView):
         form.instance.user = self.request.user
         address = context["AddressForm"]
         if address.is_valid():
-            job_address = address.save()
-            job = form.save()
+            with transaction.atomic():
+                job_address = address.save()
+                job = form.save()
 
-            job.geo_location = job_address
-            job.save()
+                job.geo_location = job_address
+                job.save()
 
-        return super(JobCreateView, self).form_valid(form)
+        return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
         self.object = None

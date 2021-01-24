@@ -3,23 +3,13 @@ import datetime
 import pytest
 
 from django.contrib.gis.geos import Point
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
 
 from geolocation.geo_utils import CoordinatesNotFound, GeoCoder
 from geolocation.models import Address, Map
 from geolocation.tasks import add_coordinates_to_address
 from jobsapp.models import Job
-
-
-@pytest.mark.django_db
-def print_total_queries(fn, *args, **kwargs):
-    from django.db import connection
-
-    def wrap(cims_list, routes_list, *args, **kwargs):
-        with CaptureQueriesContext(connection):
-            fn(cims_list, routes_list, *args, **kwargs)
-            print(len(connection.queries))
-
-    return wrap
 
 
 def test_convert_full_address_to_coordinates():
@@ -88,13 +78,8 @@ def test_get_coordinates_from_address_record_full_address(address_factory):
     assert all((location.lat == lat, location.lon == lon))
 
 
-from django.db import connection, transaction
-from django.test.utils import CaptureQueriesContext
-
-
 @pytest.mark.django_db
 def test_convert_address_records_to_geojson(complete_address_records):
-
     with CaptureQueriesContext(connection):
         geojson = Map.objects.geojson()
         assert len(connection.queries) == 2
@@ -110,29 +95,3 @@ def test_celery_task_add_coordinates_to_address(address_factory):
     # get the result object from celery task
     address = add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
     assert all((address.lat is not None, address.lat is not None))
-
-
-@pytest.mark.django_db(transaction=True)
-def test_create_new_job(user_factory):
-    user = user_factory()
-    test_data = {
-        "user_id": user.id,
-        "title": "Title 1",
-        "description": "Description 1",
-        "location": "Ronda Florinda Sala 31 Apt. 78 Cuenca, 79838",
-        "type": "1",
-        "category": "web-design",
-        "company_name": "Villegas-Campoy",
-        "company_description": "Natus illo officiis facere deleniti illo. Facilis repellat optio commodi.Nostrum maxime hic aspernatur distinctio quod dolorem. Quibusdam impedit dolor doloremque perferendis tempora ducimus ut.",
-        "website": "https://www.lujan.es/",
-        "last_date": datetime.datetime.now() + datetime.timedelta(days=30),
-        "filled": False,
-        "salary": None,
-        "remote": "2",
-        "apply_url": "",
-        "geo_location": {"city": "Girona"},
-    }
-    job = Job.save_job_with_address(test_data)
-    address = Address.objects.first()
-    assert address.jobs.first().pk == job.pk
-    assert address.lat is not None

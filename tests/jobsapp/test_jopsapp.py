@@ -11,12 +11,12 @@ class TestExample:
         assert user.first_name == "Geeks"
 
 
-@pytest.mark.skip
+# Missing staticfiles manifest entry for '...'
+@pytest.mark.xfail(raises=ValueError)
 @pytest.mark.django_db
 def test_form_view(client, user_factory):
     from django.shortcuts import reverse
 
-    breakpoint()
     user = user_factory()
     client.force_login(user=user)
-    req = client.get(reverse("jobs:employer-jobs-create"))
+    client.get(reverse("jobs:employer-jobs-create"))

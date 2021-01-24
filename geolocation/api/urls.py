@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import JobsGIS
+from .views import JobsMap
 
 urlpatterns = [
-    path("map", JobsGIS.as_view(), name="jobs-map"),
+    path("map", JobsMap.as_view(), name="jobs-map"),
 ]

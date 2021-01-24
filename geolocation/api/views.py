@@ -8,12 +8,11 @@ from rest_framework.response import Response
 from ..models import Map
 
 
-class JobsGIS(ListAPIView):
+class JobsMap(ListAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
         return Map.objects.geojson()
 
     def get(self, request: request, *args: Any, **kwargs: Any) -> Response:
-        # super().get(request, *args, **kwargs)
         return Response(self.get_queryset(), status=status.HTTP_200_OK)
