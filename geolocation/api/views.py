@@ -5,14 +5,14 @@ from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from ..models import Address
+from ..models import Map
 
 
 class JobsGIS(ListAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        return Address.objects.geojson()
+        return Map.objects.geojson()
 
     def get(self, request: request, *args: Any, **kwargs: Any) -> Response:
         # super().get(request, *args, **kwargs)

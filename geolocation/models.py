@@ -60,3 +60,8 @@ class Address(geo_models.Model):
             return self
 
         super().save(*args, **kwargs)
+
+
+class Map(Address):
+    class Meta:
+        proxy = True

@@ -5,7 +5,7 @@ import pytest
 from django.contrib.gis.geos import Point
 
 from geolocation.geo_utils import CoordinatesNotFound, GeoCoder
-from geolocation.models import Address
+from geolocation.models import Address, Map
 from geolocation.tasks import add_coordinates_to_address
 from jobsapp.models import Job
 
@@ -96,7 +96,7 @@ from django.test.utils import CaptureQueriesContext
 def test_convert_address_records_to_geojson(complete_address_records):
 
     with CaptureQueriesContext(connection):
-        geojson = Address.objects.geojson()
+        geojson = Map.objects.geojson()
         assert len(connection.queries) == 2
     assert geojson["features"][0]["geometry"] is not None
     assert isinstance(geojson, dict)
