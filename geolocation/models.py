@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
 from django.db import transaction
+from django.db.models import fields
 from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
@@ -30,7 +31,13 @@ class Address(geo_models.Model):
     objects = AddressQuerySet.as_manager()
 
     def __str__(self) -> str:
-        return f"{self.street} {self.number}, {self.city}, {self.country}"
+        return ", ".join(
+            [
+                field
+                for field in (self.street, self.number, self.city, self.county, self.country)
+                if field is not None
+            ]
+        )
 
     @property
     def full_address(self) -> str:
