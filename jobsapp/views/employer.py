@@ -46,6 +46,9 @@ class JobUpdateView(UpdateView):
         return job
 
 
+from geolocation.forms import CreateAddressForm
+
+
 class JobCreateView(CreateView):
     template_name = "jobsapp/create.html"
     form_class = CreateJobForm
@@ -58,8 +61,28 @@ class JobCreateView(CreateView):
             return reverse_lazy("accounts:login")
         return super().dispatch(self.request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["AddressForm"] = CreateAddressForm(self.request.POST)
+            print(data["AddressForm"])
+        else:
+            data["AddressForm"] = CreateAddressForm()
+            # breakpoint()
+        return data
+
     def form_valid(self, form):
+        context = self.get_context_data()
+        # save job
         form.instance.user = self.request.user
+        address = context["AddressForm"]
+        if address.is_valid():
+            job_address = address.save()
+            job = form.save()
+
+            job.geo_location = job_address
+            job.save()
+
         return super(JobCreateView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
