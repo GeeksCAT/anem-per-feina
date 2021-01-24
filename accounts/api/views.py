@@ -2,7 +2,7 @@ from rest_framework import decorators, permissions, response, status
 from rest_framework.request import Request
 
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext as _
+from django.utils.translation import _gettext as _
 
 from .serializers import UserCreateSerializer
 

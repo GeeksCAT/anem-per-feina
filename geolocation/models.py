@@ -3,7 +3,7 @@ from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
 from django.db import transaction
 from django.db.models import fields
-from django.utils.translation import gettext as _
+from django.utils.translation import _gettext as _
 
 from geolocation.managers import AddressQuerySet
 from geolocation.tasks import add_coordinates_to_address

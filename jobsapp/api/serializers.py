@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from django.utils.translation import gettext as _
+from django.utils.translation import _gettext as _
 
 from accounts.api.serializers import UserSerializer
 from geolocation.api.serializers import AddressSerializer
