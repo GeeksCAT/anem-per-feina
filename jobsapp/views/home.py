@@ -8,7 +8,7 @@ from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.utils.translation import _gettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import FormView
 

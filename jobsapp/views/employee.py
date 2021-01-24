@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.translation import _gettext as _
+from django.utils.translation import ugettext as _
 from django.views.generic import UpdateView
 
 from accounts.forms import EmployeeProfileUpdateForm

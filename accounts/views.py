@@ -1,7 +1,7 @@
 from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.utils.translation import _gettext as _
+from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, FormView, RedirectView
 
 from accounts.forms import EmployerRegistrationForm, UserLoginForm

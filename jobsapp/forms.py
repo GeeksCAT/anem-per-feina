@@ -1,6 +1,6 @@
 from django import forms
 from django.core import validators
-from django.utils.translation import _gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from jobsapp.models import Job
 
