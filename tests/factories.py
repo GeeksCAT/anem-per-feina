@@ -38,7 +38,6 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
 
     user = factory.SubFactory("tests.factories.UserFactory")
     title = factory.Sequence(lambda n: f"Title {n}")
-    location = factory.Faker("address", locale="es_ES")
     company_name = factory.Faker("company", locale="es_ES")
     company_description = factory.Faker("text", locale="es_ES")
     description = factory.Sequence(lambda n: f"Description {n}")
@@ -47,4 +46,3 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     type = "1"
     category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
-    # geo_location = factory.SubFactory("tests.factories.AddressFactory")

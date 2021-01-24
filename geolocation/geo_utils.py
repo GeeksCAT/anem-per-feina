@@ -30,6 +30,8 @@ class GeoCoder:
             self.geo_point = Point(location.latitude, location.longitude)
         except CoordinatesNotFound:
             raise CoordinatesNotFound(f"Was not possible find coordinates for address:{address}")
+        else:
+            return self
 
 
 def _add_coordinates_to_address(pk: int):
