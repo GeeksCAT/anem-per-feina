@@ -381,4 +381,4 @@ BLEACH_DEFAULT_WIDGET = "tinymce.widgets.TinyMCE"
 
 
 # Geographic settings
-SRID = env("SRID", default="EPSG:4326")
+SRID = env("SRID", default=4326)
