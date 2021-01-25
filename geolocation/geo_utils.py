@@ -67,11 +67,12 @@ class GeoJSONSerializer(Serializer):
                     job_info = obj.jobs.all()[0]
                     self._current["company_name"] = job_info.company_name
                     self._current["opening_positions"] = obj.jobs.count()
-                # FIXME: Remove IndexError. It happens when there is a address without
-                # a job. It shouldn't happen, as we are adding the address and job at the same time inside a transaction
+
                 except (IndexError, AttributeError):
+                    # FIXME: IndexError. It happens when there is a address without
+                    # a job. It shouldn't happen, as we are adding the address and job at the same time inside a transaction
                     continue
         super().end_object(obj)
 
 
-serializer = GeoJSONSerializer()
+geojson_serializer = GeoJSONSerializer()

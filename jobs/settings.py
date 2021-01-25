@@ -378,3 +378,7 @@ BLEACH_STRIP_COMMENTS = True
 
 # Default widget
 BLEACH_DEFAULT_WIDGET = "tinymce.widgets.TinyMCE"
+
+
+# Geographic settings
+SRID = env("SRID", default="EPSG:4326")

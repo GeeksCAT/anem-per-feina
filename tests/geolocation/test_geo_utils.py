@@ -79,6 +79,7 @@ def test_get_coordinates_from_address_record_full_address(address_factory):
 
 
 @pytest.mark.django_db
+@pytest.mark.now
 def test_convert_address_records_to_geojson(complete_address_records):
     with CaptureQueriesContext(connection):
         geojson = Map.objects.geojson()

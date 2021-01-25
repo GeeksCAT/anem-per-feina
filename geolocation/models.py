@@ -7,8 +7,10 @@ from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
 from geolocation.tasks import add_coordinates_to_address
+from jobs.settings import SRID
 
 User = get_user_model()
+from django.conf import settings
 
 
 class Address(geo_models.Model):
@@ -27,7 +29,7 @@ class Address(geo_models.Model):
     )
     lat = geo_models.FloatField(verbose_name=_("Latitude"), null=True)
     lon = geo_models.FloatField(verbose_name=_("Longitude"), null=True)
-    geo_point = geo_models.PointField(null=True)
+    geo_point = geo_models.PointField(null=True, srid=settings.SRID)
     objects = AddressQuerySet.as_manager()
 
     def __str__(self) -> str:
