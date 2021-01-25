@@ -12,6 +12,8 @@ from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.dates import timezone_today
 
+from geolocation.forms import CreateAddressForm
+from geolocation.models import Address
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
@@ -42,12 +44,31 @@ class JobUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(self.request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["AddressForm"] = CreateAddressForm(self.request.POST)
+        else:
+            job = self.get_object()
+            data["AddressForm"] = CreateAddressForm(
+                instance=Address.objects.get(pk=job.geo_location.pk)
+            )
+        return data
+
     def get_object(self, queryset=None):
         job = get_object_or_404(Job, user=self.request.user, pk=self.kwargs["pk"])
         return job
 
-
-from geolocation.forms import CreateAddressForm
+    def form_valid(self, form):
+        context = self.get_context_data()
+        form.instance.user = self.request.user
+        address = context["AddressForm"]
+        if address.is_valid():
+            with transaction.atomic():
+                job_address = address.save()
+                form.instance.geo_location = job_address
+                form.save()
+        return super().form_valid(form)
 
 
 class JobCreateView(CreateView):
@@ -68,7 +89,6 @@ class JobCreateView(CreateView):
             data["AddressForm"] = CreateAddressForm(self.request.POST)
         else:
             data["AddressForm"] = CreateAddressForm()
-            # breakpoint()
         return data
 
     def form_valid(self, form):
