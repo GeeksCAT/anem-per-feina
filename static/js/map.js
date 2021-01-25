@@ -72,6 +72,12 @@ map.addLayer(jobsClusterLayer);
 //  add control layers
 L.control.layers({}, overlayMaps).addTo(map);
 
+// add user location plugin
+let opts = {"flyTo": true};
+L.control.locate(opts).addTo(map);
+
+// Populate map with jobs offers
+
 async function getJobsData() {
   let url = `http://${window.location.host}/api/map`;
   await fetch(url, {
