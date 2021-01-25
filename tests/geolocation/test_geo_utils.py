@@ -39,11 +39,10 @@ def test_add_new_address(address_factory):
 
 @pytest.mark.django_db
 def test_set_coordinates_to_address(address_factory):
-    address = "Plaça del Vi, 27, Girona, Girona, Catalonia, 17001, Spain"
-    street, number, city, county, state, postalcode, country = address.split(",")
+    address = "Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain"
+    street, city, county, state, postalcode, country = address.split(",")
     new_address_entry = address_factory(
         street=street,
-        number=number,
         county=county,
         city=city,
         state=state,

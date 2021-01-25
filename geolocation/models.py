@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
@@ -7,17 +8,12 @@ from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
 from geolocation.tasks import add_coordinates_to_address
-from jobs.settings import SRID
 
 User = get_user_model()
-from django.conf import settings
 
 
 class Address(geo_models.Model):
     street = geo_models.CharField(verbose_name=_("Street"), max_length=128, null=True, blank=True)
-    number = geo_models.CharField(
-        verbose_name=_("Door Number"), max_length=16, null=True, blank=True
-    )
     city = geo_models.CharField(verbose_name=_("City"), max_length=128, db_index=True)
     # comarca
     county = geo_models.CharField(verbose_name=_("County"), max_length=128, null=True, blank=True)
@@ -36,7 +32,7 @@ class Address(geo_models.Model):
         return ", ".join(
             [
                 field
-                for field in (self.street, self.number, self.city, self.county, self.country)
+                for field in (self.street, self.city, self.county, self.country)
                 if field is not None
             ]
         )
@@ -47,7 +43,7 @@ class Address(geo_models.Model):
 
         We keep the empty places which may help on the coordinates lookup.
         """
-        return f"{self.street} {self.number}, {self.city}, {self.county}, {self.state}, {self.postalcode}, {self.country}".replace(
+        return f"{self.street}, {self.city}, {self.county}, {self.state}, {self.postalcode}, {self.country}".replace(
             "None", ""
         )
 
