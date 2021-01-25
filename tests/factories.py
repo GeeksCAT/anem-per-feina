@@ -46,3 +46,4 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     type = "1"
     category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
+    apply_url = "https://www.host.local"

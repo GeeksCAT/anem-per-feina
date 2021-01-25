@@ -63,6 +63,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "jobs.urls"
 
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

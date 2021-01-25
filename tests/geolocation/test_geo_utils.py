@@ -53,7 +53,6 @@ def test_raise_exception_when_fail_get_coordinates_from_address(address_factory)
 
 
 @pytest.mark.django_db
-@pytest.mark.now
 def test_get_coordinates_when_fail_get_coordinates_from_original_address(address_factory):
     address = address_factory(street="Carrer Mignit", city="Girona", county="Girona")
     location = _add_coordinates_to_address(pk=address.pk)

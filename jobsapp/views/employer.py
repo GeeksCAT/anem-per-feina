@@ -50,9 +50,8 @@ class JobUpdateView(UpdateView):
             data["AddressForm"] = CreateAddressForm(self.request.POST)
         else:
             job = self.get_object()
-            data["AddressForm"] = CreateAddressForm(
-                instance=Address.objects.get(pk=job.geo_location.pk)
-            )
+            data["AddressForm"] = CreateAddressForm(instance=job.geo_location)
+
         return data
 
     def get_object(self, queryset=None):

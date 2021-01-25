@@ -1,3 +1,5 @@
+import random
+
 import factory
 import pytest
 from pytest_factoryboy import register
@@ -22,6 +24,7 @@ def pytest_configure():
     """
     settings.CELERY_TASK_ALWAYS_EAGER = True
     settings.EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    settings.STATICFILES_STORAGE = ""
 
 
 @pytest.fixture
@@ -66,9 +69,6 @@ def create_users(db, user_factory):
         return user_factory.simple_generate_batch(create=True, size=size)
 
     return _create_users
-
-
-import random
 
 
 @pytest.fixture

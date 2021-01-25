@@ -1,22 +1,24 @@
 import pytest
 
-from tests.factories import UserFactory
+from geolocation.models import Address
+from jobsapp.forms import CreateJobForm
+from jobsapp.models import Job
 
 
-# Create your tests here.
+def job_as_dict(item):
+    item = vars(item)
+    item.pop("_state")
+    return {k: str(v) for k, v in item.items() if v is not None}
+
+
 @pytest.mark.django_db
-class TestExample:
-    def test__example__ok(self) -> None:
-        user = UserFactory(first_name="Geeks", last_name=".CAT")
-        assert user.first_name == "Geeks"
-
-
-# Missing staticfiles manifest entry for '...'
-@pytest.mark.xfail(raises=ValueError)
-@pytest.mark.django_db
-def test_form_view(client, user_factory):
-    from django.shortcuts import reverse
-
+def test_create_job_form(user_factory, address_factory, job_factory):
     user = user_factory()
-    client.force_login(user=user)
-    client.get(reverse("jobs:employer-jobs-create"))
+    address = address_factory()
+
+    job_dict = job_as_dict(job_factory(user=user))
+    job_dict["policies"] = True
+    form = CreateJobForm(data=job_dict)
+    form.instance.geo_location = address
+
+    assert form.is_valid()
