@@ -35,10 +35,7 @@ class GeoCoder:
 
 
 def _add_coordinates_to_address(pk: int):
-    """Helper function do generate coordinates to an new address entry.
-
-    TODO Use it as a celery task
-    """
+    """Helper function do generate coordinates from a new address entry."""
     from geolocation.models import Address
 
     address = Address.objects.get(pk=pk)
@@ -46,10 +43,14 @@ def _add_coordinates_to_address(pk: int):
     try:
         location.get_coordinates(address=address.full_address)
     except CoordinatesNotFound:
-        # If it fails to get the coordinates, we try again but using only the city and country and postalcode.
+        # If it fails to get the coordinates from the original address, we try again but using only the
+        # city and country and postalcode. We lose precision, but still can get some geographic
+        # information about the job offer.
         location.get_coordinates(
             address=f"{address.city}, {address.country}, {address.postalcode} "
         )
+    # TODO: Create a validator to avoid two differrent companies with the same coordinates
+    # otherwise only one will be show on map.
     address.set_coordinates(location.lat, location.lon)
     return address
 
@@ -59,11 +60,9 @@ class GeoJSONSerializer(Serializer):
         for field in self.selected_fields:
             if field == "pk" or field in self._current.keys():
                 continue
-            # elif field in self._current.keys():
-            #     continue
             if field == "jobs_info":
                 try:
-                    # select only the first job entry to company information
+                    # select only the first job entry to get company information
                     job_info = obj.jobs.all()[0]
                     self._current["company_name"] = job_info.company_name
                     self._current["opening_positions"] = obj.jobs.count()

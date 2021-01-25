@@ -66,7 +66,6 @@ class JobCreateView(CreateView):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
             data["AddressForm"] = CreateAddressForm(self.request.POST)
-            print(data["AddressForm"])
         else:
             data["AddressForm"] = CreateAddressForm()
             # breakpoint()
@@ -80,11 +79,8 @@ class JobCreateView(CreateView):
         if address.is_valid():
             with transaction.atomic():
                 job_address = address.save()
-                job = form.save()
-
-                job.geo_location = job_address
-                job.save()
-
+                form.instance.geo_location = job_address
+                form.save()
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
