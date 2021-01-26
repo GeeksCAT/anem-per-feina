@@ -28,6 +28,9 @@ class Address(geo_models.Model):
     geo_point = geo_models.PointField(null=True, srid=settings.SRID)
     objects = AddressQuerySet.as_manager()
 
+    class Meta:
+        unique_together = ("lat", "lon")
+
     def __str__(self) -> str:
         return ", ".join(
             [

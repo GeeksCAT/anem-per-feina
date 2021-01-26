@@ -1,6 +1,7 @@
 from celery import shared_task
 
 from django.conf import settings
+from django.db import IntegrityError
 
 from geolocation.geo_utils import _add_coordinates_to_address
 

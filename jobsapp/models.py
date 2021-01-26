@@ -162,5 +162,8 @@ class Job(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def delete(self, using, keep_parents: bool):
+        return super().delete(using=using, keep_parents=keep_parents)
+
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})

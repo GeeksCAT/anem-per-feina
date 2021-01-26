@@ -61,6 +61,19 @@ def test_get_coordinates_when_fail_get_coordinates_from_original_address(address
 
 
 @pytest.mark.django_db
+@pytest.mark.now
+def test_coordinates_off_set(address_factory):
+    """Test that coordinates are offset when we add two records with the same address."""
+    addr1 = address_factory(city="Girona", country="Spain")
+    addr2 = address_factory(city="Girona", country="Spain")
+    loc1 = _add_coordinates_to_address(pk=addr1.pk)
+    loc2 = _add_coordinates_to_address(pk=addr2.pk)
+
+    assert loc1.lat != loc2.lat
+    assert loc1.lon != loc2.lon
+
+
+@pytest.mark.django_db
 def test_convert_address_records_to_geojson(complete_address_records):
     with CaptureQueriesContext(connection):
         geojson = Map.objects.geojson()

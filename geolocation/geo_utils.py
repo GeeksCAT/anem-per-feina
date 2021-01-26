@@ -1,11 +1,13 @@
+import random
+from functools import lru_cache
+
 from geopy.geocoders import Nominatim
 
 from django.contrib.gis.geos import Point
+from django.contrib.gis.serializers.geojson import Serializer
+from django.db import IntegrityError
 
 CoordinatesNotFound = AttributeError
-from functools import lru_cache
-
-from django.contrib.gis.serializers.geojson import Serializer
 
 
 class GeoCoder:
@@ -33,25 +35,39 @@ class GeoCoder:
         else:
             return self
 
+    @classmethod
+    def coordinates_offset(cls, lat, lon):
+        """Add a small value to the current latitude and longitude.
+
+        Used when there is already an address with the same coordinates on the database.
+        """
+        lat += random.uniform(0.0001, 0.001)
+        lon += random.uniform(0.0001, 0.001)
+        return lat, lon
+
 
 def _add_coordinates_to_address(pk: int):
     """Helper function do generate coordinates from a new address entry."""
     from geolocation.models import Address
 
-    address = Address.objects.get(pk=pk)
     location = GeoCoder()
+
+    address = Address.objects.get(pk=pk)
     try:
         location.get_coordinates(address=address.full_address)
     except CoordinatesNotFound:
-        # If it fails to get the coordinates from the original address, we try again but using only the
-        # city and country and postalcode. We lose precision, but still can get some geographic
-        # information about the job offer.
-        location.get_coordinates(
-            address=f"{address.city}, {address.country}, {address.postalcode} "
-        )
-    # TODO: Create a validator to avoid two differrent companies with the same coordinates
-    # otherwise only one will be show on map.
-    address.set_coordinates(location.lat, location.lon)
+        # If it fails to get the coordinates from the original address, we try again but only
+        # using the city and country.
+        # We lose precision, but still possible get some geographic information about the job offer.
+        location.get_coordinates(address=f"{address.city}, {address.country}")
+    lat = location.lat
+    lon = location.lon
+    while True:
+        try:
+            address.set_coordinates(lat, lon)
+            break
+        except IntegrityError:
+            lat, lon = GeoCoder.coordinates_offset(lat, lon)
     return address
 
 
