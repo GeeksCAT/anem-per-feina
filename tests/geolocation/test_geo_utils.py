@@ -6,9 +6,9 @@ from django.contrib.gis.geos import Point
 from django.db import connection
 from django.test.utils import CaptureQueriesContext
 
-from geolocation.geo_utils import CoordinatesNotFound, GeoCoder, _add_coordinates_to_address
+from geolocation.geo_utils import CoordinatesNotFound, GeoCoder, add_coordinates_to_address
 from geolocation.models import Address, Map
-from geolocation.tasks import add_coordinates_to_address
+from geolocation.tasks import _add_coordinates_to_address
 from jobsapp.models import Job
 
 
@@ -25,7 +25,7 @@ def test_convert_full_address_to_coordinates():
 
 
 @pytest.mark.django_db
-def test_set_coordinates_to_address_record(address_factory):
+def test__set_coordinates_to_address_record(address_factory):
     address = "Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain"
     street, city, county, state, postalcode, country = address.split(",")
     new_address_entry = address_factory(
@@ -40,7 +40,7 @@ def test_set_coordinates_to_address_record(address_factory):
     assert all((new_address_entry.lat is None, new_address_entry.lat is None))
     lat = 41.9828528
     lon = 2.8244397
-    new_address_entry.set_coordinates(lat, lon)
+    new_address_entry._set_coordinates(lat, lon)
     assert all((new_address_entry.lat == lat, new_address_entry.lon == lon))
 
 
@@ -55,7 +55,7 @@ def test_raise_exception_when_fail_get_coordinates_from_address(address_factory)
 @pytest.mark.django_db
 def test_get_coordinates_when_fail_get_coordinates_from_original_address(address_factory):
     address = address_factory(street="Carrer Mignit", city="Girona", county="Girona")
-    location = _add_coordinates_to_address(pk=address.pk)
+    location = add_coordinates_to_address(pk=address.pk)
     assert all([hasattr(location, "lat"), hasattr(location, "lon")])
     assert all([isinstance(location.lat, float), isinstance(location.lon, float)])
 
@@ -65,8 +65,8 @@ def test_coordinates_off_set(address_factory):
     """Test that coordinates are offset when we add two records with the same address."""
     addr1 = address_factory(city="Girona", country="Spain")
     addr2 = address_factory(city="Girona", country="Spain")
-    loc1 = _add_coordinates_to_address(pk=addr1.pk)
-    loc2 = _add_coordinates_to_address(pk=addr2.pk)
+    loc1 = add_coordinates_to_address(pk=addr1.pk)
+    loc2 = add_coordinates_to_address(pk=addr2.pk)
 
     assert loc1.lat != loc2.lat
     assert loc1.lon != loc2.lon
@@ -108,5 +108,5 @@ def test_celery_task_add_coordinates_to_address(address_factory):
     address = address_factory()
     assert all((address.lat is None, address.lat is None))
     # get the result object from celery task
-    address = add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
+    address = _add_coordinates_to_address.apply_async(kwargs={"pk": address.pk}).result
     assert all((address.lat is not None, address.lat is not None))

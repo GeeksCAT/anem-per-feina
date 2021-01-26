@@ -12,6 +12,11 @@ CoordinatesNotFound = AttributeError
 
 class GeoCoder:
     def __init__(self, user_agent="nem per feina", **kwargs) -> None:
+        """
+        user_agent: should be our app name
+        **kwargs: Any valid key word argument to be passed to Nominatim.
+        https://geopy.readthedocs.io/en/stable/#geopy.geocoders.Nominatim
+        """
         self.lon: float
         self.coordinates: list
         self.lat: float
@@ -22,6 +27,9 @@ class GeoCoder:
     def get_coordinates(self, address, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
+
+        **kwargs: Any Nominatim.geocode valid keyword argument.
+        https://geopy.readthedocs.io/en/stable/#geopy.geocoders.Nominatim.geocode
 
         Search API fields: https://nominatim.org/release-docs/develop/api/Search/
         """
@@ -46,7 +54,7 @@ class GeoCoder:
         return lat, lon
 
 
-def _add_coordinates_to_address(pk: int):
+def add_coordinates_to_address(pk: int):
     """Helper function do generate coordinates from a new address entry."""
     from geolocation.models import Address
 
@@ -64,7 +72,7 @@ def _add_coordinates_to_address(pk: int):
     lon = location.lon
     while True:
         try:
-            address.set_coordinates(lat, lon)
+            address._set_coordinates(lat, lon)
             break
         except IntegrityError:
             lat, lon = GeoCoder.coordinates_offset(lat, lon)
@@ -84,9 +92,8 @@ class GeoJSONSerializer(Serializer):
                     self._current["opening_positions"] = obj.jobs.count()
 
                 except (IndexError, AttributeError):
-                    print("errors")
-                    # FIXME: IndexError. It happens when there is a address without
-                    # a job. It shouldn't happen, as we are adding the address and job at the same time inside a transaction
+                    # FIXME: IndexError: Is raised when there is an address without a job.
+                    # TODO: Delete address if there isn't any job realted with it.
                     continue
         super().end_object(obj)
 

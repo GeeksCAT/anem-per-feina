@@ -50,7 +50,7 @@ var jobsGeoJSON = L.geoJSON([], {
 
 // Base map
 var overlayMaps = {
-  Jobs: jobsClusterLayer,
+  Jobs: jobsClusterLayer
 };
 
 var map = L.map("mapid", {
@@ -60,7 +60,7 @@ var map = L.map("mapid", {
   layers: jobsClusterLayer, //default selected layers
 });
 
-//  Terrain layer
+//  Add tiles layer to map
 L.tileLayer(OSMTiles, {
   attribution: attribution,
 }).addTo(map);
@@ -69,16 +69,15 @@ L.tileLayer(OSMTiles, {
 jobsClusterLayer.addLayer(jobsGeoJSON);
 map.addLayer(jobsClusterLayer);
 
-//  add control layers
+//  Add control layers
 L.control.layers({}, overlayMaps).addTo(map);
 
-// add user location plugin
+// Add user location plugin
 let opts = {"flyTo": true};
 L.control.locate(opts).addTo(map);
 
 // Populate map with jobs offers
-
-async function getJobsData() {
+async function fetchJobsData() {
   let url = `http://${window.location.host}/api/map`;
   await fetch(url, {
     method: "GET",
@@ -101,5 +100,5 @@ async function getJobsData() {
 }
 
 window.onload = (event) => {
-  getJobsData();
+  fetchJobsData();
 };

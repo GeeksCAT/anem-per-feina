@@ -7,6 +7,8 @@ from django.db.models import Prefetch
 
 from .geo_utils import geojson_serializer
 
+POPUP_FIELDS = ("jobs_info", "city", "country")
+
 
 class AddressQuerySet(models.QuerySet):
     def geojson(self) -> dict:
@@ -16,6 +18,7 @@ class AddressQuerySet(models.QuerySet):
         """
         from jobsapp.models import Job
 
+        # Only the unfilled jobs will be displayed on map.
         unfilled_jobs = Prefetch("jobs", queryset=Job.objects.unfilled())
         queryset = self.prefetch_related(unfilled_jobs).all()
 
@@ -24,8 +27,6 @@ class AddressQuerySet(models.QuerySet):
                 queryset,
                 geometry_field="geo_point",
                 srid=settings.SRID,
-                fields=("jobs_info", "city", "country"),
-                use_natural_foreign_keys=True,
-                use_natural_primary_keys=True,
+                fields=POPUP_FIELDS,
             )
         )

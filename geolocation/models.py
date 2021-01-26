@@ -3,11 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
 from django.db import transaction
-from django.db.models import fields
 from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
-from geolocation.tasks import add_coordinates_to_address
+from geolocation.tasks import _add_coordinates_to_address
 
 User = get_user_model()
 
@@ -50,7 +49,11 @@ class Address(geo_models.Model):
             "None", ""
         )
 
-    def set_coordinates(self, lat, lon):
+    def _set_coordinates(self, lat, lon):
+        """Add coordinates to database record.
+
+        It will raise an IntegrityError if there is already an address with the same coordinates.
+        """
         self.lat = lat
         self.lon = lon
         self.geo_point = Point(lon, lat)
@@ -61,9 +64,9 @@ class Address(geo_models.Model):
         """Save a new address record to the database."""
         if self._state.adding:
             super().save(*args, **kwargs)
-            # We run a background task to add coordinates information the address record.
+            # We run a background task to add coordinates information to the address record.
             transaction.on_commit(
-                lambda: add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
+                lambda: _add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
             )
             return self
 
