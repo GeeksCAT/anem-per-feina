@@ -61,7 +61,6 @@ def test_get_coordinates_when_fail_get_coordinates_from_original_address(address
 
 
 @pytest.mark.django_db
-@pytest.mark.now
 def test_coordinates_off_set(address_factory):
     """Test that coordinates are offset when we add two records with the same address."""
     addr1 = address_factory(city="Girona", country="Spain")
@@ -80,6 +79,27 @@ def test_convert_address_records_to_geojson(complete_address_records):
         assert len(connection.queries) == 2
     assert geojson["features"][0]["geometry"] is not None
     assert isinstance(geojson, dict)
+
+
+@pytest.mark.django_db
+@pytest.mark.now
+def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
+    with CaptureQueriesContext(connection):
+        Map.objects.geojson()
+        assert len(connection.queries) == 2
+
+    # Current there is 4 jobs availables
+    assert Job.objects.count() == 4
+    # Turn one job as filled
+    filled_job = Job.objects.first()
+    filled_job.filled = True
+    filled_job.save()
+    # Now should be only 3 opening positions on the geojson response
+    geojson = Map.objects.geojson()
+    total_opening_positions = sum(
+        [job["properties"]["opening_positions"] for job in geojson["features"]]
+    )
+    assert total_opening_positions == 3
 
 
 @pytest.mark.django_db

@@ -6,6 +6,7 @@ from pytest_factoryboy import register
 from rest_framework.test import APIClient
 
 from django.conf import settings
+from django.contrib.gis.geos import Point
 
 from geolocation.geo_utils import GeoCoder
 from tests.factories import AddressFactory, JobFactory, UserFactory
@@ -73,12 +74,16 @@ def create_users(db, user_factory):
 
 @pytest.fixture
 def complete_address_records(address_factory, job_factory):
-    address_list = [address_factory(city="Girona"), address_factory(city="Barcelona")]
-    location = GeoCoder()
-    for _ in range(5):
-        address = random.choice(address_list)
-        location.get_coordinates(address=address.full_address)
-        address.set_coordinates(location.lat, location.lon)
-        job_factory(geo_location=address)
+    address_list = [
+        address_factory(
+            city="Girona", lat=41.9828528, lon=2.8244397, geo_point=Point(2.8244397, 41.9828528)
+        ),
+        address_factory(
+            city="Barcelona", lat=40.9828528, lon=2.8244397, geo_point=Point(2.8244397, 40.9828528)
+        ),
+    ]
+    for _ in range(2):
+        job_factory(geo_location=address_list[0])
+        job_factory(geo_location=address_list[1])
 
     return address_list

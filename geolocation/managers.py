@@ -1,7 +1,9 @@
 import ujson
 
+from django.apps import apps
 from django.conf import settings
 from django.db import models
+from django.db.models import Prefetch
 
 from .geo_utils import geojson_serializer
 
@@ -12,7 +14,10 @@ class AddressQuerySet(models.QuerySet):
 
         It can be pass as an api response to populate the jobs map.
         """
-        queryset = self.prefetch_related("jobs").all()
+        from jobsapp.models import Job
+
+        unfilled_jobs = Prefetch("jobs", queryset=Job.objects.unfilled())
+        queryset = self.prefetch_related(unfilled_jobs).all()
 
         return ujson.loads(
             geojson_serializer.serialize(

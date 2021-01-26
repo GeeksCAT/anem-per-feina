@@ -84,6 +84,7 @@ class GeoJSONSerializer(Serializer):
                     self._current["opening_positions"] = obj.jobs.count()
 
                 except (IndexError, AttributeError):
+                    print("errors")
                     # FIXME: IndexError. It happens when there is a address without
                     # a job. It shouldn't happen, as we are adding the address and job at the same time inside a transaction
                     continue

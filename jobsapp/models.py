@@ -163,6 +163,7 @@ class Job(models.Model):
         return self.title
 
     def delete(self, using, keep_parents: bool):
+        # TODO: Delete address as well if there is any other job offer related
         return super().delete(using=using, keep_parents=keep_parents)
 
     def get_absolute_url(self):
