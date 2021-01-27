@@ -2,9 +2,11 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
-from django.db import transaction
+from django.db import models, transaction
+from django.db.models.fields import reverse_related
 from django.utils.translation import gettext as _
 
+from geolocation.geo_utils import add_coordinates_to_address
 from geolocation.managers import AddressQuerySet
 from geolocation.tasks import _add_coordinates_to_address
 
@@ -12,6 +14,15 @@ User = get_user_model()
 
 
 class Address(geo_models.Model):
+    user = geo_models.ForeignKey(
+        User,
+        on_delete=geo_models.CASCADE,
+        verbose_name=_("User"),
+        help_text=_("User address."),
+        related_name="addresses",
+        blank=True,
+        null=True,
+    )
     street = geo_models.CharField(verbose_name=_("Street"), max_length=128, null=True, blank=True)
     city = geo_models.CharField(verbose_name=_("City"), max_length=128, db_index=True)
     # comarca
@@ -66,11 +77,13 @@ class Address(geo_models.Model):
             super().save(*args, **kwargs)
             # We run a background task to add coordinates information to the address record.
             transaction.on_commit(
-                lambda: _add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
+                # lambda: _add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
+                lambda: add_coordinates_to_address(self.pk)
             )
             return self
 
         super().save(*args, **kwargs)
+        return self
 
 
 class Map(Address):
