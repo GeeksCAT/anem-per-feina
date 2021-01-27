@@ -3,12 +3,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
 from django.db import models, transaction
-from django.db.models.fields import reverse_related
 from django.utils.translation import gettext as _
 
-from geolocation.geo_utils import add_coordinates_to_address
 from geolocation.managers import AddressQuerySet
-from geolocation.tasks import _add_coordinates_to_address
 
 User = get_user_model()
 
@@ -39,7 +36,7 @@ class Address(geo_models.Model):
     objects = AddressQuerySet.as_manager()
 
     class Meta:
-        unique_together = ("lat", "lon")
+        unique_together = ("lat", "lon", "user")
 
     def __str__(self) -> str:
         return ", ".join(
@@ -60,7 +57,7 @@ class Address(geo_models.Model):
             "None", ""
         )
 
-    def _set_coordinates(self, lat, lon):
+    def set_coordinates(self, lat, lon) -> None:
         """Add coordinates to database record.
 
         It will raise an IntegrityError if there is already an address with the same coordinates.
@@ -70,20 +67,19 @@ class Address(geo_models.Model):
         self.geo_point = Point(lon, lat)
         self.save()
 
-    @transaction.atomic
-    def save(self, *args, **kwargs):
-        """Save a new address record to the database."""
-        if self._state.adding:
-            super().save(*args, **kwargs)
-            # We run a background task to add coordinates information to the address record.
-            transaction.on_commit(
-                # lambda: _add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
-                lambda: add_coordinates_to_address(self.pk)
-            )
-            return self
-
-        super().save(*args, **kwargs)
+    def add_job(self, job_instance):
+        self.jobs.add(job_instance)
         return self
+
+    def has_coordinates(self) -> bool:
+        """Helper method to check if address is valid by ensuring if it has or not coordinates."""
+        return all(
+            [
+                isinstance(self.lat, float),
+                isinstance(self.lon, float),
+                isinstance(self.geo_point, Point),
+            ]
+        )
 
 
 class Map(Address):

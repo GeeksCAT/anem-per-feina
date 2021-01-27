@@ -4,8 +4,7 @@ from functools import lru_cache
 from geopy.geocoders import Nominatim
 
 from django.contrib.gis.geos import Point
-from django.contrib.gis.serializers.geojson import Serializer
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 
 CoordinatesNotFound = AttributeError
 
@@ -43,59 +42,70 @@ class GeoCoder:
         else:
             return self
 
-    @classmethod
-    def coordinates_offset(cls, lat, lon):
-        """Add a small value to the current latitude and longitude.
 
-        Used when there is already an address with the same coordinates on the database.
-        """
-        lat += random.uniform(0.0001, 0.001)
-        lon += random.uniform(0.0001, 0.001)
-        return lat, lon
-
-
-def add_coordinates_to_address(pk: int):
-    """Helper function do generate coordinates from a new address entry."""
+def add_address_to_job(address_id, job_id):
+    """Helper function do add address to a new job entry."""
     from geolocation.models import Address
+    from jobsapp.models import Job
 
     location = GeoCoder()
 
-    address = Address.objects.get(pk=pk)
+    address = Address.objects.get(pk=address_id)
+
+    job = Job.objects.get(pk=job_id)
     try:
         location.get_coordinates(address=address.full_address)
     except CoordinatesNotFound:
-        # If it fails to get the coordinates from the original address, we try again but only
-        # using the city and country.
-        # We lose precision, but still possible get some geographic information about the job offer.
+        # If it fails to get the coordinates from the original address, we try again but
+        # only using the city and country values.
+        # We lose precision, but is still possible get some geographic information about the job offer.
         location.get_coordinates(address=f"{address.city}, {address.country}")
+
     lat = location.lat
     lon = location.lon
-    while True:
-        try:
-            address._set_coordinates(lat, lon)
-            break
-        except IntegrityError:
-            lat, lon = GeoCoder.coordinates_offset(lat, lon)
+
+    try:
+        with transaction.atomic():
+            address.set_coordinates(lat, lon)
+
+    # Will be raised if user with same coordinates already exist on the database
+    except IntegrityError:
+        # Get record with same coordinates from database
+        db_address = Address.objects.get(lat=lat, lon=lon, user=address.user)
+
+        # They can be the same in case of a job form update
+        if db_address == address:
+            return address
+
+        # Otherwise we simply add the new job offer to the address from database
+        with transaction.atomic():
+            db_address.add_job(job)
+            # remove the 'new address' because it's already on the database
+            address.delete()
+        return db_address
+
+    else:
+        with transaction.atomic():
+            job.set_address(address)
     return address
 
 
-class GeoJSONSerializer(Serializer):
-    def end_object(self, obj):
-        for field in self.selected_fields:
-            if field == "pk" or field in self._current.keys():
-                continue
-            if field == "jobs_info":
-                try:
-                    # select only the first job entry to get company information
-                    job_info = obj.jobs.all()[0]
-                    self._current["company_name"] = job_info.company_name
-                    self._current["opening_positions"] = obj.jobs.count()
+def check_coordinates() -> object:
+    # keep track of the previous analyzed coordinates
+    coords_list = []
 
-                except (IndexError, AttributeError):
-                    # FIXME: IndexError: Is raised when there is an address without a job.
-                    # TODO: Delete address if there isn't any job realted with it.
-                    continue
-        super().end_object(obj)
+    def offset_if_needed(lon: float, lat: float) -> tuple:
+        """Offset duplicated coordinates.
 
+        This allows display on map jobs from more than one company if they have the same coordinates
+        without one overlap the other.
+        """
+        nonlocal coords_list
+        if (lon, lat) in coords_list:
+            # we offset to avoid overlay of points on map
+            lon += random.uniform(0.0001, 0.001)
+            lat += random.uniform(0.0001, 0.001)
+        coords_list.append((lon, lat))
+        return lon, lat
 
-geojson_serializer = GeoJSONSerializer()
+    return offset_if_needed

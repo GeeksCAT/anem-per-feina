@@ -144,7 +144,7 @@ class Job(models.Model):
         help_text=_("Users will apply on your website."),
         default="",
     )
-    geo_location = models.ForeignKey(
+    address = models.ForeignKey(
         "geolocation.Address",
         verbose_name=_("Location"),
         help_text=_("Location for this job position."),
@@ -161,6 +161,14 @@ class Job(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def set_address(self, address: Address):
+        if address.has_coordinates():
+            self.address = address
+            self.save()
+            return self
+        else:
+            raise AttributeError("Address instance doesn't contain valid coordinates.")
 
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})

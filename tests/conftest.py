@@ -83,7 +83,7 @@ def complete_address_records(address_factory, job_factory):
         ),
     ]
     for _ in range(2):
-        job_factory(geo_location=address_list[0])
-        job_factory(geo_location=address_list[1])
+        job_factory(address=address_list[0])
+        job_factory(address=address_list[1])
 
     return address_list

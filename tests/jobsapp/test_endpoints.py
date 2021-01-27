@@ -34,11 +34,7 @@ def test_create_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP POST method.
 
     Ensures that only registered user can create jobs."""
-    create_job_as_dict.pop("user")
-    create_job_as_dict["geo_location"] = {"city": "Girona", "country": "Catalunya"}
-    response = api_client_authenticate().post(
-        reverse("jobs-list"), data=create_job_as_dict, format="json"
-    )
+    response = api_client_authenticate().post(reverse("jobs-list"), data=create_job_as_dict)
     assert response.status_code == 201
 
 

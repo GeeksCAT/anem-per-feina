@@ -19,6 +19,12 @@ def test_create_job_form(user_factory, address_factory, job_factory):
     job_dict = job_as_dict(job_factory(user=user))
     job_dict["policies"] = True
     form = CreateJobForm(data=job_dict)
-    form.instance.geo_location = address
-
+    form.instance.address = address
+    form.instance.user = user
     assert form.is_valid()
+    assert form.save()
+
+
+@pytest.mark.django_db
+def test_job_form_post():
+    pass

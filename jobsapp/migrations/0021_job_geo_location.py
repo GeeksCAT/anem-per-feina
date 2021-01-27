@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='job',
-            name='geo_location',
+            name='address',
             field=models.ForeignKey(blank=True, help_text='Location for this job position.', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='jobs', to='geolocation.Address', verbose_name='Location'),
         ),
     ]

@@ -13,7 +13,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.dates import timezone_today
 
 from geolocation.forms import CreateAddressForm
-from geolocation.models import Address
+from geolocation.tasks import _add_address_to_job
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
@@ -50,7 +50,7 @@ class JobUpdateView(UpdateView):
             data["AddressForm"] = CreateAddressForm(self.request.POST)
         else:
             job = self.get_object()
-            data["AddressForm"] = CreateAddressForm(instance=job.geo_location)
+            data["AddressForm"] = CreateAddressForm(instance=job.address)
 
         return data
 
@@ -62,11 +62,15 @@ class JobUpdateView(UpdateView):
         context = self.get_context_data()
         form.instance.user = self.request.user
         address = context["AddressForm"]
+        address.instance.user = self.request.user
         if address.is_valid():
             with transaction.atomic():
                 job_address = address.save()
-                form.instance.geo_location = job_address
-                form.save()
+                self.object = form.save()
+                self.object.save()
+                transaction.on_commit(
+                    lambda: _add_address_to_job.apply_async(args=(job_address.pk, self.object.pk))
+                )
         return super().form_valid(form)
 
 
@@ -92,14 +96,16 @@ class JobCreateView(CreateView):
 
     def form_valid(self, form):
         context = self.get_context_data()
-        # save job
         form.instance.user = self.request.user
         address = context["AddressForm"]
+        address.instance.user = self.request.user
         if address.is_valid():
             with transaction.atomic():
                 job_address = address.save()
-                form.instance.geo_location = job_address
-                form.save()
+                self.object = form.save()
+                transaction.on_commit(
+                    lambda: _add_address_to_job.apply_async(args=(job_address.pk, self.object.pk))
+                )
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
