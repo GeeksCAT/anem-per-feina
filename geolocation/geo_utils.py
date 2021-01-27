@@ -44,7 +44,7 @@ class GeoCoder:
 
 
 def add_address_to_job(address_id, job_id):
-    """Helper function do add address to a new job entry."""
+    """Helper function do add address to a new job entry. from a new address entry."""
     from geolocation.models import Address
     from jobsapp.models import Job
 

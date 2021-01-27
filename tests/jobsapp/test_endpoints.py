@@ -30,6 +30,7 @@ def test_list_all_users(api_client, create_users):
 
 
 @pytest.mark.django_db
+@pytest.mark.now
 def test_create_job(api_client_authenticate, create_job_as_dict):
     """Test HTTP POST method.
 

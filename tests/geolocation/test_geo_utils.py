@@ -114,6 +114,19 @@ def test_add_address_instance_to_job(address_factory, job_factory, user_factory)
 
 
 @pytest.mark.django_db
+@pytest.mark.now
+def test_add_address_instance_to_job(address_factory, job_factory, user_factory):
+    user = user_factory()
+    address = address_factory(user=user)
+    address.set_coordinates(41.00, -9.1234)
+    job = job_factory(user=user)
+    assert job.address is None
+    job.set_address(address)
+    assert job.address.lat == 41.00
+    assert job.address.lon == -9.1234
+
+
+@pytest.mark.django_db
 def test_convert_address_records_to_geojson(complete_address_records):
     with CaptureQueriesContext(connection):
         geojson = Map.objects.geojson()
