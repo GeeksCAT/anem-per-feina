@@ -150,7 +150,6 @@ def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
     job.save()
     # Now should be only 3 opening positions on the geojson response
     geojson = Map.objects.geojson()
-    breakpoint()
     total_opening_positions = sum(
         [job["properties"]["opening_positions"] for job in geojson["features"]]
     )
