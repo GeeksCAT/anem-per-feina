@@ -1,7 +1,7 @@
 from django.db import models
-from django.db.models import Count, Prefetch
+from django.db.models import Count, Prefetch, Q
 
-from geolocation.geo_utils import check_coordinates
+from geolocation.geo_utils import check_duplicated_coordinates
 
 
 class AddressQuerySet(models.QuerySet):
@@ -9,39 +9,36 @@ class AddressQuerySet(models.QuerySet):
         """Convert query to a valid geojson format.
 
         It can be pass as an api response to populate the jobs map.
-
-        TODO: Add cache to geojson response
         """
         from jobsapp.models import Job
 
-        run_check = check_coordinates()
+        # Check for duplicated coordinates
+        run_check = check_duplicated_coordinates()
 
-        # Only the unfilled jobs will be displayed on map.
-        unfilled_jobs = Prefetch("jobs", queryset=Job.objects.unfilled())
-        jobs_offers = self.prefetch_related(unfilled_jobs).all()
+        # Only companies with job offers and unfilled jobs will be present on geojson.
+        jobs_offers = (
+            self.prefetch_related("jobs")
+            .annotate(opening_positions=Count("jobs", filter=(Q(jobs__filled=False))))
+            .filter(opening_positions__gte=1)
+        )
         jobs_list = []
         for offer in jobs_offers:
-            try:
-                # Address without jobs will raise an IndexError.
-                job_info = offer.jobs.all()[0]
-            except IndexError:
-                # So we skip companies without jobs offers.
-                continue
-            else:
-                jobs_list.append(
-                    {
-                        "type": "Feature",
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [*run_check(offer.lon, offer.lat)],
-                        },
-                        "properties": {
-                            "company_name": job_info.company_name,
-                            "opening_positions": offer.jobs.count(),
-                            "city": offer.city,
-                            "country": offer.country,
-                        },
-                    }
-                )
+            # allows get company information
+            company_info = offer.jobs.all()[0]
+            jobs_list.append(
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [*run_check(offer.lon, offer.lat)],
+                    },
+                    "properties": {
+                        "company_name": company_info.company_name,
+                        "opening_positions": offer.opening_positions,
+                        "city": offer.city,
+                        "country": offer.country,
+                    },
+                }
+            )
 
         return {"type": "FeatureCollection", "features": jobs_list}

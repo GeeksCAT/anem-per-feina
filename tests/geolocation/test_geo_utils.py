@@ -10,7 +10,7 @@ from geolocation.geo_utils import (
     CoordinatesNotFound,
     GeoCoder,
     add_address_to_job,
-    check_coordinates,
+    check_duplicated_coordinates,
 )
 from geolocation.models import Address, Map
 from jobsapp.models import Job
@@ -158,7 +158,7 @@ def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
 
 def test_offset_coordinates():
     """Test that if there is duplicated coordinates, we offset them"""
-    run_check = check_coordinates()
+    run_check = check_duplicated_coordinates()
     original_coordinates = [(41.9793006, 2.8199439), (41.979, 2.2343), (41.9793006, 2.8199439)]
     final_coordinates = [run_check(*coord) for coord in original_coordinates]
     assert original_coordinates != final_coordinates
