@@ -60,10 +60,11 @@ def add_address_to_job(address_id, job_id):
         # only using the city and country values.
         # We lose precision, but is still possible get some geographic information about the job offer.
         location.get_coordinates(address=f"{address.city}, {address.country}")
-
+    # FIXME: It can fail if there is coordinates
     lat = location.lat
     lon = location.lon
 
+    # set coordinates to the address
     try:
         with transaction.atomic():
             address.set_coordinates(lat, lon)

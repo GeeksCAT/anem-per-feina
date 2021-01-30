@@ -25,22 +25,22 @@ function onEachFeature(feature, layer) {
 }
 
 // Map utils
-var markerStyle = {
-  icon: "info",
+let markerStyle = {
+  icon: "fas fa-code",
   iconColor: "white",
   prefix: "fa",
-  markerColor: "green",
+  markerColor: "blue",
 };
-var jobMarker = L.AwesomeMarkers.icon(markerStyle);
+let jobMarker = L.AwesomeMarkers.icon(markerStyle);
 
-var clusterOptions = {
+let clusterOptions = {
   disableClusteringAtZoom: 10,
   zoomToBoundsOnClick: true,
   spiderLegPolylineOptions: { weight: 1.5, color: "#000", opacity: 0.5 },
 };
 
 // Data Layers
-var jobsClusterLayer = L.markerClusterGroup(clusterOptions);
+let jobsClusterLayer = L.markerClusterGroup(clusterOptions);
 var jobsGeoJSON = L.geoJSON([], {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, { icon: jobMarker });

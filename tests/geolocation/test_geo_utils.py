@@ -37,8 +37,13 @@ def test_raise_exception_when_fail_get_coordinates_from_address(address_factory)
 
 
 @pytest.mark.django_db(transaction=True)
-# @pytest.mark.now  # TODO: Change function test name
-def test_job_with_same_location_from_same_user_get(address_factory, user_factory, job_factory):
+def test_job_with_same_location_from_same_user_are_merge(
+    address_factory, user_factory, job_factory
+):
+    """
+    Ensures that if the same company post two jobs to the same location,
+    we just end up with one address on the database but containing two jobs positions.
+    """
     user = user_factory()
     address = address_factory(user=user, city="Girona", country="Spain")
     address2 = address_factory(user=user, city="Girona", country="Spain")
@@ -114,7 +119,6 @@ def test_add_address_instance_to_job(address_factory, job_factory, user_factory)
 
 
 @pytest.mark.django_db
-@pytest.mark.now
 def test_add_address_instance_to_job(address_factory, job_factory, user_factory):
     user = user_factory()
     address = address_factory(user=user)
@@ -141,17 +145,20 @@ def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
     # Current there is 4 jobs availables
     assert Job.objects.count() == 4
     # Turn one job as filled
-    Job.objects.filter(pk=1).update(filled=True)
+    job = Job.objects.first()
+    job.filled = True
+    job.save()
     # Now should be only 3 opening positions on the geojson response
     geojson = Map.objects.geojson()
+    breakpoint()
     total_opening_positions = sum(
         [job["properties"]["opening_positions"] for job in geojson["features"]]
     )
     assert total_opening_positions == 3
 
 
-@pytest.mark.now
 def test_offset_coordinates():
+    """Test that if there is duplicated coordinates, we offset them"""
     run_check = check_coordinates()
     original_coordinates = [(41.9793006, 2.8199439), (41.979, 2.2343), (41.9793006, 2.8199439)]
     final_coordinates = [run_check(*coord) for coord in original_coordinates]
