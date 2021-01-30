@@ -8,7 +8,7 @@
 
 /*global L*/
 
-(function (window, document, undefined) {
+(function (window, document) {
     "use strict";
     /*
      * Leaflet.AwesomeMarkers assumes that you have already included the Leaflet library.

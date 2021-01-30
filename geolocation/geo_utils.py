@@ -1,5 +1,6 @@
 import random
 from functools import lru_cache
+from typing import Callable
 
 from geopy.geocoders import Nominatim
 
@@ -91,7 +92,7 @@ def add_address_to_job(address_id, job_id):
     return address
 
 
-def check_duplicated_coordinates() -> object:
+def check_duplicated_coordinates() -> Callable:
     # keep track of the previous analyzed coordinates
     coords_list = []
 

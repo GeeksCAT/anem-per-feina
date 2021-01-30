@@ -3,7 +3,7 @@ import datetime
 import pytest
 
 from django.contrib.gis.geos import Point
-from django.db import connection, transaction
+from django.db import connection
 from django.test.utils import CaptureQueriesContext
 
 from geolocation.geo_utils import (
