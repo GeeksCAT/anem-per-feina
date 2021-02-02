@@ -46,12 +46,12 @@ def test_job_with_same_location_from_same_user_are_merge(
     """
     user = user_factory()
     address = address_factory(user=user, city="Girona", country="Spain")
-    address2 = address_factory(user=user, city="Girona", country="Spain")
 
     job = job_factory(user=user)
     job2 = job_factory(user=user)
 
     address_job_1 = add_address_to_job(address_id=address.pk, job_id=job.pk)
+    address2 = address_factory(user=user, city="Girona", country="Spain")
     address_job_2 = add_address_to_job(address_id=address2.pk, job_id=job2.pk)
 
     assert Address.objects.count() == 1
@@ -119,19 +119,11 @@ def test_add_address_instance_to_job(address_factory, job_factory, user_factory)
 
 
 @pytest.mark.django_db
-def test_add_address_instance_to_job(address_factory, job_factory, user_factory):
-    user = user_factory()
-    address = address_factory(user=user)
-    address.set_coordinates(41.00, -9.1234)
-    job = job_factory(user=user)
-    assert job.address is None
-    job.set_address(address)
-    assert job.address.lat == 41.00
-    assert job.address.lon == -9.1234
-
-
-@pytest.mark.django_db
 def test_convert_address_records_to_geojson(complete_address_records):
+    """Test geojson data conversion.
+    Also ensures that using preftech_related we can get all data needed from database with
+    only two queires.
+    """
     with CaptureQueriesContext(connection):
         geojson = Map.objects.geojson()
         assert len(connection.queries) == 2
@@ -140,7 +132,6 @@ def test_convert_address_records_to_geojson(complete_address_records):
 
 
 @pytest.mark.django_db(transaction=True)
-@pytest.mark.now
 def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
     # Current there is 4 jobs availables
     assert Job.objects.count() == 4

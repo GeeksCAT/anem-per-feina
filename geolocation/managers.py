@@ -8,7 +8,7 @@ class AddressQuerySet(models.QuerySet):
     def geojson(self) -> dict:
         """Convert query to a valid geojson format.
 
-        It can be pass as an api response to populate the jobs map.
+        It can be pass as an api response to populate the jobs map with open positions.
         """
         from jobsapp.models import Job
 

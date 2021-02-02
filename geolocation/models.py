@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models as geo_models
 from django.contrib.gis.geos import Point
+from django.db import IntegrityError, transaction
 from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
@@ -57,14 +58,21 @@ class Address(geo_models.Model):
         )
 
     def set_coordinates(self, lat, lon) -> None:
-        """Add coordinates to database record.
+        """Add coordinates to a database address.
 
-        It will raise an IntegrityError if there is already an address with the same coordinates.
+        It will raise an IntegrityError if there is already an address with the same coordinates from the
+        same company.
         """
-        self.lat = lat
-        self.lon = lon
-        self.geo_point = Point(lon, lat)
-        self.save()
+        try:
+            with transaction.atomic():
+                self.lat = lat
+                self.lon = lon
+                self.geo_point = Point(lon, lat)
+                self.save()
+                return self
+        except IntegrityError:
+            # So we return the address from the database
+            return Address.objects.get(lat=lat, lon=lon, user=self.user)
 
     def add_job(self, job_instance):
         self.jobs.add(job_instance)
