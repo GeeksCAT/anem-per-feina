@@ -6,6 +6,7 @@ from django.db import IntegrityError, transaction
 from django.utils.translation import gettext as _
 
 from geolocation.managers import AddressQuerySet
+from geolocation.tasks import _add_coordinates_to_address
 
 User = get_user_model()
 
@@ -63,16 +64,12 @@ class Address(geo_models.Model):
         It will raise an IntegrityError if there is already an address with the same coordinates from the
         same company.
         """
-        try:
-            with transaction.atomic():
-                self.lat = lat
-                self.lon = lon
-                self.geo_point = Point(lon, lat)
-                self.save()
-                return self
-        except IntegrityError:
-            # So we return the address from the database
-            return Address.objects.get(lat=lat, lon=lon, user=self.user)
+
+        self.lat = lat
+        self.lon = lon
+        self.geo_point = Point(lon, lat)
+        self.save()
+        return self
 
     def add_job(self, job_instance):
         self.jobs.add(job_instance)
@@ -87,6 +84,21 @@ class Address(geo_models.Model):
                 isinstance(self.geo_point, Point),
             ]
         )
+
+    @transaction.atomic
+    def save(self, *args, **kwargs):
+        """Save a new address record to the database..
+
+        At the end of the transaction, we run a background task to add coordinates information the address record.
+        """
+        if self._state.adding:
+            super().save(*args, **kwargs)
+            transaction.on_commit(
+                lambda: _add_coordinates_to_address.apply_async(kwargs={"pk": self.pk})
+            )
+            return self
+
+        super().save(*args, **kwargs)
 
 
 class Map(Address):

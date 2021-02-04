@@ -65,10 +65,11 @@ class JobUpdateView(UpdateView):
         address.instance.user = self.request.user
         if address.is_valid():
             with transaction.atomic():
-                job_address = address.save()
                 job_form = form.save()
                 transaction.on_commit(
-                    lambda: _add_address_to_job.apply_async(args=(job_address.pk, job_form.pk))
+                    lambda: _add_address_to_job.apply_async(
+                        args=(job_form.pk, address.cleaned_data)
+                    )
                 )
         return super().form_valid(form)
 
@@ -100,10 +101,11 @@ class JobCreateView(CreateView):
         address.instance.user = self.request.user
         if address.is_valid():
             with transaction.atomic():
-                job_address = address.save()
                 job_form = form.save()
                 transaction.on_commit(
-                    lambda: _add_address_to_job.apply_async(args=(job_address.pk, job_form.pk))
+                    lambda: _add_address_to_job.apply_async(
+                        args=(job_form.pk, address.cleaned_data)
+                    )
                 )
         return super().form_valid(form)
 

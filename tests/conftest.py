@@ -52,6 +52,14 @@ def create_job(db, job_factory):
 
 
 @pytest.fixture
+def create_user_job(db, job_factory, user_factory):
+    def _create_user_job(user=None):
+        return job_factory(user=user if user else user_factory())
+
+    return _create_user_job
+
+
+@pytest.fixture
 def create_job_as_dict(db, job_factory) -> dict:
     return factory.build(dict, FACTORY_CLASS=JobFactory)
 

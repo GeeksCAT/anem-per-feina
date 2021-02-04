@@ -24,7 +24,7 @@ class GeoCoder:
         self.geolocator = Nominatim(user_agent=user_agent, **kwargs)
 
     @lru_cache()
-    def get_coordinates(self, address: str, **kwargs) -> None:
+    def _get_coordinates(self, address: str, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
 
@@ -50,7 +50,7 @@ class GeoCoder:
         """
         default_coordinates = (41.98, 2.82)
         try:
-            self.get_coordinates(address=address.full_address)
+            self._get_coordinates(address=address.full_address)
         except CoordinatesNotFound:
             if _retring:
                 return default_coordinates
@@ -58,52 +58,36 @@ class GeoCoder:
             # only using the city and country values.
             # We set 'retring' to True to ensure that if it fails again to get the coordinates, it will fallback to a default position.
             # We lose precision, but is still possible display the job on map.
-            self.get_coordinates(address=f"{address.city}, {address.country}", retring=True)
+            self._get_coordinates(address=f"{address.city}, {address.country}", retring=True)
 
         return self.lat, self.lon
 
 
-def _address_resolver(new_address: "models.Model", db_address: "models.Model") -> "models.Model":
-    """Compare the last address from a job post with the one returned from the database.
-
-    Returns a database address to be add to the new job offer.
-    """
-    # Will happen when is new address on the database
-    # Or is a job form update without change the address information
-    if new_address == db_address:
-        return db_address
-
-    # If all condition are True, we are dealing with a new job
-    # from a company which is address is already in our database
-    if all(
-        [
-            new_address.has_coordinates(),
-            new_address.user == db_address.user,
-            new_address.full_address == db_address.full_address,
-        ]
-    ):
-        # we delete the new address entry because it's already on the database
-        with transaction.atomic():
-            new_address.delete()
-        return db_address
-    # is a new address from a different user
-    return new_address
-
-
-def add_address_to_job(address_id: int, job_id: int):
+def add_address_to_job(job_id: int, address: dict):
     from geolocation.models import Address
     from jobsapp.models import Job
 
-    location = GeoCoder()
-    new_address = Address.objects.get(pk=address_id)
     job = Job.objects.get(pk=job_id)
-    lat, lon = location.from_address_to_coordinates(new_address)
-    job_address = new_address.set_coordinates(lat, lon)
-    address = _address_resolver(new_address, job_address)
-    # They can be the same in case of a job form update without change job address
-    # Or when is a new address
-    with transaction.atomic():
-        job.set_address(address)
+    new_address = Address.objects.filter(**address)
+    if not bool(new_address):
+        new_address = Address(user=job.user, **address)
+        new_address.save()
+    else:
+        # we need convert the queryset to an address instance
+        new_address = new_address[0]
+
+    job.set_address(new_address)
+    return new_address
+
+
+def add_coordinates_to_address(pk: int):
+    """Helper function do generate coordinates to an new address entry."""
+    from geolocation.models import Address
+
+    address = Address.objects.get(pk=pk)
+    location = GeoCoder()
+    location.from_address_to_coordinates(address=address)
+    address.set_coordinates(location.lat, location.lon)
     return address
 
 

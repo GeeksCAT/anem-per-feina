@@ -163,12 +163,9 @@ class Job(models.Model):
         return self.title
 
     def set_address(self, address: Address):
-        if address.has_coordinates():
-            self.address = address
-            self.save()
-            return self
-        else:
-            raise AttributeError("Address instance doesn't contain valid coordinates.")
+        self.address = address
+        self.save()
+        return self
 
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})
