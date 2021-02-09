@@ -9,14 +9,16 @@
 <div class="container mt-5 mb-5">
   <form action="https://formspree.io/f/xqkgbqek" method="POST">
     {% csrf_token %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <input name="_language" type="hidden" value="{{ LANGUAGE_CODE }}"/>
 
     {% for field in form %}
       <div class="form-group">
-        <label for="id_{{ field.name }}">{{ field.label }}</label>
+        <label for="id_{{ field.name }}">{% trans field.label %}</label>
         {{ field|add_class:"form-control" }}
         {% if field.errors %}
           <div class="alert alert-danger alert-dismissable mt-1">
-            <strong>{{ field.errors.0 }}</strong>
+            <strong>{% trans field.errors.0 %}</strong>
           </div>
         {% endif %}
       </div>

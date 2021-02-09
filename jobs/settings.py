@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "notifications",
     "social_django",
     "django_filters",
+    "django_bleach",
+    "tinymce",
 ]
 
 MIDDLEWARE = [
@@ -115,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
 
 LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
-LANGUAGES = [("en", "English"), ("ca", "Català"), ("es", "Castellano")]
+LANGUAGES = [("ca", "Català"), ("es", "Castellano"), ("en", "English")]
 
 USE_I18N = True
 
@@ -244,6 +246,7 @@ CONSTANCE_CONFIG = {
     "SITE_NAME": ("My Title", "Website title"),
     "SITE_DESCRIPTION": ("", "Website description"),
     "JOBS_URL": ("", "URL Jobs"),
+    "DEFAULT_JOB_EXPIRATION": (90, "Default job expiration days"),
 }
 CONSTANCE_CONFIG_FIELDSETS = {
     "General Configuration Service": ("SITE_NAME", "SITE_DESCRIPTION"),
@@ -261,12 +264,15 @@ if SENTRY_URL:
 
 # More third-party logins available
 AUTHENTICATION_BACKENDS = (
-    "social_core.backends.github.GithubOAuth2",
     "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
 )
 
-SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=False)
-SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=False)
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/employer/dashboard/"
+SOCIAL_AUTH_GITHUB_KEY = env("SOCIAL_AUTH_GITHUB_KEY", default=None)
+SOCIAL_AUTH_GITHUB_SECRET = env("SOCIAL_AUTH_GITHUB_SECRET", default=None)
+SOCIAL_AUTH_GITHUB_SCOPE = ["user:email"]
 
 # Celery settings
 CELERY_HIGH_QUEUE_NAME = "high_priority"
@@ -327,3 +333,46 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default=None)
 RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 SILENCED_SYSTEM_CHECKS = env.list("SILENCED_SYSTEM_CHECKS")
+
+# URL Schemes
+URL_SCHEMES = env.list("URL_SCHEMES", default=["http", "https", "mailto"])
+
+# TinyMCE
+# TINYMCE_DEFAULT_CONFIG = {'theme': "simple", 'relative_urls': False}
+
+# Bleach
+# Which HTML tags are allowed
+BLEACH_ALLOWED_TAGS = [
+    "p",
+    "b",
+    "i",
+    "u",
+    "em",
+    "strong",
+    "a",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "code",
+    "ul",
+    "ol",
+    "li",
+]
+
+# Which HTML attributes are allowed
+BLEACH_ALLOWED_ATTRIBUTES = ["title", "style"]
+
+# Which CSS properties are allowed in 'style' attributes
+BLEACH_ALLOWED_STYLES = ["font-family", "font-weight", "text-decoration", "font-variant"]
+
+# Strip unknown tags if True, replace with HTML escaped characters if False
+BLEACH_STRIP_TAGS = True
+
+# Strip comments, or leave them in.
+BLEACH_STRIP_COMMENTS = True
+
+# Default widget
+BLEACH_DEFAULT_WIDGET = "tinymce.widgets.TinyMCE"

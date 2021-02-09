@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # admin <it@geekscat.org>, 2020.
 # Xavi Torelló <info@xaviertorello.cat>, 2020.
+# Diogo <somnium@riseup.net>, 2020.
+# Francesc Arpí <francesc.arpi@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-31 10:15+0100\n"
-"PO-Revision-Date: 2020-10-25 17:57+0000\n"
+"POT-Creation-Date: 2020-11-05 16:14+0000\n"
+"PO-Revision-Date: 2020-11-04 18:51+0000\n"
 "Last-Translator: Xavi Torelló <info@xaviertorello.cat>\n"
-"Language-Team: Catalan <http://weblate.geekscat.org/projects/anem-per-feina/"
+"Language-Team: Catalan <http://weblate.geekscat.org/projects/nem-per-feina/"
 "apf-backend-jobsapp/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -19,25 +21,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.1\n"
 
-#, fuzzy
-#| msgid "Location"
-msgid "Advanced options"
-msgstr "Localització"
-
 msgid "Please insert your name"
-msgstr ""
+msgstr "S.u.p. inserta el teu nom"
 
 msgid "Please insert your email"
-msgstr ""
+msgstr "S.u.p. defineix el teu email"
 
 msgid "Reason why you are contact us"
-msgstr ""
+msgstr "Motiu pel qual ens contactes"
 
 msgid "Your message"
-msgstr ""
-
-msgid "Email sent successfully."
-msgstr ""
+msgstr "El teu missatge"
 
 msgid "Last Date"
 msgstr "Última data"
@@ -48,6 +42,18 @@ msgstr "Nom de l'empresa"
 msgid "Company Description"
 msgstr "Descripció de l'empresa"
 
+msgid "Name"
+msgstr "Nom"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Subject"
+msgstr "Assumpte"
+
+msgid "Message"
+msgstr "Missatge"
+
 msgid "Full time"
 msgstr "Temps complet"
 
@@ -56,6 +62,63 @@ msgstr "Temps parcial"
 
 msgid "Internship"
 msgstr "Pràctiques"
+
+msgid "No remote"
+msgstr "Sense treball en remot"
+
+msgid "Full remote"
+msgstr "Totalment en remot"
+
+msgid "Partial remote"
+msgstr "Parcialment en remot"
+
+msgid "Web design"
+msgstr "Disseny web"
+
+msgid "Graphic design"
+msgstr "Disseny gràfic"
+
+msgid "Sofware developer"
+msgstr "Desenvolupador de programari"
+
+msgid "Data analyst"
+msgstr "Analista de dades"
+
+msgid "Android mobile developer"
+msgstr "Desenvolupador mòbil Android"
+
+msgid "iOS mobile developer"
+msgstr "Desenvolupador mòbil iOS"
+
+msgid "Frontend developer"
+msgstr "Desenvolupador de frontend"
+
+msgid "Backend developer"
+msgstr "Desenvolupador de backend"
+
+msgid "Fullstack developer"
+msgstr "Desenvolupador Fullstack"
+
+msgid "Product Owner"
+msgstr "Product Owner"
+
+msgid "Project Manager"
+msgstr "Cap de projecte"
+
+msgid "Lead software engineer"
+msgstr "Enginyer de software lider"
+
+msgid "Security specialist"
+msgstr "Especialista en seguretat"
+
+msgid "Sysadmin"
+msgstr "Administrador de sistemes"
+
+msgid "Devops"
+msgstr "Devops"
+
+msgid "Database administrator"
+msgstr "Administrador de la base de dades"
 
 msgid "User"
 msgstr "Usuari"
@@ -132,8 +195,24 @@ msgstr "La oferta de feina ha estat coberta."
 msgid "Salary"
 msgstr "Salari"
 
-msgid "Maximum salary for this job."
-msgstr "Salari màxim per aquesta feina."
+msgid ""
+"Minimum and maximum annual salary for this job. Examples: 30.000 €, 30.000 € "
+"- 40.000 €, etc"
+msgstr ""
+"Salari mínim i màxim per aquesta feina. Exemples: 30.000 €, 30.000 € - "
+"40.000 €, etc"
+
+msgid "Remote"
+msgstr "Remot"
+
+msgid "Is this job position remote?."
+msgstr "És una feina en remot?."
+
+msgid "Apply URL"
+msgstr "URL per la candidatura"
+
+msgid "Users will apply on your website."
+msgstr "Els usuaris aplicaràn la seva candidatura al teu lloc web."
 
 msgid "Job"
 msgstr "Feina"
@@ -142,261 +221,210 @@ msgid "Jobs"
 msgstr "Feines"
 
 msgid "Home"
-msgstr ""
+msgstr "Inici"
 
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 msgid "Home "
-msgstr ""
+msgstr "Inici "
 
 msgid "current"
-msgstr ""
+msgstr "actual"
 
 msgid "About Us"
-msgstr ""
+msgstr "Sobre nosaltres"
 
 msgid "Contact"
-msgstr ""
+msgstr "Contacte"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
-#, fuzzy
-#| msgid "Post New Job"
 msgid "Post a new job"
 msgstr "Publica una nova oferta de feina"
 
 msgid "Logout"
-msgstr ""
+msgstr "Sortir"
 
 msgid "Register"
-msgstr ""
+msgstr "Registrar-se"
 
 msgid "Login"
-msgstr ""
+msgstr "Iniciar Sessió"
 
 msgid "Contact us"
-msgstr ""
+msgstr "Contacta'ns"
 
 msgid "Send message"
-msgstr ""
+msgstr "Enviar missatge"
 
 msgid ""
 "Find a <span class=\"accent\">job</span> you will <span class=\"accent"
 "\">love</span>."
 msgstr ""
+"Troba una <span class=\"accent\">feina</span> que <span class=\"accent"
+"\">t'encantarà</span>."
 
-#, fuzzy
-#| msgid "Description"
 msgid "Position"
-msgstr "Descripció"
+msgstr "Posició"
 
 msgid "Position you are looking for"
-msgstr ""
+msgstr "Posició que estàs buscant"
 
 msgid "Any particular location?"
-msgstr ""
+msgstr "Alguna ubicació concreta?"
 
 msgid "Featured jobs"
-msgstr ""
+msgstr "Ofertes destacades"
 
 msgid "Trending this month"
-msgstr ""
+msgstr "Tendències aquest mes"
 
 msgid "Share Board"
-msgstr ""
+msgstr "Compartir Tauler"
 
-#, fuzzy
-#| msgid "Post New Job"
 msgid "Posted "
-msgstr "Publica una nova oferta de feina"
+msgstr "Publicat "
 
 msgid "Start searching for your new job now!"
-msgstr ""
+msgstr "Comença cercant la teva nova feina!"
 
 msgid "See our job offers"
-msgstr ""
+msgstr "Consulta les nostres ofertes de feina"
 
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 msgid "Add a new position"
-msgstr ""
+msgstr "Afegir una nova feina"
 
-#, fuzzy
-#| msgid "Job doesn't exists"
 msgid "Job details"
-msgstr "La oferta de feina no existeix"
+msgstr "Detalls de l'oferta de feina"
 
-msgid ""
-"Some additional info for this screen about validity of\n"
-"the ads, etc. Pellentesque habitant morbi tristique senectus et netus et "
-"malesuada\n"
-"fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies "
-"eget,\n"
-"tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean\n"
-"ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est "
-"et sapien ullamcorper pharetra."
-msgstr ""
+msgid "Describe the new position filling the following fields:"
+msgstr "Descriu la oferta omplint els següents camps:"
 
-#, fuzzy
-#| msgid "Title"
 msgid "Job Title"
-msgstr "Títol"
+msgstr "Títol de la feina"
 
-#, fuzzy
-#| msgid "Description"
+msgid "Enter Company Name"
+msgstr "Introdueix el nom de l'empresa"
+
 msgid "Job Description"
-msgstr "Descripció"
+msgstr "Descripció de la feina"
 
 msgid "Salary(Leave empty if it's negotiable)"
-msgstr ""
-
-msgid "e.g. Dhaka, Bangladesh"
-msgstr ""
-
-msgid "Choose job type"
-msgstr ""
-
-msgid "Web design"
-msgstr ""
-
-msgid "Graphic design"
-msgstr ""
-
-msgid "Web development"
-msgstr ""
-
-msgid "Human Resources"
-msgstr ""
-
-msgid "Support"
-msgstr ""
-
-msgid "Apply URL"
-msgstr ""
+msgstr "Salari (Deixa'l buit si es pot negociar)"
 
 msgid "users will apply on your website"
-msgstr ""
+msgstr "els usuaris aplicaran la seva candidatura al teu lloc web"
 
 msgid "Validity of the post"
-msgstr ""
+msgstr "Validesa de l'entrada"
 
-#, fuzzy
-#| msgid "Company description"
 msgid "Company details"
-msgstr "Descripció de l'empresa"
+msgstr "Detalls de l'empresa"
 
-#, fuzzy
-#| msgid "Company Name"
 msgid "Company name"
 msgstr "Nom de l'empresa"
 
 msgid "I agree with the"
-msgstr ""
+msgstr "Accepto els"
 
 msgid "Terms and conditions"
-msgstr ""
+msgstr "Termes i condicions"
 
 msgid "Save and publish"
-msgstr ""
+msgstr "Desar i publicar"
 
 #, python-format
 msgid "Are you sure you want to delete \"%(job)s\"?"
-msgstr ""
+msgstr "Segur que vols esborrar \"%(job)s\"?"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 msgid "Yearly "
-msgstr ""
+msgstr "Anualment "
 
 msgid "Negotiable "
-msgstr ""
+msgstr "Negociable "
 
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editar Perfil"
 
 msgid "Male"
-msgstr ""
+msgstr "Home"
 
 msgid "Female"
-msgstr ""
+msgstr "Dona"
 
 msgid "Update"
-msgstr ""
+msgstr "Actualitzar"
 
 msgid "All created jobs"
-msgstr ""
+msgstr "Totes les feines creades"
 
 msgid "Add new position"
-msgstr ""
+msgstr "Afegir nova oferta"
 
-#, fuzzy
-#| msgid "Job type."
 msgid "Job title"
-msgstr "Tipus d'oferta."
+msgstr "Títol de la oferta"
 
-#, fuzzy
-#| msgid "Job position is filled."
 msgid "Position filled"
-msgstr "La oferta de feina ha estat coberta."
+msgstr "Oferta de feina coberta"
 
 msgid "Date posted"
-msgstr ""
+msgstr "Data de publicació"
 
 msgid "Date expiring"
-msgstr ""
+msgstr "Data d'expiració"
 
-#, fuzzy
-#| msgid "Location"
 msgid "Actions"
-msgstr "Localització"
+msgstr "Accions"
 
-#, fuzzy
-#| msgid "Filled"
 msgid "Not Filled"
-msgstr "Satisfeta"
+msgstr "No satisfeta"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "Mark as"
-msgstr ""
+msgstr "Marcar com"
 
-#, fuzzy
-#| msgid "Filled"
 msgid "filled"
-msgstr "Satisfeta"
+msgstr "satisfeta"
 
 msgid "Delete"
-msgstr ""
+msgstr "Esborrar"
 
 msgid "All jobs"
-msgstr ""
+msgstr "Totes les ofertes"
 
 msgid ""
 "Find a <span class=\"accent\">job </span> you will <span class=\"accent"
 "\">love</span>"
 msgstr ""
+"Troba una <span class=\"accent\">feina </span> que <span class=\"accent"
+"\">t'encantarà</span>"
 
 msgid "Profession"
-msgstr ""
+msgstr "Professió"
 
 msgid "Profession you are looking for"
-msgstr ""
+msgstr "Professió que busques"
 
 #, python-format
 msgid "We have found <span class=\"accent\">%(jobs)s</span> jobs"
-msgstr ""
+msgstr "Hem trobat <span class=\"accent\">%(jobs)s</span> feines"
 
 #, python-format
 msgid "We have found <span class=\"accent\">%(jobs.count)s</span> jobs"
-msgstr ""
+msgstr "Hem trobat <span class=\"accent\">%(jobs.count)s</span> feines"
 
 msgid "User doesn't exists"
 msgstr "L'usuari no existeix"
@@ -404,14 +432,20 @@ msgstr "L'usuari no existeix"
 msgid "Job doesn't exists"
 msgstr "La oferta de feina no existeix"
 
+msgid "Edit Job"
+msgstr "Editar Oferta"
+
 msgid "Post New Job"
 msgstr "Publica una nova oferta de feina"
 
 msgid "Mensage sent successfully"
-msgstr ""
+msgstr "El missatge s'ha enviat correctament"
 
 msgid "Mensage not sent"
-msgstr ""
+msgstr "El missatge no s'ha pogut enviar"
+
+#~ msgid "Advanced options"
+#~ msgstr "Opcions avançades"
 
 #~ msgid "User applicant."
 #~ msgstr "Candidat."

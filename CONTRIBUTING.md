@@ -1,16 +1,16 @@
-# Contributing to Anem per feina
+# Contributing to Nem per feina
 
-Welcome, and thank you for your interest in contributing to Anem per feina!
+Welcome, and thank you for your interest in contributing to Nem per feina!
 
 There are many ways in which you can contribute, beyond writing code. The goal of this document is to provide a high-level overview of how you can get involved.
 
 ## How to translate
 
-We use [Weblate](https://weblate.geekscat.org/projects/anem-per-feina/) as a translation system.
+We use [Weblate](https://weblate.geekscat.org/projects/nem-per-feina/) as a translation system.
 
 If you want to contribute,
 
-1. Register at https://weblate.geekscat.org/projects/anem-per-feina/
+1. Register at https://weblate.geekscat.org/projects/nem-per-feina/
 2. Review or propose changes to any component
 
 At the end of each release cycle we'll raise a PR to merge all reviewed translations.
@@ -19,14 +19,14 @@ At the end of each release cycle we'll raise a PR to merge all reviewed translat
 
 1. Fork this very repository (use the `fork` button at the top left).
 
-**Tip for hacktoberfest'20 participants**: If you have doubts or troubles forking and keeping it synchronized, start a new branch from **master** and submit a PR directly in this [repo](https://github.com/GeeksCAT/anem-per-feina).
+**Tip for hacktoberfest'20 participants**: If you have doubts or troubles forking and keeping it synchronized, start a new branch from **master** and submit a PR directly in this [repo](https://github.com/GeeksCAT/nem-per-feina).
 
 1. Clone the newly created fork (use the green `clone` button)
    > Remember to [configure your SSH key]()
 2. Add this repository remote and name it `common`, use the follow command:
 
 ```bash
-git remote add common git@github.com:GeeksCAT/anem-per-feina.git
+git remote add common git@github.com:GeeksCAT/nem-per-feina.git
 ```
 
 4. Fetch the latest changes from the `common` repository:
@@ -89,7 +89,7 @@ If you have questions you can ask in the [Slack channel](https://geekscat.slack.
 
 ### Look For an Existing Issue
 
-Before you create a new issue, please do a search in [open issues](https://github.com/GeeksCAT/anem-per-feina/issues) to see if the issue or feature request has already been filed.
+Before you create a new issue, please do a search in [open issues](https://github.com/GeeksCAT/nem-per-feina/issues) to see if the issue or feature request has already been filed.
 
 If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments). Use a reaction in place of a "+1" comment:
 

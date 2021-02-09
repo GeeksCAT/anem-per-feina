@@ -4,10 +4,13 @@ import factory
 from factory import fuzzy
 from faker import Faker
 
+from django.views.generic.dates import timezone_today
+
 from accounts.models import User
 from jobsapp.models import Job
 
 faker = Faker("es_ES")
+
 
 # List of factories
 class UserFactory(factory.django.DjangoModelFactory):  # type: ignore
@@ -30,8 +33,8 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     company_name = factory.Faker("company", locale="es_ES")
     company_description = factory.Faker("text", locale="es_ES")
     description = factory.Sequence(lambda n: f"Description {n}")
-    last_date = datetime.datetime.now() + datetime.timedelta(days=10)
+    last_date = timezone_today() + datetime.timedelta(days=10)
     website = factory.Faker("url", locale="es_ES")
     type = "1"
-    category = fuzzy.FuzzyChoice(["Senior", "Junior", "Manager"])
+    category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
