@@ -1,9 +1,10 @@
+from django_bleach.models import BleachField
+from tinymce.models import HTMLField
+
 from django.conf import settings
 from django.core.validators import URLValidator
 from django.db.models import URLField
 from django.forms.fields import URLField as FormURLField
-from tinymce.models import HTMLField
-from django_bleach.models import BleachField
 
 ################
 # JobsURLField #

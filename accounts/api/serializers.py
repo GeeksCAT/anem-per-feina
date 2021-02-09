@@ -2,7 +2,7 @@ from typing import Any, Dict, Optional, Union
 
 from rest_framework import serializers
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..models import User
 

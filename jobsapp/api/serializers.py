@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from accounts.api.serializers import UserSerializer
 
@@ -8,9 +8,7 @@ from ..models import Job
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
-    # class JobSerializer(serializers.ModelSerializer):
-    # FIXME: Do we need this?
-    # user = UserSerializer(read_only=True)
+    user = serializers.ReadOnlyField(source="user.email")
 
     class Meta:
         model = Job

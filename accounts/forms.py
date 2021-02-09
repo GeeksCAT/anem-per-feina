@@ -4,7 +4,7 @@ from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from accounts.models import User
 
