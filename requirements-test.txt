@@ -13,3 +13,4 @@ pre-commit==2.7.1
 pytest==6.1.1
 pytest-eradicate==0.0.5
 pytest-django==3.10.0
+pytest-mock==3.5.1

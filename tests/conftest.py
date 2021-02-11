@@ -1,5 +1,3 @@
-import random
-
 import factory
 import pytest
 from pytest_factoryboy import register
@@ -8,7 +6,6 @@ from rest_framework.test import APIClient
 from django.conf import settings
 from django.contrib.gis.geos import Point
 
-from geolocation.geo_utils import GeoCoder
 from tests.factories import AddressFactory, JobFactory, UserFactory
 
 # Register factories to pytest global namespace.
@@ -95,3 +92,18 @@ def complete_address_records(address_factory, job_factory):
         job_factory(address=address_list[1])
 
     return address_list
+
+
+@pytest.fixture
+def mock_geocoder_get_coordinates(mocker):
+    def coordinates(self, address):
+        """Mock geocoder response.
+
+        address = {"city": "Girona", "country": "Spain"}
+        """
+
+        self.lat = 41.9828528
+        self.lon = 2.8244397
+        return self
+
+    return mocker.patch("geolocation.geo_utils.GeoCoder._get_coordinates", coordinates)

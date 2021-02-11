@@ -1,13 +1,14 @@
 import random
+import time
 from functools import lru_cache
-from typing import Callable
+from typing import Callable, Tuple
 
 from geopy.geocoders import Nominatim
 
-from django.contrib.gis.geos import Point
-from django.db import models, transaction
+from django.db import models
 
 CoordinatesNotFound = AttributeError
+from geopy.extra.rate_limiter import RateLimiter
 
 
 class GeoCoder:
@@ -20,58 +21,60 @@ class GeoCoder:
         self.lon: float
         self.coordinates: list
         self.lat: float
-        self.geo_point: Point
         self.geolocator = Nominatim(user_agent=user_agent, **kwargs)
 
-    @lru_cache()
     def _get_coordinates(self, address: str, **kwargs) -> None:
         """
-        Get address coordinates using OSM Nominatim.
+        Proxy to call OSM Nominatim service.
 
         **kwargs: Any Nominatim.geocode valid keyword argument.
         https://geopy.readthedocs.io/en/stable/#geopy.geocoders.Nominatim.geocode
 
-        Search API fields: https://nominatim.org/release-docs/develop/api/Search/
+        About search API fields: https://nominatim.org/release-docs/develop/api/Search/
         """
         try:
-            location = self.geolocator.geocode(address, **kwargs)
+            # We can only do a request per second using the Nominatim
+            geocoder = RateLimiter(self.geolocator.geocode, min_delay_seconds=1)
+            location = geocoder(address, **kwargs)
             self.lat = location.latitude
             self.lon = location.longitude
-            self.geo_point = Point(location.latitude, location.longitude)
         except CoordinatesNotFound:
             raise CoordinatesNotFound(f"Was not possible find coordinates for address:{address}")
 
-    def from_address_to_coordinates(self, address: "models.Model", _retring=False):
-        """Convert a address to coordinates.
+    def from_address_to_coordinates(
+        self, address: "models.Model", _retring: bool = False
+    ) -> Tuple[float, float]:
+        """Get coordinates from a Address model instance.
 
-        Retring by default is false, as it used to check if we are calling the service
-        for first time.
-
+        If it fails to get the coordinates from the original address, we try again but
+        only using the city and country values.
+        We set 'retring' to True to ensure that if it fails again to get the coordinates, it will fallback to a default position.
+        We lose precision, but is still possible display the job on map.
         """
+        # REVIEW: It's a good idea have a default coordinates as fallback?
         default_coordinates = (41.98, 2.82)
         try:
             self._get_coordinates(address=address.full_address)
         except CoordinatesNotFound:
             if _retring:
                 return default_coordinates
-            # If it fails to get the coordinates from the original address, we try again but
-            # only using the city and country values.
-            # We set 'retring' to True to ensure that if it fails again to get the coordinates, it will fallback to a default position.
-            # We lose precision, but is still possible display the job on map.
+
             self._get_coordinates(address=f"{address.city}, {address.country}", retring=True)
 
         return self.lat, self.lon
 
 
-def add_coordinates_to_address(pk: int):
-    """Helper function do generate coordinates to an new address entry."""
+def add_coordinates_to_address(pk: int) -> None:
+    """Helper function do generate coordinates to an new address entry.
+
+    Currently is only called by celery every time a new address is created.
+    """
     from geolocation.models import Address
 
     address = Address.objects.get(pk=pk)
     location = GeoCoder()
     location.from_address_to_coordinates(address=address)
     address.set_coordinates(location.lat, location.lon)
-    return address
 
 
 def check_duplicated_coordinates() -> Callable:

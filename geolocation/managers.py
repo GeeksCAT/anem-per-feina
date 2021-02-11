@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Count, Prefetch, Q
+from django.db.models import Count, Q
 
 from geolocation.geo_utils import check_duplicated_coordinates
 
@@ -10,8 +10,6 @@ class AddressQuerySet(models.QuerySet):
 
         It can be pass as an api response to populate the jobs map with open positions.
         """
-        from jobsapp.models import Job
-
         # Check for duplicated coordinates
         run_check = check_duplicated_coordinates()
 

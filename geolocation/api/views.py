@@ -1,6 +1,6 @@
 from typing import Any
 
-from rest_framework import permissions, request, status
+from rest_framework import request, status
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response

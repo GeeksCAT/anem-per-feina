@@ -1,12 +1,7 @@
-import datetime
-from types import SimpleNamespace
-from typing import NamedTuple
-
 import pytest
 
 from django.contrib.gis.geos import Point
-from django.db import connection, transaction
-from django.db.models.fields import TimeField
+from django.db import connection
 from django.test.utils import CaptureQueriesContext
 
 from geolocation.geo_utils import CoordinatesNotFound, GeoCoder, check_duplicated_coordinates
@@ -24,36 +19,26 @@ def test_offset_coordinates():
     assert len(original_coordinates) == len(final_coordinates)
 
 
-def test_convert_full_address_to_coordinates(mocker):
+def test_geocoder_get_coordinates(mock_geocoder_get_coordinates):
     """Get coordinates from a string address."""
     lat = 41.9828528
     lon = 2.8244397
     geodata = GeoCoder()
-    geodata._get_coordinates(address="Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain")
-
-    assert all(
-        [hasattr(geodata, "lat"), hasattr(geodata, "lon"), isinstance(geodata.geo_point, Point)]
+    mock_geocoder_get_coordinates(
+        geodata, address="Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain"
     )
+    assert all([hasattr(geodata, "lat"), hasattr(geodata, "lon")])
     assert geodata.lat == lat
     assert geodata.lon == lon
 
 
-def test_from_address_to_coordinates(mocker):
+def test_geocoder_from_address_to_coordinates(mock_geocoder_get_coordinates):
     """Get coordinates from an Address object instance."""
-
-    def coordinates(self, address):
-        """Mock geocoder response."""
-        self.lat = lat
-        self.lon = lon
-        self.geo_point = Point(lon, lat)
-        return self
-
     lat = 41.9828528
     lon = 2.8244397
-
     location = GeoCoder()
-    mocker.patch("geolocation.geo_utils.GeoCoder._get_coordinates", coordinates)
     address = Address(city="Girona", country="Spain")
+    mock_geocoder_get_coordinates(location, address)
     location.from_address_to_coordinates(address=address)
 
     assert all(
@@ -77,19 +62,23 @@ def test_raise_exception_when_fail_get_coordinates_from_address(mocker):
 def test_add_address_instance_to_job(mocker):
     mocker.patch("jobsapp.models.Job.save", return_value=Job)
     user = User(email="tester@tester.cat", password="nemperfeina")
-    address = Address(user=user, lat=41.00, lon=-9.1234)
+    lat = 41.00
+    lon = -9.1234
+
+    address = Address(user=user, lat=lat, lon=lon)
     job = Job(user=user)
+
     assert job.address is None
     job.set_address(address)
-    assert job.address.lat == 41.00
-    assert job.address.lon == -9.1234
+    assert job.address.lat == lat
+    assert job.address.lon == lon
 
 
 # integration
 @pytest.mark.django_db(transaction=True)
 def test_add_coordinates_to_address(address_factory):
     """Test that coordinates is automatically added once we save the new address entry."""
-    address = address_factory()
+    address = address_factory(city="Girona", country="Spain")
     assert not all(
         (
             isinstance(address.lat, float),
@@ -135,10 +124,3 @@ def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
         [job["properties"]["opening_positions"] for job in geojson["features"]]
     )
     assert total_opening_positions == 3
-
-    """
-    Instead of saving the address information on a background task, we now save it at the same time than we save the job offer.
-    Also:
-    - Add tests for HTTP job form create and update offer
-    - Clean up some tests
-    """

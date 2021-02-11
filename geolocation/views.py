@@ -1,6 +1,3 @@
-from contextlib import suppress
-
-from django.db import ProgrammingError
 from django.views.generic import ListView
 
 from geolocation.models import Map
