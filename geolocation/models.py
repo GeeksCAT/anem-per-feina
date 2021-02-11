@@ -43,7 +43,7 @@ class Address(geo_models.Model):
         return ", ".join(
             [
                 field
-                for field in (self.street, self.city, self.county, self.country)
+                for field in (self.street, self.city, self.state, self.country)
                 if field is not None
             ]
         )
@@ -70,20 +70,6 @@ class Address(geo_models.Model):
         self.geo_point = Point(lon, lat)
         self.save()
         return self
-
-    def add_job(self, job_instance):
-        self.jobs.add(job_instance)
-        return self
-
-    def has_coordinates(self) -> bool:
-        """Helper method to check if address is valid by ensuring if it has or not coordinates."""
-        return all(
-            [
-                isinstance(self.lat, float),
-                isinstance(self.lon, float),
-                isinstance(self.geo_point, Point),
-            ]
-        )
 
     @transaction.atomic
     def save(self, *args, **kwargs):
