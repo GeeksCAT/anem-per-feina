@@ -77,6 +77,7 @@ test_data = (
         {
             "title": "Title 4",
             "description": "Description 4",
+            "location": "Cañada de Fermín Lara 19 Apt. 98 \nCastellón, 43469",
             "type": "1",
             "category": "Manager",
             "last_date": "2020-11-09T22:54:05.276115Z",

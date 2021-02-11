@@ -4,7 +4,7 @@ from inclusive_django_range_fields import InclusiveIntegerRangeField
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 # APP Imports
 from accounts.models import User
