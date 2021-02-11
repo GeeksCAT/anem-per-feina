@@ -13,7 +13,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.dates import timezone_today
 
 from geolocation.forms import CreateAddressForm
-from geolocation.tasks import _add_address_to_job
+from geolocation.models import Address
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
@@ -66,11 +66,10 @@ class JobUpdateView(UpdateView):
         if address.is_valid():
             with transaction.atomic():
                 job_form = form.save()
-                transaction.on_commit(
-                    lambda: _add_address_to_job.apply_async(
-                        args=(job_form.pk, address.cleaned_data)
-                    )
-                )
+                job_address = Address.objects.get_or_create(
+                    user=job_form.user, **address.cleaned_data
+                )[0]
+                job_form.set_address(job_address)
         return super().form_valid(form)
 
 
@@ -89,6 +88,7 @@ class JobCreateView(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
+            print(self.request.POST)
             data["AddressForm"] = CreateAddressForm(self.request.POST)
         else:
             data["AddressForm"] = CreateAddressForm()
@@ -102,11 +102,10 @@ class JobCreateView(CreateView):
         if address.is_valid():
             with transaction.atomic():
                 job_form = form.save()
-                transaction.on_commit(
-                    lambda: _add_address_to_job.apply_async(
-                        args=(job_form.pk, address.cleaned_data)
-                    )
-                )
+                job_address = Address.objects.get_or_create(
+                    user=job_form.user, **address.cleaned_data
+                )[0]
+                job_form.set_address(job_address)
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):

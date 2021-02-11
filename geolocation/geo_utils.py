@@ -23,7 +23,7 @@ class GeoCoder:
         self.geo_point: Point
         self.geolocator = Nominatim(user_agent=user_agent, **kwargs)
 
-    # @lru_cache()
+    @lru_cache()
     def _get_coordinates(self, address: str, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
@@ -61,24 +61,6 @@ class GeoCoder:
             self._get_coordinates(address=f"{address.city}, {address.country}", retring=True)
 
         return self.lat, self.lon
-
-
-def add_address_to_job(job_id: int, address: dict):
-    from geolocation.models import Address
-    from jobsapp.models import Job
-
-    job = Job.objects.get(pk=job_id)
-
-    new_address = Address.objects.filter(user=job.user, **address)
-    if not bool(new_address):
-        new_address = Address(user=job.user, **address)
-        new_address.save()
-    else:
-        # we need convert the queryset to an address instance
-        new_address = new_address[0]
-
-    job.set_address(new_address)
-    return new_address
 
 
 def add_coordinates_to_address(pk: int):

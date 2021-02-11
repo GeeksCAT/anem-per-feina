@@ -6,14 +6,10 @@ import pytest
 
 from django.contrib.gis.geos import Point
 from django.db import connection, transaction
+from django.db.models.fields import TimeField
 from django.test.utils import CaptureQueriesContext
 
-from geolocation.geo_utils import (
-    CoordinatesNotFound,
-    GeoCoder,
-    add_address_to_job,
-    check_duplicated_coordinates,
-)
+from geolocation.geo_utils import CoordinatesNotFound, GeoCoder, check_duplicated_coordinates
 from geolocation.models import Address, Map, User
 from jobsapp.models import Job
 
@@ -91,84 +87,25 @@ def test_add_address_instance_to_job(mocker):
 
 # integration
 @pytest.mark.django_db(transaction=True)
-def test_job_with_same_location_from_same_user_are_merge(user_factory, create_user_job):
-    """
-    Ensures that if the same company post two jobs to the same location,
-    we just end up with one address on the database but containing two jobs positions.
-    """
-    user = user_factory()
-    address = {"city": "Girona", "country": "Spain"}
-
-    job = create_user_job(user=user)
-    job2 = create_user_job(user=user)
-
-    address_job_1 = add_address_to_job(job_id=job.pk, address=address)
-    address_job_2 = add_address_to_job(job_id=job2.pk, address=address)
-    address_job_1.refresh_from_db()
-    address_job_2.refresh_from_db()
-
-    assert address_job_1.lat == address_job_2.lat
-    assert address_job_1.lon == address_job_2.lon
-    address = Address.objects.all()
-    assert address.count() == 1
-    assert address[0].jobs.count() == 2
-
-
-@pytest.mark.django_db(transaction=True)
-def test_jobs_from_different_user_with_same_location_get_same_coordinates(create_user_job):
-    job = create_user_job()
-    job2 = create_user_job()
-    address = {"city": "Girona", "country": "Spain"}
-
-    address_job_1 = add_address_to_job(job_id=job.pk, address=address)
-    address_job_2 = add_address_to_job(job_id=job2.pk, address=address)
-
-    address_job_1.refresh_from_db()
-    address_job_2.refresh_from_db()
-    assert address_job_1.lat == address_job_2.lat
-    assert address_job_1.lon == address_job_2.lon
-
-
-@pytest.mark.django_db(transaction=True)
-def test_update_job_address(create_user_job, user_factory):
-
-    user = user_factory()
-    address = {"city": "Girona", "country": "Spain"}
-    # Create jobs offers
-    job = create_user_job(user=user)
-    job2 = create_user_job(user=user)
-    # Add address to job offer
-    add_address_to_job(job.pk, address)
-    add_address_to_job(job2.pk, address)
-
-    # Update one job address
-    update_job = Job.objects.first()
-    new_address = {"city": "Barcelona", "country": "Spain"}
-    add_address_to_job(job_id=update_job.pk, address=new_address)
-
-    # Check that now there is two addresses with coordinates and job offer
-    assert Address.objects.count() == 2
-    for address in Address.objects.all():
-        assert address.has_coordinates()
-    geojson = Map.objects.geojson()
-    assert len(geojson["features"]) == 2
-
-
-@pytest.mark.django_db(transaction=True)
-def test_add_address_to_job(create_user_job):
-    job = create_user_job()
-    address = add_address_to_job(job.pk, {"city": "Girona", "country": "Spain"})
-    address.refresh_from_db()
-
-    assert all(
-        [
+def test_add_coordinates_to_address(address_factory):
+    """Test that coordinates is automatically added once we save the new address entry."""
+    address = address_factory()
+    assert not all(
+        (
             isinstance(address.lat, float),
             isinstance(address.lon, float),
             isinstance(address.geo_point, Point),
-        ]
+        )
     )
-    job.refresh_from_db()
-    assert job.address == address
+    # After the transaction ends, we will have the coordinates and the geo point
+    address.refresh_from_db()
+    assert all(
+        (
+            isinstance(address.lat, float),
+            isinstance(address.lon, float),
+            isinstance(address.geo_point, Point),
+        )
+    )
 
 
 @pytest.mark.django_db
@@ -198,3 +135,10 @@ def test_convert_to_geojson_only_unfilled_offers(complete_address_records):
         [job["properties"]["opening_positions"] for job in geojson["features"]]
     )
     assert total_opening_positions == 3
+
+    """
+    Instead of saving the address information on a background task, we now save it at the same time than we save the job offer.
+    Also:
+    - Add tests for HTTP job form create and update offer
+    - Clean up some tests
+    """
