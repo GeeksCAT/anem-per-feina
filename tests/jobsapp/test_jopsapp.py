@@ -47,7 +47,6 @@ def test_form_create_new_job_offer(create_job_as_dict, client, user_factory):
     # Check if data was added to database
     assert Job.objects.count() == 1
     assert Address.objects.count() == 1
-    import time
 
 
 @pytest.mark.django_db
@@ -73,3 +72,51 @@ def test_form_update_job_offer(client, create_user_job, address_factory):
     updated_job = Job.objects.get(pk=job.pk)
     assert resp.status_code == 302
     assert updated_job.address.city != original_job_city
+
+
+@pytest.mark.django_db
+def test_fail_form_create_new_job_offer_without_valid_address(
+    create_job_as_dict, client, user_factory
+):
+    """Test the HTTP form post."""
+    # Create job offer dictionary
+    job_offer = create_job_as_dict
+    job_offer["policies"] = True
+
+    # POST to form
+    client.force_login(user_factory())
+    resp = client.post(reverse("jobs:employer-jobs-create"), data=job_offer)
+    # Check response
+    assert resp.status_code == 200
+    assert resp.context_data["AddressForm"].is_valid() is False
+    # Check that transaction rolled back and neither job nor address was created
+    assert Job.objects.count() == 0
+    assert Address.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_fail_form_create_new_job_offer_with_missing_job_info(
+    create_job_as_dict, client, user_factory
+):
+    """Test the HTTP form post."""
+    # Create job offer dictionary
+    job_offer = create_job_as_dict
+    job_offer["city"] = "Barcelona"
+    job_offer["country"] = "Spain"
+    job_offer["policies"] = True
+
+    # Remove required field to generate an invalid form
+    missing_field = "company_description"
+    job_offer.pop(missing_field)
+
+    # POST to form
+    client.force_login(user_factory())
+    resp = client.post(reverse("jobs:employer-jobs-create"), data=job_offer)
+    # Check response
+    assert resp.status_code == 200
+    # Get error data
+    assert resp.context_data["form"].has_error("company_description") is True
+    assert resp.context_data["form"].errors[missing_field][0] == "This field is required."
+    # Check that transaction rolled back and neither job nor address was created
+    assert Job.objects.count() == 0
+    assert Address.objects.count() == 0

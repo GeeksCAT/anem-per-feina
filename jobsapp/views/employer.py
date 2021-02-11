@@ -4,11 +4,13 @@ from constance import config
 
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.forms.models import ModelForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
+from django.views import View
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.dates import timezone_today
 
@@ -17,6 +19,27 @@ from geolocation.models import Address
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm, EditJobForm
 from jobsapp.models import Job
+
+
+def address_form_validation(obj: View, form: ModelForm) -> True:
+    """Helper function to validated the address form.
+
+    If is valid we save the address and the job and return True, otherwise we return False and later raise an exception.
+
+    As we are nesting the Address form inside the JobForm, we can't validated the
+    address using self.valid_form(form). So we do it here, and if is valid we save address and job together.
+    """
+    context = obj.get_context_data()
+    form.instance.user = obj.request.user
+    address = context["AddressForm"]
+    address.instance.user = obj.request.user
+    if address.is_valid():
+        with transaction.atomic():
+            job_form = form.save()
+            job_address = Address.objects.get_or_create(user=job_form.user, **address.cleaned_data)
+            job_form.set_address(job_address[0])
+        return True
+    return False
 
 
 class DashboardView(ListView):
@@ -51,7 +74,6 @@ class JobUpdateView(UpdateView):
         else:
             job = self.get_object()
             data["AddressForm"] = CreateAddressForm(instance=job.address)
-
         return data
 
     def get_object(self, queryset=None):
@@ -59,18 +81,9 @@ class JobUpdateView(UpdateView):
         return job
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        form.instance.user = self.request.user
-        address = context["AddressForm"]
-        address.instance.user = self.request.user
-        if address.is_valid():
-            with transaction.atomic():
-                job_form = form.save()
-                job_address = Address.objects.get_or_create(
-                    user=job_form.user, **address.cleaned_data
-                )[0]
-                job_form.set_address(job_address)
-        return super().form_valid(form)
+        if address_form_validation(self, form):
+            return super().form_valid(form)
+        return super().form_invalid(form)
 
 
 class JobCreateView(CreateView):
@@ -88,25 +101,15 @@ class JobCreateView(CreateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            print(self.request.POST)
             data["AddressForm"] = CreateAddressForm(self.request.POST)
         else:
             data["AddressForm"] = CreateAddressForm()
         return data
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        form.instance.user = self.request.user
-        address = context["AddressForm"]
-        address.instance.user = self.request.user
-        if address.is_valid():
-            with transaction.atomic():
-                job_form = form.save()
-                job_address = Address.objects.get_or_create(
-                    user=job_form.user, **address.cleaned_data
-                )[0]
-                job_form.set_address(job_address)
-        return super().form_valid(form)
+        if address_form_validation(self, form):
+            return super().form_valid(form)
+        return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
         self.object = None
