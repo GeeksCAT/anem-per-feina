@@ -13,7 +13,7 @@ CoordinatesNotFound = AttributeError
 class GeoCoder:
     def __init__(self, user_agent="nem per feina", **kwargs) -> None:
         """
-        user_agent: should be our app name
+        user_agent: Should be our app name
         **kwargs: Any valid key word argument to be passed to Nominatim.
         https://geopy.readthedocs.io/en/stable/#geopy.geocoders.Nominatim
         """
@@ -23,7 +23,7 @@ class GeoCoder:
         self.geo_point: Point
         self.geolocator = Nominatim(user_agent=user_agent, **kwargs)
 
-    @lru_cache()
+    # @lru_cache()
     def _get_coordinates(self, address: str, **kwargs) -> None:
         """
         Get address coordinates using OSM Nominatim.
@@ -68,7 +68,8 @@ def add_address_to_job(job_id: int, address: dict):
     from jobsapp.models import Job
 
     job = Job.objects.get(pk=job_id)
-    new_address = Address.objects.filter(**address)
+
+    new_address = Address.objects.filter(user=job.user, **address)
     if not bool(new_address):
         new_address = Address(user=job.user, **address)
         new_address.save()

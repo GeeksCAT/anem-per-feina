@@ -1,4 +1,6 @@
 import datetime
+from types import SimpleNamespace
+from typing import NamedTuple
 
 import pytest
 
@@ -12,11 +14,11 @@ from geolocation.geo_utils import (
     add_address_to_job,
     check_duplicated_coordinates,
 )
-from geolocation.models import Address, Map
+from geolocation.models import Address, Map, User
 from jobsapp.models import Job
-from tests.conftest import create_job
 
 
+# unit
 def test_offset_coordinates():
     """Test that if there is duplicated coordinates, we offset them"""
     run_check = check_duplicated_coordinates()
@@ -26,47 +28,68 @@ def test_offset_coordinates():
     assert len(original_coordinates) == len(final_coordinates)
 
 
-def test_convert_full_address_to_coordinates():
-    address = "Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain"
-
+def test_convert_full_address_to_coordinates(mocker):
+    """Get coordinates from a string address."""
+    lat = 41.9828528
+    lon = 2.8244397
     geodata = GeoCoder()
-    geodata._get_coordinates(address)
+    geodata._get_coordinates(address="Plaça del Vi 27, Girona, Girona, Catalonia, 17001, Spain")
 
     assert all(
         [hasattr(geodata, "lat"), hasattr(geodata, "lon"), isinstance(geodata.geo_point, Point)]
     )
-    assert geodata.lat == 41.9828528
-    assert geodata.lon == 2.8244397
+    assert geodata.lat == lat
+    assert geodata.lon == lon
 
 
-def test_from_address_to_coordinates():
-    address = Address(city="Girona", country="Spain")
+def test_from_address_to_coordinates(mocker):
+    """Get coordinates from an Address object instance."""
+
+    def coordinates(self, address):
+        """Mock geocoder response."""
+        self.lat = lat
+        self.lon = lon
+        self.geo_point = Point(lon, lat)
+        return self
+
+    lat = 41.9828528
+    lon = 2.8244397
+
     location = GeoCoder()
+    mocker.patch("geolocation.geo_utils.GeoCoder._get_coordinates", coordinates)
+    address = Address(city="Girona", country="Spain")
     location.from_address_to_coordinates(address=address)
 
-    assert all((isinstance(location.lat, float), isinstance(location.lon, float)))
+    assert all(
+        (
+            isinstance(location.lat, float),
+            isinstance(location.lon, float),
+            location.lat == lat,
+            location.lon == lon,
+        )
+    )
 
 
-@pytest.mark.django_db  # TODO: Maybe can be removed
-def test_add_address_instance_to_job(address_factory, create_job, user_factory):
-    user = user_factory()
-    address = address_factory(user=user)
-    address.set_coordinates(41.00, -9.1234)
-    job = create_job(user=user)
+def test_raise_exception_when_fail_get_coordinates_from_address(mocker):
+    mocker.patch("geolocation.geo_utils.GeoCoder._get_coordinates", side_effect=CoordinatesNotFound)
+    geodata = GeoCoder(user_agent="Testing 'nem per feina'")
+    address = "Carrer Mignit, Girona, Girona"
+    with pytest.raises(CoordinatesNotFound):
+        geodata._get_coordinates(address)
+
+
+def test_add_address_instance_to_job(mocker):
+    mocker.patch("jobsapp.models.Job.save", return_value=Job)
+    user = User(email="tester@tester.cat", password="nemperfeina")
+    address = Address(user=user, lat=41.00, lon=-9.1234)
+    job = Job(user=user)
     assert job.address is None
     job.set_address(address)
     assert job.address.lat == 41.00
     assert job.address.lon == -9.1234
 
 
-@pytest.mark.django_db
-def test_raise_exception_when_fail_get_coordinates_from_address(address_factory):
-    address = address_factory(street="Carrer Mignit", city="Girona", county="Girona")
-    with pytest.raises(CoordinatesNotFound):
-        geodata = GeoCoder(user_agent="Testing 'nem per feina'")
-        geodata._get_coordinates(address.full_address)
-
-
+# integration
 @pytest.mark.django_db(transaction=True)
 def test_job_with_same_location_from_same_user_are_merge(user_factory, create_user_job):
     """
