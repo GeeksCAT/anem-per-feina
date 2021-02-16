@@ -80,12 +80,8 @@ def create_users(db, user_factory):
 @pytest.fixture
 def complete_address_records(address_factory, job_factory):
     address_list = [
-        address_factory(
-            city="Girona", lat=41.9828528, lon=2.8244397, geo_point=Point(2.8244397, 41.9828528)
-        ),
-        address_factory(
-            city="Barcelona", lat=40.9828528, lon=2.8244397, geo_point=Point(2.8244397, 40.9828528)
-        ),
+        address_factory(city="Girona", geo_point=Point(2.8244397, 41.9828528)),
+        address_factory(city="Barcelona", geo_point=Point(2.8244397, 40.9828528)),
     ]
     for _ in range(2):
         job_factory(address=address_list[0])

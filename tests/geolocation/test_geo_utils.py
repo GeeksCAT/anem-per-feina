@@ -65,13 +65,13 @@ def test_add_address_instance_to_job(mocker):
     lat = 41.00
     lon = -9.1234
 
-    address = Address(user=user, lat=lat, lon=lon)
+    address = Address(user=user, geo_point=Point(x=lon, y=lat))
     job = Job(user=user)
 
     assert job.address is None
     job.set_address(address)
-    assert job.address.lat == lat
-    assert job.address.lon == lon
+    assert job.address.latitude == lat
+    assert job.address.longitude == lon
 
 
 # integration
@@ -79,22 +79,10 @@ def test_add_address_instance_to_job(mocker):
 def test_add_coordinates_to_address(address_factory):
     """Test that coordinates is automatically added once we save the new address entry."""
     address = address_factory(city="Girona", country="Spain")
-    assert not all(
-        (
-            isinstance(address.lat, float),
-            isinstance(address.lon, float),
-            isinstance(address.geo_point, Point),
-        )
-    )
+    assert not all((isinstance(address.geo_point, Point),))
     # After the transaction ends, we will have the coordinates and the geo point
     address.refresh_from_db()
-    assert all(
-        (
-            isinstance(address.lat, float),
-            isinstance(address.lon, float),
-            isinstance(address.geo_point, Point),
-        )
-    )
+    assert all((isinstance(address.geo_point, Point),))
 
 
 @pytest.mark.django_db

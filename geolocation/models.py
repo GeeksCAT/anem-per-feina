@@ -31,13 +31,11 @@ class Address(geo_models.Model):
     postalcode = geo_models.CharField(
         verbose_name=_("Postal Code"), max_length=16, null=True, blank=True
     )
-    lat = geo_models.FloatField(verbose_name=_("Latitude"), null=True)
-    lon = geo_models.FloatField(verbose_name=_("Longitude"), null=True)
     geo_point = geo_models.PointField(null=True, srid=settings.SRID)
     objects = AddressQuerySet.as_manager()
 
     class Meta:
-        unique_together = ("lat", "lon", "user")
+        unique_together = ("geo_point", "user")
 
     def __str__(self) -> str:
         return ", ".join(
@@ -47,6 +45,22 @@ class Address(geo_models.Model):
                 if field is not None
             ]
         )
+
+    @property
+    def latitude(self):
+        return self.geo_point.y
+
+    @latitude.setter
+    def latitude(self, value):
+        raise AttributeError("Latitude is read-only")
+
+    @property
+    def longitude(self):
+        return self.geo_point.x
+
+    @longitude.setter
+    def longitude(self, value):
+        raise AttributeError("Longitude is read-only")
 
     @property
     def full_address(self) -> str:
@@ -65,9 +79,7 @@ class Address(geo_models.Model):
         same company.
         """
 
-        self.lat = lat
-        self.lon = lon
-        self.geo_point = Point(lon, lat)
+        self.geo_point = Point(x=lon, y=lat)
         self.save()
         return self
 

@@ -52,7 +52,7 @@ class GeoCoder:
         We lose precision, but is still possible display the job on map.
         """
         # REVIEW: It's a good idea have a default coordinates as fallback?
-        default_coordinates = (41.98, 2.82)
+        default_coordinates = (2.82, 41.98)
         try:
             self._get_coordinates(address=address.full_address)
         except CoordinatesNotFound:

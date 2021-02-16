@@ -28,7 +28,7 @@ class AddressQuerySet(models.QuerySet):
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [*run_check(offer.lon, offer.lat)],
+                        "coordinates": [*run_check(*offer.geo_point.coords)],
                     },
                     "properties": {
                         "company_name": company_info.company_name,
