@@ -9,7 +9,7 @@ django-elasticsearch-dsl==7.1.1
 django-environ==0.4.5
 django-extensions==3.0.7
 django-filter==2.4.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.1
 elasticsearch==7.5.1
