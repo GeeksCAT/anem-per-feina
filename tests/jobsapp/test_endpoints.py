@@ -2,8 +2,6 @@
 import pytest
 from rest_framework.reverse import reverse
 
-JOBS_ENDPOINT = "/api/jobs"
-USERS_ENDPOINT = "/api/users"
 from jobs.settings import REST_FRAMEWORK
 
 

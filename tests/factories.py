@@ -7,6 +7,7 @@ from faker import Faker
 from django.views.generic.dates import timezone_today
 
 from accounts.models import User
+from geolocation.models import Address
 from jobsapp.models import Job
 
 faker = Faker("es_ES")
@@ -23,13 +24,20 @@ class UserFactory(factory.django.DjangoModelFactory):  # type: ignore
     email = factory.Faker("email", locale="es_ES")
 
 
+class AddressFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    city = factory.Faker("city", locale="es_ES")
+    country = "Spain"
+
+
 class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     class Meta:
         model = Job
 
     user = factory.SubFactory("tests.factories.UserFactory")
     title = factory.Sequence(lambda n: f"Title {n}")
-    location = factory.Faker("address", locale="es_ES")
     company_name = factory.Faker("company", locale="es_ES")
     company_description = factory.Faker("text", locale="es_ES")
     description = factory.Sequence(lambda n: f"Description {n}")
@@ -38,3 +46,4 @@ class JobFactory(factory.django.DjangoModelFactory):  # type: ignore
     type = "1"
     category = fuzzy.FuzzyChoice([Job.CATEGORY_WEB_DESIGN, Job.CATEGORY_GRAPHIC_DESIGN])
     remote = fuzzy.FuzzyChoice([Job.REMOTE, Job.NO_REMOTE, Job.PARTIAL_REMOTE])
+    apply_url = "https://www.host.local"

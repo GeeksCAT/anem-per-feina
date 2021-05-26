@@ -12,10 +12,7 @@ class CreateJobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        exclude = (
-            "user",
-            "created_at",
-        )
+        exclude = ("user", "created_at", "location")
         labels = {
             "last_date": _("Last Date"),
             "company_name": _("Company Name"),

@@ -61,17 +61,11 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-12 form-group">
+              <div class="col-lg-10 form-group">
                 <label for="salary">{% trans "Salary(Leave empty if it's negotiable)" %}</label>
                 {% render_field form.salary class+="form-control" placeholder=form.salary.help_text %}
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 form-group">
-                <label for="location">{% trans "Location" %}</label>
-                {% render_field form.location class+="form-control" placeholder=form.location.help_text %}
-              </div>
-              <div class="col-lg-6 form-group">
+            <div class="col-lg-2 form-group">
                 <label for="type">{% trans "Type" %}</label>
                 {% render_field form.type class+="form-control" placeholder=form.type.help_text %}
               </div>
@@ -123,6 +117,38 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-lg-12">
+                <h6>{% trans "Company Address" %}</h6>
+              </div>
+            </div>
+            <!-- {{ AddressForm.as_p }} -->
+            <div class="row">
+              <div class="col-lg-10 form-group">
+                <label for="street">{% trans "Street" %}</label>
+                {% render_field AddressForm.street class+="form-control" placeholder=form.street.help_text %}
+              </div>
+            <div class="col-lg-2 form-group">
+                <label for="postalcode">{% trans "Postal Code" %}</label>
+                {% render_field AddressForm.postalcode class+="form-control" placeholder=form.postalcode.help_text %}
+              </div>                
+
+            </div>
+              <div class="row">
+              <div class="col-lg-4 form-group">
+                <label for="city">{% trans "City" %}</label>
+                {% render_field AddressForm.city class+="form-control" placeholder=form.city.help_text %}
+              </div>
+              <div class="col-lg-4 form-group">
+                <label for="state">{% trans "State" %}</label>
+                {% render_field AddressForm.state class+="form-control" placeholder=form.state.help_text %}
+              </div>
+              <div class="col-lg-4 form-group">
+                <label for="country">{% trans "Country" %}</label>
+                {% render_field AddressForm.country class+="form-control" placeholder=form.county.help_text %}
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-lg-4 form-group">
                 <label for="company_website">{% trans "Website" %}</label>
                 {% render_field form.website class+="form-control" placeholder=form.website.help_text %}
@@ -141,6 +167,7 @@
                 </div>
               </div>
             {% endif %}
+
             <div class="row">
               <div class="col-lg-12 text-center">
                 <hr>

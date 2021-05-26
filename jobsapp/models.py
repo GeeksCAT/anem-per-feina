@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 
 # APP Imports
 from accounts.models import User
+from geolocation.models import Address
 from jobsapp.managers import JobManager
 from notifications.decorators import event_dispatcher
 from notifications.events import EVENT_NEW_JOB
@@ -88,7 +89,10 @@ class Job(models.Model):
         verbose_name=_("Description"), help_text=_("Long job description.")
     )
     location = models.CharField(
-        max_length=150, verbose_name=_("Location"), help_text=_("Location for this job position.")
+        max_length=150,
+        verbose_name=_("Location"),
+        default="",
+        help_text=_("Location for this job position."),
     )
     type = models.CharField(
         choices=JOB_TYPES, max_length=10, verbose_name=_("Type"), help_text=_("Job type.")
@@ -140,6 +144,15 @@ class Job(models.Model):
         help_text=_("Users will apply on your website."),
         default="",
     )
+    address = models.ForeignKey(
+        "geolocation.Address",
+        verbose_name=_("Location"),
+        help_text=_("Location for this job position."),
+        blank=True,
+        null=True,
+        related_name="jobs",
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         verbose_name = _("Job")
@@ -148,6 +161,11 @@ class Job(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def set_address(self, address: Address):
+        self.address = address
+        self.save()
+        return self
 
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", kwargs={"id": self.id})

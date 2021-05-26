@@ -24,6 +24,7 @@ schema_view = get_schema_view(
 lang_patterns = i18n_patterns(
     path("", include("jobsapp.urls")),
     path("", include("accounts.urls")),
+    path("", include("geolocation.urls")),
 )
 
 urlpatterns = lang_patterns + [
@@ -35,6 +36,7 @@ urlpatterns = lang_patterns + [
                 path("swagger", schema_view.with_ui("swagger", cache_timeout=0)),
                 path("", include("accounts.api.urls")),
                 path("", include("jobsapp.api.urls")),
+                path("", include("geolocation.api.urls")),
             ]
         ),
     ),
