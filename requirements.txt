@@ -36,7 +36,7 @@ six==1.14.0
 social-auth-app-django==4.0.0
 sqlparse==0.3.0
 uritemplate==3.0.1
-urllib3==1.25.8
+urllib3==1.26.5
 whitenoise==5.0.1
 django-constance[database]==2.7.0
 invoke==1.4.1
